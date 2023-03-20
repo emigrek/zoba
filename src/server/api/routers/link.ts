@@ -1,23 +1,19 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
-import { nanoid } from "nanoid";
 
 export const linkRouter = createTRPCRouter({
     create: publicProcedure
         .input(z.object({ 
-            url: z.string().url(),
-            slug: z.string().optional(),
+            url: z.string().url()
         }))
         .mutation(async ({ input, ctx }) => {
-            const { url, slug: preferredSlug } = input;
+            const { url } = input;
             const { prisma, session } = ctx;
-            let slug = preferredSlug || nanoid(6);
 
             if(session) {
                 const link = await prisma.link.create({
                     data: {
                         url,
-                        slug,
                         user: {
                             connect: {
                                 id: session.user.id
@@ -31,7 +27,6 @@ export const linkRouter = createTRPCRouter({
                 const link = await prisma.link.create({
                     data: {
                         url,
-                        slug,
                     }
                 });
 
@@ -39,14 +34,14 @@ export const linkRouter = createTRPCRouter({
             }
         }),
     get: publicProcedure
-        .input(z.object({ slug: z.string() }))
+        .input(z.object({ id: z.string() }))
         .query(async ({ input, ctx }) => {
-            const { slug } = input;
+            const { id } = input;
             const { prisma } = ctx;
 
             const link = await prisma.link.findUnique({
                 where: {
-                    slug
+                    id
                 }
             });
 
@@ -65,14 +60,14 @@ export const linkRouter = createTRPCRouter({
             return links;
         }),
     delete: protectedProcedure
-        .input(z.object({ slug: z.string() }))
+        .input(z.object({ id: z.string() }))
         .mutation(async ({ input, ctx }) => {
-            const { slug } = input;
+            const { id } = input;
             const { prisma } = ctx;
 
             const link = await prisma.link.delete({
                 where: {
-                    slug
+                    id
                 }
             });
 

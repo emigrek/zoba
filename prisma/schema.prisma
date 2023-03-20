@@ -63,7 +63,7 @@ model VerificationToken {
 model Link {
     id        String   @id @default(cuid())
     url       String
-    slug      String   @unique
+    slug      String   @default(nanoid(6))
     clicks    Int      @default(0)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

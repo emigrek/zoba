@@ -30,18 +30,16 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar className="flex justify-between items-center gap-2" size="medium">
-                <div className='flex gap-4 items-center'>
+                <div className='flex gap-5 items-center'>
                     <Link href="/">
-                        <Button className='text-2xl font-bold' variant="ghost">
-                            Zoba
-                        </Button>
+                        <span className='text-2xl font-bold'>Zoba</span>
                     </Link>
                     <div className='flex gap-2 items-center'>
                         <Link href="/shorten">
-                            <Button className="font-medium" size="medium" variant="success" iconLeft={BiCut}>Shorten</Button>
+                            <Button className="font-medium" variant="success" iconLeft={BiCut}>Shorten</Button>
                         </Link>
                         <Link href="/qr">
-                            <Button className="font-medium" size="medium" variant="info" iconLeft={HiQrcode}>QR</Button>
+                            <Button className="font-medium" variant="info" iconLeft={HiQrcode}>QR</Button>
                         </Link>
                     </div>
                 </div>
