@@ -9,6 +9,9 @@ import { toast } from "react-hot-toast"
 import { createLinkSchema } from "@/schema/link";
 import { ZodError } from "zod";
 
+// @ts-ignore
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 const Shorten: NextPage = () => {
   const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
   const { mutateAsync, data } = api.link.create.useMutation({
@@ -21,19 +24,22 @@ const Shorten: NextPage = () => {
     e.preventDefault();
     const url = e.currentTarget.url.value;
 
-    if(!url) return;
-    
+    if (!url) return;
+
     try {
       createLinkSchema.parse({ url });
     } catch (error) {
-      if(error instanceof ZodError) {
-        for(const err of error.errors) {
+      if (error instanceof ZodError) {
+        for (const err of error.errors) {
           toast.error(err.message);
         }
+        return;
+      } else {
+        toast.error("Something went wrong");
+        return;
       }
-      return;
     }
-    
+
     await mutateAsync({ url });
   };
 
@@ -50,12 +56,23 @@ const Shorten: NextPage = () => {
             <p className="text-neutral-300">Link</p>
             <Input id="url" placeholder="Paste your link" />
           </div>
-          <Button className="w-full" size="large" variant="primary">
+          <Button type="submit" className="w-full" size="large" variant="primary">
             Shorten
           </Button>
           <div className="flex flex-col gap-2">
             <p className="text-neutral-300">Output</p>
-            <Input id="output" value={`${origin}/${data ? data?.slug : ""}`} readOnly />
+            <CopyToClipboard 
+              text={`${origin}/${data ? data?.slug : ""}`} 
+              onCopy={() => toast.success("Copied to your clipboard")}
+            >
+              <Input id="output" className="h-16 text-xl" 
+                value={`${origin}/${data ? data?.slug : ""}`} 
+                readOnly 
+              />
+            </CopyToClipboard>
+            <p className="text-neutral-600 text-center">
+              Get shortened link by clicking input above!
+            </p>
           </div>
         </form>
       </Box>
