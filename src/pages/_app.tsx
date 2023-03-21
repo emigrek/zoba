@@ -6,6 +6,8 @@ import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
 import Layout from "@/components/Layout/Layout";
+import { Toaster } from "react-hot-toast";
+import toastOptions from "@/utils/toastOptions";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -13,6 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      <Toaster position={"bottom-right"} toastOptions={toastOptions} />
       <Layout>
         <Component {...pageProps} />
       </Layout>

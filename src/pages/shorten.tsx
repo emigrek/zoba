@@ -5,17 +5,36 @@ import PageHeader from "@/components/Layout/PageHeader";
 import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import { BiCut } from "react-icons/bi";
+import { toast } from "react-hot-toast"
+import { createLinkSchema } from "@/schema/link";
+import { ZodError } from "zod";
 
 const Shorten: NextPage = () => {
-  const { mutate, data, error } = api.link.create.useMutation();
-  const { zodError } = error?.data || {};
   const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
+  const { mutateAsync, data } = api.link.create.useMutation({
+    onSuccess: () => {
+      toast.success("Link shortened successfully");
+    }
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const url = e.currentTarget.url.value;
-    if (!url) return;
-    await mutate({ url });
+
+    if(!url) return;
+    
+    try {
+      createLinkSchema.parse({ url });
+    } catch (error) {
+      if(error instanceof ZodError) {
+        for(const err of error.errors) {
+          toast.error(err.message);
+        }
+      }
+      return;
+    }
+    
+    await mutateAsync({ url });
   };
 
   return (
@@ -30,11 +49,6 @@ const Shorten: NextPage = () => {
           <div className="flex flex-col gap-2">
             <p className="text-neutral-300">Link</p>
             <Input id="url" placeholder="Paste your link" />
-            {zodError?.fieldErrors?.url ? (
-              <p className="text-red-500">
-                {zodError?.fieldErrors?.url}
-              </p>
-            ) : null}
           </div>
           <Button className="w-full" size="large" variant="primary">
             Shorten

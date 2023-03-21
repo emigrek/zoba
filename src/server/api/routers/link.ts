@@ -1,11 +1,10 @@
+import { createLinkSchema, deleteLinkSchema, getLinkSchema } from "@/schema/link";
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const linkRouter = createTRPCRouter({
     create: publicProcedure
-        .input(z.object({ 
-            url: z.string().url()
-        }))
+        .input(createLinkSchema)
         .mutation(async ({ input, ctx }) => {
             const { url } = input;
             const { prisma, session } = ctx;
@@ -34,7 +33,7 @@ export const linkRouter = createTRPCRouter({
             }
         }),
     get: publicProcedure
-        .input(z.object({ id: z.string() }))
+        .input(getLinkSchema)
         .query(async ({ input, ctx }) => {
             const { id } = input;
             const { prisma } = ctx;
@@ -60,7 +59,7 @@ export const linkRouter = createTRPCRouter({
             return links;
         }),
     delete: protectedProcedure
-        .input(z.object({ id: z.string() }))
+        .input(deleteLinkSchema)
         .mutation(async ({ input, ctx }) => {
             const { id } = input;
             const { prisma } = ctx;
