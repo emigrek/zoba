@@ -1,5 +1,4 @@
 import { createLinkSchema, deleteLinkSchema, getLinkSchema } from "@/schema/link";
-import { z } from "zod";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const linkRouter = createTRPCRouter({
@@ -35,12 +34,12 @@ export const linkRouter = createTRPCRouter({
     get: publicProcedure
         .input(getLinkSchema)
         .query(async ({ input, ctx }) => {
-            const { id } = input;
+            const { slug } = input;
             const { prisma } = ctx;
 
             const link = await prisma.link.findUnique({
                 where: {
-                    id
+                    slug
                 }
             });
 

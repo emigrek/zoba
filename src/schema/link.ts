@@ -6,6 +6,6 @@ export const createLinkSchema = z.object({
     })
 });
 
-export const getLinkSchema = z.object({ id: z.string() });
+export const getLinkSchema = z.object({ slug: z.string() });
 
 export const deleteLinkSchema = z.object({ id: z.string() });
