@@ -7,6 +7,7 @@ import { HiQrcode } from 'react-icons/hi'
 import { Avatar } from '../Avatar/Avatar'
 import { Button } from '../Button/Button'
 import { Container } from '../Container/Container'
+import Dropdown from '../Dropdown/Dropdown'
 import { Navbar } from '../Navigation/Navbar'
 
 interface LayoutProps {
@@ -45,10 +46,22 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 </div>
                 <div className='flex gap-2'>
                     {session ? (
-                        <div className='flex gap-4 items-center'>
-                            <div className='text-neutral-300 hidden md:block'>{session.user.name}</div>
-                            <Avatar src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
-                        </div>
+                        <Dropdown
+                            trigger={
+                                <div className='flex gap-4 items-center'>
+                                    <div className='text-neutral-300 hidden md:block'>{session.user.name}</div>
+                                    <Avatar size="small" src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
+                                </div>
+                            }
+                            content={
+                                <div className='flex flex-col gap-2'>
+                                    <div>
+                                        { session.user.email }
+                                    </div>
+                                    <hr className='opacity-10' />
+                                </div>
+                            }
+                        />
                     ) : (
                         <Button loading={loading} onClick={handleSignIn} variant="primary" iconLeft={BiLogIn}>
                             Sign in

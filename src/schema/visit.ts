@@ -1,5 +1,5 @@
 import { z } from "zod";
 
-export const createClickSchema = z.object({ 
+export const createVisitSchema = z.object({ 
     id: z.string()
 });

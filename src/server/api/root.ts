@@ -1,5 +1,5 @@
 import { createTRPCRouter } from "@/server/api/trpc";
-import { clickRouter } from "./routers/click";
+import { visitRouter } from "./routers/visit";
 import { linkRouter } from "./routers/link";
 
 /**
@@ -9,7 +9,7 @@ import { linkRouter } from "./routers/link";
  */
 export const appRouter = createTRPCRouter({
   link: linkRouter,
-  click: clickRouter
+  visit: visitRouter
 });
 
 // export type definition of API

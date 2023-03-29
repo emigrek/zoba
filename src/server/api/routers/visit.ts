@@ -1,9 +1,9 @@
-import { createClickSchema } from "@/schema/click";
+import { createVisitSchema } from "@/schema/visit";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
-export const clickRouter = createTRPCRouter({
+export const visitRouter = createTRPCRouter({
     create: publicProcedure
-        .input(createClickSchema)
+        .input(createVisitSchema)
         .mutation(async ({ input, ctx }) => {
             const { id } = input;
             const { prisma } = ctx;
@@ -15,7 +15,7 @@ export const clickRouter = createTRPCRouter({
             });
 
             if(link) {
-                const click = await prisma.click.create({
+                const visit = await prisma.visit.create({
                     data: {
                         link: {
                             connect: {
@@ -25,7 +25,7 @@ export const clickRouter = createTRPCRouter({
                     }
                 });
 
-                return click;
+                return visit;
             } else {
                 throw new Error("Link not found");
             }

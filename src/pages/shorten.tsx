@@ -8,9 +8,11 @@ import { BiCut } from "react-icons/bi";
 import { toast } from "react-hot-toast"
 import { createLinkSchema } from "@/schema/link";
 import { ZodError } from "zod";
+import { useMemo } from "react";
 
 // @ts-ignore
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 
 const Shorten: NextPage = () => {
   const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
@@ -19,6 +21,7 @@ const Shorten: NextPage = () => {
       toast.success("Link shortened successfully");
     }
   });
+  const shortened = useMemo(() => `${origin}/${data ? data?.slug : ""}`, [data, origin]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -62,17 +65,14 @@ const Shorten: NextPage = () => {
           <div className="flex flex-col gap-2">
             <p className="text-neutral-300">Output</p>
             <CopyToClipboard 
-              text={`${origin}/${data ? data?.slug : ""}`} 
+              text={shortened} 
               onCopy={() => toast.success("Copied to your clipboard")}
             >
               <Input id="output" className="h-16 text-xl" 
-                value={`${origin}/${data ? data?.slug : ""}`} 
+                value={shortened} 
                 readOnly 
               />
             </CopyToClipboard>
-            <p className="text-neutral-600 text-center">
-              Get shortened link by clicking input above!
-            </p>
           </div>
         </form>
       </Box>

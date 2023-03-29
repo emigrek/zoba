@@ -68,10 +68,10 @@ model Link {
     updatedAt DateTime @updatedAt
     userId    String?
     user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    clicks    Click[]
+    visits    Visit[]
 }
 
-model Click {
+model Visit {
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     linkId    String

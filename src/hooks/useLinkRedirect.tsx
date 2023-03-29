@@ -8,11 +8,11 @@ const useLinkRedirect = () => {
     if(!slug || !slug.length) return;
 
     const link = api.link.get.useQuery({ slug: slug[0] as string });
-    const { mutate: createClick } = api.click.create.useMutation();
+    const { mutate: registerVisit } = api.visit.create.useMutation();
 
     useEffect(() => {
         if(!link.data) return;
-        createClick({ id: link.data.id });
+        registerVisit({ id: link.data.id });
         router.push(link.data.url);
     }, [link.data]);
 
