@@ -5,7 +5,7 @@ import cn from '@/utils/cn';
 import { Container, containerVariants } from '../Container/Container';
 
 const navbarVariants = cva(
-    "w-full backdrop-blur-sm fixed top-0 z-50",
+    "w-full backdrop-blur-sm fixed top-0 z-40",
     {
         variants: {
             variant: {
