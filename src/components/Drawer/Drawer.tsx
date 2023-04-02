@@ -15,10 +15,10 @@ const Drawer: FC<DrawerProps> = ({
 
     return (
         <>
-            <div className='w-72 absolute h-screen left-0 top-0 bg-neutral-900 z-50'>
+            <div className='w-64 absolute h-screen left-0 top-0 bg-neutral-900 z-30'>
                 {children}
             </div>
-            <div onClick={onClickOutside} className="w-full h-full absolute z-40 bg-black/60"/>
+            <div onClick={onClickOutside} className="w-full h-full absolute z-20 bg-black/60"/>
         </>
     )
 }
