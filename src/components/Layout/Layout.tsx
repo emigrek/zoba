@@ -1,7 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import { BiCut, BiLogIn } from 'react-icons/bi'
 import { HiQrcode } from 'react-icons/hi'
 import { MdDashboard, MdLogout } from 'react-icons/md'
@@ -15,6 +15,7 @@ import { Navbar } from '../Navigation/Navbar'
 import { GoThreeBars } from "react-icons/go";
 import Drawer from '../Drawer/Drawer'
 import DrawerItem from '../Drawer/DrawerItem'
+import useDrawer from '@/hooks/useDrawer'
 
 interface LayoutProps {
     children: React.ReactNode
@@ -23,7 +24,7 @@ interface LayoutProps {
 const Layout: FC<LayoutProps> = ({ children }) => {
     const { data: session } = useSession();
     const [loading, setLoading] = useState(false);
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const { drawer, setDrawer } = useDrawer();
 
     const handleSignIn = async () => {
         setLoading(true);
@@ -42,10 +43,9 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar className="flex justify-between items-center gap-2" size="medium">
-
                 <div className='gap-5 items-center flex'>
                     <div className='items-center flex md:hidden'>
-                        <Button onClick={() => setDrawerOpen(!drawerOpen)} variant="ghost" iconLeft={GoThreeBars} />
+                        <Button onClick={() => setDrawer(!drawer)} variant="ghost" iconLeft={GoThreeBars} />
                     </div>
                     <Link href="/">
                         <span className='text-2xl font-bold'>Zoba</span>
@@ -87,8 +87,8 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 }
             </Navbar>
             <Drawer
-                open={drawerOpen}
-                onClickOutside={() => setDrawerOpen(false)}
+                open={drawer}
+                onClickOutside={() => setDrawer(false)}
             >
                 <div className='h-screen flex flex-col justify-between text-white p-5 items-center'>
                     <div className='flex flex-col items-center justify-center gap-2 w-full mt-14'>

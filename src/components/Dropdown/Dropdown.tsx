@@ -21,7 +21,7 @@ const Dropdown: FC<DropdownProps> = ({
                 </div>
                 {
                     open ? (
-                        <div className="absolute top-10 z-10 right-0 w-56 bg-white/5 my-4 p-4 rounded-lg flex flex-col gap-2 shadow-lg">
+                        <div className="absolute top-10 z-10 right-0 w-56 bg-neutral-900 my-4 p-4 rounded-lg flex flex-col gap-2 shadow-lg">
                             {children}
                         </div>
                     ) : null
