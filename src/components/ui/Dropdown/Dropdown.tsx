@@ -1,15 +1,18 @@
-import { FC, ReactNode, useState } from 'react'
+import cn from '@/utils/cn';
+import { FC, HTMLAttributes, ReactNode, useState } from 'react'
 
-interface DropdownProps {
+interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
     trigger: ReactNode,
     children: ReactNode,
     defaultOpen?: boolean
 }
 
 const Dropdown: FC<DropdownProps> = ({
+    className,
     trigger,
     children,
-    defaultOpen = false
+    defaultOpen = false,
+    ...props
 }) => {
     const [open, setOpen] = useState(defaultOpen);
 
@@ -21,7 +24,7 @@ const Dropdown: FC<DropdownProps> = ({
                 </div>
                 {
                     open ? (
-                        <div className="absolute top-10 z-10 right-0 w-56 bg-neutral-900 my-4 p-4 rounded-lg flex flex-col gap-2 shadow-lg">
+                        <div className={cn("absolute top-10 z-10 right-0 w-56 bg-neutral-900 my-2 p-2 rounded-lg flex flex-col gap-2 shadow-lg", className)} {...props}>
                             {children}
                         </div>
                     ) : null

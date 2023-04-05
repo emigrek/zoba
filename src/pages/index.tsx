@@ -1,5 +1,5 @@
-import { Box } from "@/components/Box/Box";
-import { Button } from "@/components/Button/Button";
+import { Box } from "@/components/ui/Box/Box";
+import { Button } from "@/components/ui/Button/Button";
 import { type NextPage } from "next";
 import Link from "next/link";
 import { BiRightArrowAlt, BiSave, BiShareAlt } from "react-icons/bi";

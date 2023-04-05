@@ -5,17 +5,19 @@ import { FC, useContext, useState } from 'react'
 import { BiCut, BiLogIn } from 'react-icons/bi'
 import { HiQrcode } from 'react-icons/hi'
 import { MdDashboard, MdLogout } from 'react-icons/md'
-import { Avatar } from '../Avatar/Avatar'
-import { Button } from '../Button/Button'
-import { Container } from '../Container/Container'
-import Dropdown from '../Dropdown/Dropdown'
-import DropdownDivider from '../Dropdown/DropdownDivider'
-import DropdownItem from '../Dropdown/DropdownItem'
-import { Navbar } from '../Navigation/Navbar'
+import { Avatar } from './ui/Avatar/Avatar'
+import { Button } from './ui/Button/Button'
+import { Container } from './ui/Container/Container'
+import Dropdown from './ui/Dropdown/Dropdown'
+import DropdownDivider from './ui/Dropdown/DropdownDivider'
+import DropdownItem from './ui/Dropdown/DropdownItem'
+import { Navbar } from './ui/Navigation/Navbar'
 import { GoThreeBars } from "react-icons/go";
-import Drawer from '../Drawer/Drawer'
-import DrawerItem from '../Drawer/DrawerItem'
+import Drawer from './ui/Drawer/Drawer'
+import DrawerItem from './ui/Drawer/DrawerItem'
 import useDrawer from '@/hooks/useDrawer'
+import DropdownLinkItem from './ui/Dropdown/DropdownLinkItem'
+import DrawerLinkItem from './ui/Drawer/DrawerLinkItem'
 
 interface LayoutProps {
     children: React.ReactNode
@@ -70,9 +72,9 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                                     </div>
                                 }
                             >
-                                <DropdownItem iconLeft={MdDashboard} href="/dashboard">
+                                <DropdownLinkItem iconLeft={MdDashboard} href="/dashboard">
                                     Dashboard
-                                </DropdownItem>
+                                </DropdownLinkItem>
                                 <DropdownDivider />
                                 <DropdownItem iconLeft={MdLogout} onClick={handleSignOut}>
                                     Sign out
@@ -92,12 +94,12 @@ const Layout: FC<LayoutProps> = ({ children }) => {
             >
                 <div className='h-screen flex flex-col justify-between text-white p-5 items-center'>
                     <div className='flex flex-col items-center justify-center gap-2 w-full mt-14'>
-                        <DrawerItem iconLeft={BiCut} href="/shorten">
+                        <DrawerLinkItem iconLeft={BiCut} href="/shorten">
                             Shorten
-                        </DrawerItem>
-                        <DrawerItem iconLeft={HiQrcode} href="/qr">
+                        </DrawerLinkItem>
+                        <DrawerLinkItem iconLeft={HiQrcode} href="/qr">
                             QR
-                        </DrawerItem>
+                        </DrawerLinkItem>
                     </div>
                 </div>
             </Drawer>

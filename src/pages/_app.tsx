@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { api } from "@/utils/api";
 
 import "@/styles/globals.css";
-import Layout from "@/components/Layout/Layout";
+import Layout from "@/components/Layout";
 import { Toaster } from "react-hot-toast";
 import toastOptions from "@/utils/toastOptions";
 import PageContextProvider from "@/contexts/PageContext";

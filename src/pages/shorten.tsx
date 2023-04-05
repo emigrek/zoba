@@ -1,7 +1,7 @@
-import { Box } from "@/components/Box/Box";
-import { Button } from "@/components/Button/Button";
-import { Input } from "@/components/Input/Input";
-import PageHeader from "@/components/Layout/PageHeader";
+import { Box } from "@/components/ui/Box/Box";
+import { Button } from "@/components/ui/Button/Button";
+import { Input } from "@/components/ui/Input/Input";
+import PageHeader from "@/components/ui/Layout/PageHeader";
 import { api } from "@/utils/api";
 import { type NextPage } from "next";
 import { BiCut } from "react-icons/bi";

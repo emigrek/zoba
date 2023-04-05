@@ -1,5 +1,5 @@
-import { Box } from "@/components/Box/Box";
-import PageHeader from "@/components/Layout/PageHeader";
+import { Box } from "@/components/ui/Box/Box";
+import PageHeader from "@/components/ui/Layout/PageHeader";
 import { type NextPage } from "next";
 import { HiQrcode } from "react-icons/hi";
 
