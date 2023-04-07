@@ -59,7 +59,7 @@ const Shorten: NextPage = () => {
             <p className="text-neutral-300">Link</p>
             <Input id="url" placeholder="Paste your link" />
           </div>
-          <Button type="submit" className="w-full" size="large" variant="primary">
+          <Button type="submit" className="w-full" size="large" variant="blue">
             Shorten
           </Button>
           <div className="flex flex-col gap-2">

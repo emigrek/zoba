@@ -12,12 +12,12 @@ const buttonVariants = cva(
         variants: {
             variant: {
                 default: "bg-gray-500 hover:bg-gray-600  focus:ring-2 focus:ring-gray-500/50",
-                primary: "bg-blue-500/20 hover:bg-blue-600/60 focus:ring-2 focus:ring-blue-500/50",
-                success: "bg-emerald-500/20 hover:bg-emerald-600/60 focus:ring-2 focus:ring-emerald-500/50",
-                danger: "bg-red-500/20 hover:bg-red-600/60 focus:ring-2 focus:ring-red-500/50",
-                warning: "bg-yellow-500/20 hover:bg-yellow-600/60 focus:ring-2 focus:ring-yellow-500/50",
-                info: "bg-cyan-500/20 hover:bg-cyan-600/60 focus:ring-2 focus:ring-cyan-500/50",
-                ghost: "bg-transparent hover:bg-gray-500/20 focus:ring-2 focus:ring-gray-500/50",
+                blue: "bg-blue-500/20 hover:bg-blue-600/60 focus:ring-2 focus:ring-blue-500/50",
+                emerald: "bg-emerald-500/20 hover:bg-emerald-600/60 focus:ring-2 focus:ring-emerald-500/50",
+                red: "bg-red-500/20 hover:bg-red-600/60 focus:ring-2 focus:ring-red-500/50",
+                yellow: "bg-yellow-500/20 hover:bg-yellow-600/60 focus:ring-2 focus:ring-yellow-500/50",
+                cyan: "bg-cyan-500/20 hover:bg-cyan-600/60 focus:ring-2 focus:ring-cyan-500/50",
+                transparent: "bg-transparent hover:bg-gray-500/20 focus:ring-2 focus:ring-gray-500/50",
             },
             size: {
                 small: "px-4 py-2 text-sm gap-1",
@@ -38,12 +38,12 @@ const iconVariants = cva(
         variants: {
             variant: {
                 default: "fill-neutral-100",
-                primary: "fill-blue-500",
-                success: "fill-emerald-500",
-                danger: "fill-red-500",
-                warning: "fill-yellow-500",
-                info: "fill-cyan-500",
-                ghost: "fill-neutral-100"
+                blue: "fill-blue-500",
+                emerald: "fill-emerald-500",
+                red: "fill-red-500",
+                yellow: "fill-yellow-500",
+                cyan: "fill-cyan-500",
+                transparent: "fill-neutral-100"
             },
             size: {
                 small: "w-4 h-4",

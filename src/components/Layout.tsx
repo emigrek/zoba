@@ -14,7 +14,6 @@ import DropdownItem from './ui/Dropdown/DropdownItem'
 import { Navbar } from './ui/Navigation/Navbar'
 import { GoThreeBars } from "react-icons/go";
 import Drawer from './ui/Drawer/Drawer'
-import DrawerItem from './ui/Drawer/DrawerItem'
 import useDrawer from '@/hooks/useDrawer'
 import DropdownLinkItem from './ui/Dropdown/DropdownLinkItem'
 import DrawerLinkItem from './ui/Drawer/DrawerLinkItem'
@@ -25,8 +24,8 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children }) => {
     const { data: session } = useSession();
-    const [loading, setLoading] = useState(false);
     const { drawer, setDrawer } = useDrawer();
+    const [loading, setLoading] = useState(false);
 
     const handleSignIn = async () => {
         setLoading(true);
@@ -47,17 +46,17 @@ const Layout: FC<LayoutProps> = ({ children }) => {
             <Navbar className="flex justify-between items-center gap-2" size="medium">
                 <div className='gap-5 items-center flex'>
                     <div className='items-center flex md:hidden'>
-                        <Button onClick={() => setDrawer(!drawer)} variant="ghost" iconLeft={GoThreeBars} />
+                        <Button onClick={() => setDrawer(!drawer)} variant={'transparent'} iconLeft={GoThreeBars} />
                     </div>
                     <Link href="/">
                         <span className='text-2xl font-bold'>Zoba</span>
                     </Link>
                     <div className='hidden md:flex gap-2 items-center'>
                         <Link href="/shorten">
-                            <Button className="font-medium" variant="success" iconLeft={BiCut}>Shorten</Button>
+                            <Button className="font-medium" variant={'emerald'} iconLeft={BiCut}>Shorten</Button>
                         </Link>
                         <Link href="/qr">
-                            <Button className="font-medium" variant="info" iconLeft={HiQrcode}>QR</Button>
+                            <Button className="font-medium" variant={'blue'} iconLeft={HiQrcode}>QR</Button>
                         </Link>
                     </div>
                 </div>
@@ -81,7 +80,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                                 </DropdownItem>
                             </Dropdown>
                         ) : (
-                            <Button loading={loading} onClick={handleSignIn} variant="primary" iconLeft={BiLogIn}>
+                            <Button loading={loading} onClick={handleSignIn} variant="blue" iconLeft={BiLogIn}>
                                 Sign in
                             </Button>
                         )}
@@ -94,10 +93,10 @@ const Layout: FC<LayoutProps> = ({ children }) => {
             >
                 <div className='h-screen flex flex-col justify-between text-white p-5 items-center'>
                     <div className='flex flex-col items-center justify-center gap-2 w-full mt-14'>
-                        <DrawerLinkItem iconLeft={BiCut} href="/shorten">
+                        <DrawerLinkItem variant={'emerald'} iconLeft={BiCut} href="/shorten">
                             Shorten
                         </DrawerLinkItem>
-                        <DrawerLinkItem iconLeft={HiQrcode} href="/qr">
+                        <DrawerLinkItem variant={'blue'} iconLeft={HiQrcode} href="/qr">
                             QR
                         </DrawerLinkItem>
                     </div>
