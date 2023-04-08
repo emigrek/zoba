@@ -2,7 +2,7 @@ import { Box } from "@/components/ui/Box/Box";
 import { Button } from "@/components/ui/Button/Button";
 import { type NextPage } from "next";
 import Link from "next/link";
-import { BiRightArrowAlt, BiSave, BiShareAlt } from "react-icons/bi";
+import { BiCut, BiSave, BiShareAlt } from "react-icons/bi";
 import { MdManageSearch } from "react-icons/md";
 
 const Home: NextPage = () => {
@@ -35,8 +35,8 @@ const Home: NextPage = () => {
       </div>
       <div className="flex justify-center">
         <Link href="/shorten">
-          <Button variant={'blue'} size={'large'} iconRight={BiRightArrowAlt}>
-            Get started
+          <Button variant={'emerald'} size={'large'} iconRight={BiCut}>
+            Start shortening
           </Button>
         </Link>
       </div>

@@ -44,19 +44,16 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Navbar className="flex justify-between items-center gap-2" size="medium">
-                <div className='gap-5 items-center flex'>
+                <div className='gap-2 items-center flex'>
                     <div className='items-center flex md:hidden'>
                         <Button onClick={() => setDrawer(!drawer)} variant={'transparent'} iconLeft={GoThreeBars} />
                     </div>
                     <Link href="/">
                         <span className='text-2xl font-bold'>Zoba</span>
                     </Link>
-                    <div className='hidden md:flex gap-2 items-center'>
+                    <div className='hidden md:flex gap-2 ml-4 items-center'>
                         <Link href="/shorten">
                             <Button className="font-medium" variant={'emerald'} iconLeft={BiCut}>Shorten</Button>
-                        </Link>
-                        <Link href="/qr">
-                            <Button className="font-medium" variant={'blue'} iconLeft={HiQrcode}>QR</Button>
                         </Link>
                     </div>
                 </div>
@@ -95,9 +92,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                     <div className='flex flex-col items-center justify-center gap-2 w-full mt-14'>
                         <DrawerLinkItem variant={'emerald'} iconLeft={BiCut} href="/shorten">
                             Shorten
-                        </DrawerLinkItem>
-                        <DrawerLinkItem variant={'blue'} iconLeft={HiQrcode} href="/qr">
-                            QR
                         </DrawerLinkItem>
                     </div>
                 </div>
