@@ -17,6 +17,7 @@ import Drawer from './ui/Drawer/Drawer'
 import useDrawer from '@/hooks/useDrawer'
 import DropdownLinkItem from './ui/Dropdown/DropdownLinkItem'
 import DrawerLinkItem from './ui/Drawer/DrawerLinkItem'
+import { FcGoogle } from 'react-icons/fc'
 
 interface LayoutProps {
     children: React.ReactNode
@@ -77,7 +78,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                                 </DropdownItem>
                             </Dropdown>
                         ) : (
-                            <Button loading={loading} onClick={handleSignIn} variant="blue" iconLeft={BiLogIn}>
+                            <Button loading={loading} onClick={handleSignIn} variant="blue" iconLeft={FcGoogle}>
                                 Sign in
                             </Button>
                         )}
