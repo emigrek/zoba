@@ -4,12 +4,13 @@ import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
 const boxVariants = cva(
-    "w-fit rounded-xl backdrop-blur-md",
+    "w-fit rounded-xl",
     {
         variants: {
             variant: {
                 light: "bg-white/5 text-neutral-200",
                 dark: "bg-black/5 text-neutral-200",
+                outlined: "bg-transparent border border-neutral-600 text-neutral-200"
             },
             size: {
                 small: "p-4",

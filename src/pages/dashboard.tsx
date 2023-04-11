@@ -1,15 +1,16 @@
 import { Box } from "@/components/ui/Box/Box";
-import { Button } from "@/components/ui/Button/Button";
 import PageHeader from "@/components/ui/Layout/PageHeader";
 import { NextPage } from "next";
-import { signIn, useSession } from "next-auth/react";
-import { BiError, BiLogIn } from "react-icons/bi";
+import { useSession } from "next-auth/react";
 import { MdDashboard } from "react-icons/md";
-import { useState } from "react";
 import SignIn from "@/components/SignIn";
+import { api } from "@/utils/api";
+import Link from "@/components/Link";
+import LinkGrid from "@/components/LinkGrid";
 
 const Dashboard: NextPage = () => {
   const { data: session } = useSession();
+  const { data: links, isLoading } = api.link.getAll.useQuery();
 
   if (!session) {
     return (
@@ -25,9 +26,19 @@ const Dashboard: NextPage = () => {
         icon={MdDashboard}
       />
       <Box className="w-full">
-        <div className="flex justify-between items-center mb-2">
-          <div>Your links</div>
-        </div>
+        {
+          links?.length === 0 ? (
+            <p className="text-neutral-400 text-center">You don&apos;t have any links yet</p>
+          ) : (
+            <LinkGrid>
+              {
+                links?.map((link) => (
+                  <Link key={link.id} link={link} />
+                ))
+              }
+            </LinkGrid>
+          )
+        }
       </Box>
     </div>
   );

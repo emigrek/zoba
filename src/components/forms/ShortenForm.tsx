@@ -14,7 +14,7 @@ interface ShortenFormProps { }
 
 const ShortenForm: FC<ShortenFormProps> = ({ }) => {
     const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
-    const { mutateAsync, data } = api.link.create.useMutation({
+    const { mutateAsync: createLink, data } = api.link.create.useMutation({
         onSuccess: () => {
             toast.success("Link shortened successfully");
         }
@@ -41,7 +41,7 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
             }
         }
 
-        await mutateAsync({ url });
+        await createLink({ url });
     };
 
     return (
