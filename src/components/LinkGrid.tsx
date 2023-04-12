@@ -8,8 +8,8 @@ const LinkGrid: FC<LinkGridProps> = ({
     children
 }) => {
   return (
-    <div className='grid'>
-        {children}
+    <div className='grid gap-2'>
+      {children}
     </div>
   )
 }

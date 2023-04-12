@@ -23,8 +23,10 @@ const Link: FC<LinkProps> = ({
     const created = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date(link.createdAt));
     const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
 
+    const linkContext = api.useContext();
     const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
         onSuccess: () => {
+            linkContext.link.getAll.invalidate();
             toast.success("Link deleted successfully");
         }
     });
@@ -55,7 +57,7 @@ const Link: FC<LinkProps> = ({
             <div className='flex items-center'>
                 <Dropdown
                     trigger={
-                        <Button variant={'blue'} iconRight={BiDotsVerticalRounded} />
+                        <Button variant={'transparent'} iconRight={BiDotsVerticalRounded} />
                     }
                 >
                     <DropdownItem iconLeft={BiLinkExternal} onClick={handleVisit}>
