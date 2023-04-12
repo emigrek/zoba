@@ -7,11 +7,11 @@ import { VscLoading } from "react-icons/vsc";
 import { IconType } from 'react-icons/lib';
 
 const buttonVariants = cva(
-    "relative w-fit flex items-center justify-center rounded-full text-white font-semibold tracking-wide transition duration-200 ease-in-out focus:outline-none disabled:cursor-not-allowed",
+    "relative w-fit flex items-center justify-center rounded-full text-white font-semibold tracking-wide transition duration-200 ease-in-out focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
     {
         variants: {
             variant: {
-                default: "bg-gray-500 hover:bg-gray-600  focus:ring-2 focus:ring-gray-500/50",
+                default: "bg-gray-700 hover:bg-gray-600  focus:ring-2 focus:ring-gray-500/50",
                 blue: "bg-blue-500/20 hover:bg-blue-600/60 focus:ring-2 focus:ring-blue-500/50",
                 emerald: "bg-emerald-500/20 hover:bg-emerald-600/60 focus:ring-2 focus:ring-emerald-500/50",
                 red: "bg-red-500/20 hover:bg-red-600/60 focus:ring-2 focus:ring-red-500/50",

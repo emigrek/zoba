@@ -1,4 +1,4 @@
-import { createLinkSchema, deleteLinkSchema, getLinkSchema } from "@/schema/link";
+import { createLinkSchema, deleteLinkSchema, getLinkSchema, getPageSchema } from "@/schema/link";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const linkRouter = createTRPCRouter({
@@ -8,7 +8,7 @@ export const linkRouter = createTRPCRouter({
             const { url } = input;
             const { prisma, session } = ctx;
 
-            if(session) {
+            if (session) {
                 const link = await prisma.link.create({
                     data: {
                         url,
@@ -56,6 +56,34 @@ export const linkRouter = createTRPCRouter({
             });
 
             return links;
+        }),
+    getPage: protectedProcedure
+        .input(getPageSchema)
+        .query(async ({ input, ctx }) => {
+            const { page } = input;
+            const { prisma, session } = ctx;
+
+            const links = await prisma.link.findMany({
+                where: {
+                    userId: session.user.id
+                },
+                skip: (page - 1) * 5,
+                take: 5
+            });
+
+            return links;
+        }),
+    getTotalPages: protectedProcedure
+        .query(async ({ ctx }) => {
+            const { prisma, session } = ctx;
+
+            const totalPages = Math.ceil(await prisma.link.count({
+                where: {
+                    userId: session.user.id
+                }
+            }) / 5);
+
+            return totalPages;
         }),
     delete: protectedProcedure
         .input(deleteLinkSchema)

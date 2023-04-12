@@ -26,8 +26,12 @@ const Link: FC<LinkProps> = ({
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
         onSuccess: () => {
-            linkContext.link.getAll.invalidate();
+            linkContext.link.getPage.invalidate();
+            linkContext.link.getTotalPages.invalidate();
             toast.success("Link deleted successfully");
+        },
+        onError: () => {
+            toast.error("Something went wrong");
         }
     });
 
@@ -40,16 +44,16 @@ const Link: FC<LinkProps> = ({
     };
 
     return (
-        <Box variant={'outlined'} className='w-full flex flex-row justify-between items-center'>
+        <Box variant={'outlined'} size={'small'} className='w-full flex flex-row justify-between items-center'>
             <div className='flex items-center gap-5'>
-                <div className='relative w-12 h-12'>
+                <div className='relative w-10 h-10'>
                     <Image src={favicon} alt={`${domain} favicon`} fill />
                 </div>
                 <div className='flex flex-col'>
                     <div className='font-semibold'>
                         {domain}
                     </div>
-                    <div className='text-neutral-500'>
+                    <div className='text-neutral-400'>
                         {created}
                     </div>
                 </div>
