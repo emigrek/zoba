@@ -63,14 +63,11 @@ const Link: FC<LinkProps> = ({
                     trigger={
                         <Button variant={'transparent'} iconRight={BiDotsVerticalRounded} />
                     }
-                >
-                    <DropdownItem iconLeft={BiLinkExternal} onClick={handleVisit}>
-                        Visit
-                    </DropdownItem>
-                    <DropdownItem iconLeft={BiTrash} onClick={handleDelete}>
-                        Delete
-                    </DropdownItem>
-                </Dropdown>
+                    items={[
+                        <DropdownItem iconLeft={BiLinkExternal} onClick={handleVisit}>Visit</DropdownItem>,
+                        <DropdownItem iconLeft={BiTrash} onClick={handleDelete}>Delete</DropdownItem>
+                    ]}
+                />
             </div>
         </Box>
     )

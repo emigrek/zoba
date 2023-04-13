@@ -1,16 +1,16 @@
 import cn from '@/utils/cn';
-import { FC, HTMLAttributes, ReactNode, useState } from 'react'
+import { FC, HTMLAttributes, ReactNode, cloneElement, useState } from 'react'
 
 interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
     trigger: ReactNode,
-    children: ReactNode,
+    items: ReactNode[],
     defaultOpen?: boolean
 }
 
 const Dropdown: FC<DropdownProps> = ({
     className,
     trigger,
-    children,
+    items,
     defaultOpen = false,
     ...props
 }) => {
@@ -25,7 +25,13 @@ const Dropdown: FC<DropdownProps> = ({
                 {
                     open ? (
                         <div className={cn("absolute top-10 z-10 right-0 w-56 bg-neutral-900 my-2 p-2 rounded-lg flex flex-col gap-2 shadow-lg", className)} {...props}>
-                            {children}
+                            {
+                                items.map((item, index) => (
+                                    <div onClick={() => setOpen(false)} key={index}>
+                                        {item}
+                                    </div>
+                                ))
+                            }
                         </div>
                     ) : null
                 }

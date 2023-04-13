@@ -8,7 +8,7 @@ import { api } from "@/utils/api";
 import Link from "@/components/Link";
 import LinkGrid from "@/components/LinkGrid";
 import { Button } from "@/components/ui/Button/Button";
-import { BiCut, BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { BiCut, BiDotsHorizontal, BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { usePagination } from "@mantine/hooks";
 
@@ -38,7 +38,7 @@ const Dashboard: NextPage = () => {
         subtitle="Manage your links"
         icon={MdDashboard}
       />
-      <Box className="w-full flex flex-col gap-3">
+      <Box className="w-full flex flex-col gap-3 h-[650px] md:h-[550px] justify-between">
         {
           links?.length === 0 ? (
             <div className="flex flex-col gap-3 items-center justify-center py-10 text-neutral-400">
@@ -56,7 +56,7 @@ const Dashboard: NextPage = () => {
           )
         }
         <div className="flex flex-col md:flex-row gap-2 md:gap-1 items-center justify-center">
-          <Button size={'small'} onClick={() => pagination.previous()} className="w-full md:w-fit" iconRight={BiLeftArrowAlt} disabled={pagination.active === 1} />
+          <Button onClick={() => pagination.previous()} className="w-full py-3 md:py-2 md:w-fit" iconRight={BiLeftArrowAlt} disabled={pagination.active === 1} />
           <div className="flex gap-1 w-full justify-evenly md:w-fit">
             {
               pagination.range.map((page) => (
@@ -65,12 +65,12 @@ const Dashboard: NextPage = () => {
                   onClick={() => handlePageChange(page)}
                   size={'small'}
                 >
-                  {page == "dots" ? '...' : page}
+                  {page == "dots" ? <BiDotsHorizontal/> : page}
                 </Button>
               ))
             }
           </div>
-          <Button size={'small'} onClick={() => pagination.next()} className="w-full md:w-fit" iconRight={BiRightArrowAlt} disabled={pagination.active === totalPages} />
+          <Button onClick={() => pagination.next()} className="w-full py-3 md:py-2 md:w-fit" iconRight={BiRightArrowAlt} disabled={pagination.active === totalPages} />
         </div>
       </Box>
     </div>

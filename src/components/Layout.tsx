@@ -68,15 +68,12 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                                         <Avatar size="small" src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
                                     </div>
                                 }
-                            >
-                                <DropdownLinkItem iconLeft={MdDashboard} href="/dashboard">
-                                    Dashboard
-                                </DropdownLinkItem>
-                                <DropdownDivider />
-                                <DropdownItem iconLeft={MdLogout} onClick={handleSignOut}>
-                                    Sign out
-                                </DropdownItem>
-                            </Dropdown>
+                                items={[
+                                    <DropdownLinkItem iconLeft={MdDashboard} href="/dashboard">Dashboard</DropdownLinkItem>,
+                                    <DropdownDivider />,
+                                    <DropdownItem iconLeft={MdLogout} onClick={handleSignOut}>Sign out</DropdownItem>
+                                ]}
+                            />
                         ) : (
                             <Button loading={loading} onClick={handleSignIn} variant="blue" iconLeft={FcGoogle}>
                                 Sign in
@@ -86,17 +83,10 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 }
             </Navbar>
             <Drawer
-                open={drawer}
-                onClickOutside={() => setDrawer(false)}
-            >
-                <div className='h-screen flex flex-col justify-between text-white p-5 items-center'>
-                    <div className='flex flex-col items-center justify-center gap-2 w-full mt-14'>
-                        <DrawerLinkItem variant={'emerald'} iconLeft={BiCut} href="/shorten">
-                            Shorten
-                        </DrawerLinkItem>
-                    </div>
-                </div>
-            </Drawer>
+                items={[
+                    <DrawerLinkItem variant={'emerald'} iconLeft={HiQrcode} href="/shorten">Shorten</DrawerLinkItem>,
+                ]}
+            />
             <main className="flex min-h-screen flex-col items-center justify-center">
                 <Container size="small">
                     {children}

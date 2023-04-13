@@ -5,7 +5,7 @@ import { IconType } from 'react-icons/lib'
 import { iconVariants } from '../Button/Button';
 
 const drawerItemVariants = cva(
-    "w-full rounded-lg flex gap-6 cursor-pointer items-center font-semibold transition duration-100",
+    "w-full rounded-lg flex gap-6 cursor-pointer items-center font-semibold transition duration-100 text-white tracking-wide",
     {
         variants: {
             variant: {
