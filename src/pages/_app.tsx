@@ -8,7 +8,6 @@ import "@/styles/globals.css";
 import Layout from "@/components/Layout";
 import { Toaster } from "react-hot-toast";
 import toastOptions from "@/utils/toastOptions";
-import PageContextProvider from "@/contexts/PageContext";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -17,11 +16,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <SessionProvider session={session}>
       <Toaster position={"bottom-right"} toastOptions={toastOptions} />
-      <PageContextProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </PageContextProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </SessionProvider>
   );
 };

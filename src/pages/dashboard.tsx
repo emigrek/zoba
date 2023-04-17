@@ -11,7 +11,6 @@ import { Container } from "@/components/ui/Container/Container";
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
-
   const { data: session } = useSession();
   const { data: links } = api.link.getAll.useQuery();
 

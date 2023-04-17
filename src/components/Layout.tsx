@@ -28,6 +28,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 
     const { pathname } = router;
     const active = (path: string) => pathname === path;
+    const pageName =`${pathname.charAt(1).toUpperCase()}${pathname.slice(2)}`;
 
     const handleSignIn = async () => {
         setLoading(true);
@@ -61,7 +62,8 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 <main className="flex flex-col flex-grow ml-20 md:ml-64">
                     <Nav variant={'dark'}>
                         <div className="flex items-center justify-between h-full px-6">
-                            <div>
+                            <div className='text-lg font-semibold flex items-center'>
+                                { pageName }
                             </div>
                             <div className="flex items-center gap-4">
                                 {

@@ -1,4 +1,4 @@
-import { createLinkSchema, deleteLinkSchema, getLinkSchema, getPageSchema } from "@/schema/link";
+import { createLinkSchema, deleteLinkSchema, getInfiniteSchema, getLinkSchema } from "@/schema/link";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const linkRouter = createTRPCRouter({
@@ -57,33 +57,30 @@ export const linkRouter = createTRPCRouter({
 
             return links;
         }),
-    getPage: protectedProcedure
-        .input(getPageSchema)
+    getInfinite: protectedProcedure
+        .input(getInfiniteSchema)
         .query(async ({ input, ctx }) => {
-            const { page } = input;
+            const limit = input.limit ?? 10;
+            const { cursor } = input;
             const { prisma, session } = ctx;
 
             const links = await prisma.link.findMany({
+                take: limit + 1,
                 where: {
                     userId: session.user.id
                 },
-                skip: (page - 1) * 5,
-                take: 5
+                cursor: cursor ? { id: cursor } : undefined,
             });
 
-            return links;
-        }),
-    getTotalPages: protectedProcedure
-        .query(async ({ ctx }) => {
-            const { prisma, session } = ctx;
-
-            const totalPages = Math.ceil(await prisma.link.count({
-                where: {
-                    userId: session.user.id
-                }
-            }) / 5);
-
-            return totalPages;
+            let nextCursor: typeof cursor | undefined = undefined;
+            if (links.length > limit) {
+                const nextItem = links.pop()
+                nextCursor = nextItem!.id;
+            }
+            return {
+                links,
+                nextCursor,
+            };
         }),
     delete: protectedProcedure
         .input(deleteLinkSchema)

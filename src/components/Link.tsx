@@ -26,8 +26,7 @@ const Link: FC<LinkProps> = ({
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
         onSuccess: () => {
-            linkContext.link.getPage.invalidate();
-            linkContext.link.getTotalPages.invalidate();
+            linkContext.link.getAll.invalidate();
             toast.success("Link deleted successfully");
         },
         onError: () => {
