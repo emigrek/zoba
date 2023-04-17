@@ -1,11 +1,10 @@
 import { Container } from '@/components/ui/Container/Container';
 import useLinkRedirect from '@/hooks/useLinkRedirect';
-import { FC } from 'react'
 import { BiError, BiLoaderAlt } from 'react-icons/bi';
+import { NextPageWithLayout } from './_app';
+import InterstitialLayout from '@/components/InterstitialLayout';
 
-interface InterstitialProps { }
-
-const Interstitial: FC<InterstitialProps> = () => {
+const Interstitial: NextPageWithLayout = () => {
     const link = useLinkRedirect();
 
     if (!link || !link.data) {
@@ -30,5 +29,9 @@ const Interstitial: FC<InterstitialProps> = () => {
         </Container>
     )
 }
+
+Interstitial.getLayout = (page) => {
+    return <InterstitialLayout>{page}</InterstitialLayout>
+};
 
 export default Interstitial;
