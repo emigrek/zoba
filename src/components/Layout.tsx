@@ -1,32 +1,33 @@
-import { signIn, signOut, useSession } from 'next-auth/react'
 import Head from 'next/head'
+import { FC, useState } from 'react'
+import { Aside } from './ui/Navigation/Aside'
+import AsideLinkItem from './ui/Navigation/AsideLinkItem'
 import Link from 'next/link'
-import { FC, useContext, useState } from 'react'
-import { BiCut, BiLogIn } from 'react-icons/bi'
-import { HiQrcode } from 'react-icons/hi'
-import { MdDashboard, MdLogout } from 'react-icons/md'
-import { Avatar } from './ui/Avatar/Avatar'
-import { Button } from './ui/Button/Button'
-import { Container } from './ui/Container/Container'
+import { BiCut, BiLogOut } from 'react-icons/bi'
+import { useRouter } from 'next/router'
+import { Nav } from './ui/Navigation/Nav'
 import Dropdown from './ui/Dropdown/Dropdown'
+import { Avatar } from './ui/Avatar/Avatar'
+import DropdownLinkItem from './ui/Dropdown/DropdownLinkItem'
 import DropdownDivider from './ui/Dropdown/DropdownDivider'
 import DropdownItem from './ui/Dropdown/DropdownItem'
-import { Navbar } from './ui/Navigation/Navbar'
-import { GoThreeBars } from "react-icons/go";
-import Drawer from './ui/Drawer/Drawer'
-import useDrawer from '@/hooks/useDrawer'
-import DropdownLinkItem from './ui/Dropdown/DropdownLinkItem'
-import DrawerLinkItem from './ui/Drawer/DrawerLinkItem'
+import { MdDashboard } from 'react-icons/md'
 import { FcGoogle } from 'react-icons/fc'
+import { Button } from './ui/Button/Button'
+import { useSession } from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
 
 interface LayoutProps {
     children: React.ReactNode
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
+    const router = useRouter();
     const { data: session } = useSession();
-    const { drawer, setDrawer } = useDrawer();
     const [loading, setLoading] = useState(false);
+
+    const { pathname } = router;
+    const active = (path: string) => pathname === path;
 
     const handleSignIn = async () => {
         setLoading(true);
@@ -44,54 +45,52 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 <meta name="description" content="Shorten links and manage them in fashionable way" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Navbar className="flex justify-between items-center gap-2" size="medium">
-                <div className='gap-2 items-center flex'>
-                    <div className='items-center flex md:hidden'>
-                        <Button onClick={() => setDrawer(!drawer)} variant={'transparent'} iconLeft={GoThreeBars} />
-                    </div>
-                    <Link href="/">
-                        <span className='text-2xl font-bold'>Zoba</span>
-                    </Link>
-                    <div className='hidden md:flex gap-2 ml-4 items-center'>
-                        <Link href="/shorten">
-                            <Button className="font-medium" variant={'emerald'} iconLeft={BiCut}>Shorten</Button>
+            <div className='flex min-h-screen'>
+                <Aside className='w-20 md:w-64 flex flex-col px-2 md:px-5 items-center justify-between' variant={'dark'}>
+                    <div className='flex flex-col items-center w-full'>
+                        <Link href="/">
+                            <div className='font-bold text-xl md:text-2xl py-16 px-2 md:p-16'>
+                                Zoba
+                            </div>
                         </Link>
+                        <AsideLinkItem variant={active("/shorten") ? 'active' : 'transparent'} iconLeft={BiCut} href="/shorten" size={'large'}>
+                            Shorten
+                        </AsideLinkItem>
                     </div>
-                </div>
-                {
-                    <div className='flex gap-2'>
-                        {session ? (
-                            <Dropdown
-                                trigger={
-                                    <div className='flex gap-4 items-center'>
-                                        <div className='text-neutral-300 hidden md:block'>{session.user.name}</div>
-                                        <Avatar size="small" src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
-                                    </div>
+                </Aside>
+                <main className="flex flex-col flex-grow ml-20 md:ml-64">
+                    <Nav variant={'dark'}>
+                        <div className="flex items-center justify-between h-full px-6">
+                            <div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                {
+                                    session ? (
+                                        <Dropdown
+                                            trigger={
+                                                <div className='flex items-center gap-4'>
+                                                    <span className='hidden md:block text-neutral-300 text-sm'>{session.user.name}</span>
+                                                    <Avatar size={'small'} src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
+                                                </div>
+                                            }
+                                            items={[
+                                                <DropdownLinkItem iconLeft={MdDashboard} href="/dashboard">Dashboard</DropdownLinkItem>,
+                                                <DropdownDivider />,
+                                                <DropdownItem iconLeft={BiLogOut} onClick={handleSignOut}>Sign out</DropdownItem>
+                                            ]}
+                                        />
+                                    ) : (
+                                        <Button onClick={handleSignIn} loading={loading} variant='blue' iconLeft={FcGoogle}>
+                                            <span className='hidden md:block'>Sign in</span>
+                                        </Button>
+                                    )
                                 }
-                                items={[
-                                    <DropdownLinkItem iconLeft={MdDashboard} href="/dashboard">Dashboard</DropdownLinkItem>,
-                                    <DropdownDivider />,
-                                    <DropdownItem iconLeft={MdLogout} onClick={handleSignOut}>Sign out</DropdownItem>
-                                ]}
-                            />
-                        ) : (
-                            <Button loading={loading} onClick={handleSignIn} variant="blue" iconLeft={FcGoogle}>
-                                Sign in
-                            </Button>
-                        )}
-                    </div>
-                }
-            </Navbar>
-            <Drawer
-                items={[
-                    <DrawerLinkItem variant={'emerald'} iconLeft={HiQrcode} href="/shorten">Shorten</DrawerLinkItem>,
-                ]}
-            />
-            <main className="flex min-h-screen flex-col items-center justify-center">
-                <Container size="small">
+                            </div>
+                        </div>
+                    </Nav>
                     {children}
-                </Container>
-            </main>
+                </main>
+            </div>
         </>
     )
 }

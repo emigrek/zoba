@@ -9,7 +9,7 @@ interface PageHeaderProps {
 
 const PageHeader: FC<PageHeaderProps> = ({ title, subtitle, icon: Icon }) => {
     return (
-        <div className="flex justify-between text-neutral-100 items-center">
+        <div className="flex justify-between text-neutral-100 items-center my-3">
             <div className="flex flex-col">
                 <h1 className="text-3xl md:text-4xl font-bold">{title}</h1>
                 <p className="text-neutral-400 text-sm">

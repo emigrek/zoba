@@ -43,12 +43,13 @@ const iconVariants = cva(
                 red: "fill-red-500",
                 yellow: "fill-yellow-500",
                 cyan: "fill-cyan-500",
-                transparent: "fill-neutral-100"
+                active: "fill-neutral-100",
+                transparent: "fill-gray-500"
             },
             size: {
                 small: "w-4 h-4",
-                medium: "w-6 h-6",
-                large: "w-8 h-8"
+                medium: "w-5 h-5",
+                large: "w-6 h-6"
             }
         },
         defaultVariants: {

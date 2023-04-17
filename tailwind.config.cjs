@@ -4,7 +4,7 @@ const config = {
   theme: {
     extend: {
       colors: {
-        "night": "#0d0524",
+        "night": "#080316",
       }
     },
   },
