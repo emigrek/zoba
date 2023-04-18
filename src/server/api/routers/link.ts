@@ -52,6 +52,9 @@ export const linkRouter = createTRPCRouter({
             const links = await prisma.link.findMany({
                 where: {
                     userId: session.user.id
+                },
+                include: {
+                    visits: true
                 }
             });
 

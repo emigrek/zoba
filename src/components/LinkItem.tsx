@@ -1,28 +1,23 @@
-import { Link } from '@prisma/client'
 import { FC } from 'react'
 import { Box } from './ui/Box/Box'
 import { Button } from './ui/Button/Button'
 import { BiDotsVerticalRounded, BiLinkExternal, BiTrash } from 'react-icons/bi'
-import extractDomain from "extract-domain";
 import Image from 'next/image'
 import Dropdown from './ui/Dropdown/Dropdown'
 import DropdownItem from './ui/Dropdown/DropdownItem'
 import { api } from '@/utils/api'
 import { toast } from 'react-hot-toast'
+import useLinkDetails from '@/hooks/useLinkDetails'
+import { ExtendedLink } from 'types'
 
-interface LinkProps {
-    link: Link
+interface LinkItemProps {
+    link: ExtendedLink
 }
 
-const Link: FC<LinkProps> = ({
+const LinkItem: FC<LinkItemProps> = ({
     link
 }) => {
-    const domain = extractDomain(link.url);
-    const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
-    const shortened = `${origin}/${link.slug}`;
-    const created = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date(link.createdAt));
-    const favicon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-
+    const { domain, shortened, created, favicon } = useLinkDetails({ link });
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
         onSuccess: () => {
@@ -49,8 +44,11 @@ const Link: FC<LinkProps> = ({
                     <Image src={favicon} alt={`${domain} favicon`} fill />
                 </div>
                 <div className='flex flex-col'>
-                    <div className='font-semibold'>
+                    <div className='font-semibold text-lg'>
                         {domain}
+                    </div>
+                    <div>
+                        {link.visits.length} visits
                     </div>
                     <div className='text-neutral-400'>
                         {created}
@@ -72,4 +70,4 @@ const Link: FC<LinkProps> = ({
     )
 }
 
-export default Link
+export default LinkItem

@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import SignIn from "@/components/SignIn";
 import { api } from "@/utils/api";
-import Link from "@/components/Link";
+import LinkItem from "@/components/LinkItem";
 import LinkGrid from "@/components/LinkGrid";
 import { Button } from "@/components/ui/Button/Button";
 import { BiCut } from "react-icons/bi";
@@ -21,7 +21,10 @@ const Dashboard: NextPage = () => {
   }
 
   return (
-    <Container className="flex flex-col gap-8">
+    <Container className="flex flex-col gap-8 my-0 p-8">
+      <div>
+        <h1 className="text-3xl font-bold text-neutral-100">All links</h1>
+      </div>
       {
         links?.length === 0 ? (
           <div className="flex flex-col gap-3 items-center justify-center py-10 text-neutral-400">
@@ -32,7 +35,7 @@ const Dashboard: NextPage = () => {
           <LinkGrid>
             {
               links?.map((link) => (
-                <Link key={link.id} link={link} />
+                <LinkItem key={link.id} link={link} />
               ))
             }
           </LinkGrid>
