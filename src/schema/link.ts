@@ -6,6 +6,13 @@ export const createLinkSchema = z.object({
     })
 });
 
+export const createCaptchaLinkSchema = z.object({
+    url: z.string().url({
+        message: "Please enter a valid URL"
+    }),
+    captcha: z.string().nonempty()
+});
+
 export const getInfiniteSchema = z.object({
     limit: z.number().min(1).max(100).nullish(),
     cursor: z.string().nullish()

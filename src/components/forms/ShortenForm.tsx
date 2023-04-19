@@ -12,6 +12,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 import { env } from "@/env.mjs";
+import { TRPCClientError } from '@trpc/client';
 
 interface ShortenFormProps { }
 
@@ -25,21 +26,12 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
             toast.success("Link shortened successfully");
         }
     });
-    const { mutateAsync: verifyCaptcha } = api.captcha.verify.useMutation({
-        onSuccess: async () => {
-            await createLink({ url: link });
-        },
-        onError: () => {
-            toast.error("Captcha verification failed");
-        }
-    });
 
     const shortened = useMemo(() => `${origin}/${data ? data?.slug : ""}`, [data, origin]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const url = e.currentTarget.url.value;
-
         if (!url) return;
 
         try {
@@ -49,11 +41,8 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
                 for (const err of error.errors) {
                     toast.error(err.message);
                 }
-                return;
-            } else {
-                toast.error("Something went wrong");
-                return;
             }
+            return;
         }
 
         setLink(url);
@@ -61,7 +50,14 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
     };
 
     const onHCaptchaChange = async (token: string) => {
-        await verifyCaptcha({ token });
+        try {
+            await createLink({ url: link, captcha: token });
+        } catch (error) {
+            if (error instanceof TRPCClientError) {
+                const { message } = error;
+                toast.error(message);
+            }
+        }
     }
 
     return (

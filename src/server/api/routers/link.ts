@@ -1,12 +1,37 @@
-import { createLinkSchema, deleteLinkSchema, getInfiniteSchema, getLinkSchema } from "@/schema/link";
+import { createCaptchaLinkSchema, deleteLinkSchema, getInfiniteSchema, getLinkSchema } from "@/schema/link";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { env } from "@/env.mjs";
+import { TRPCError } from "@trpc/server";
+
+const verifyCaptcha = async (token: string) => {
+    const response = await fetch(
+        `https://hcaptcha.com/siteverify`,
+        {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded; charset=utf-8",
+            },
+            body: `response=${token}&secret=${env.HCAPTCHA_SECRET_KEY}`,
+            method: "POST",
+        }
+    );
+    const data = await response.json();
+    return data.success;
+};
 
 export const linkRouter = createTRPCRouter({
     create: publicProcedure
-        .input(createLinkSchema)
+        .input(createCaptchaLinkSchema)
         .mutation(async ({ input, ctx }) => {
-            const { url } = input;
+            const { url, captcha } = input;
             const { prisma, session } = ctx;
+            const validCaptcha = await verifyCaptcha(captcha);
+
+            if(!validCaptcha) {
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Invalid captcha"
+                });
+            }
 
             if (session) {
                 const link = await prisma.link.create({
