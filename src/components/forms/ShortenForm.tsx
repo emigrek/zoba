@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useRef, useState } from 'react'
 import { Input } from '../ui/Input/Input';
 import { Button } from '../ui/Button/Button';
 import { createLinkSchema } from "@/schema/link";
@@ -9,16 +9,31 @@ import { toast } from 'react-hot-toast';
 
 // @ts-ignore
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+
+import { env } from "@/env.mjs";
 
 interface ShortenFormProps { }
 
 const ShortenForm: FC<ShortenFormProps> = ({ }) => {
+    const hcaptchaRef = useRef<HCaptcha>(null);
+    const [link, setLink] = useState<string>("");
     const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
+
     const { mutateAsync: createLink, data } = api.link.create.useMutation({
         onSuccess: () => {
             toast.success("Link shortened successfully");
         }
     });
+    const { mutateAsync: verifyCaptcha } = api.captcha.verify.useMutation({
+        onSuccess: async () => {
+            await createLink({ url: link });
+        },
+        onError: () => {
+            toast.error("Captcha verification failed");
+        }
+    });
+
     const shortened = useMemo(() => `${origin}/${data ? data?.slug : ""}`, [data, origin]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,11 +56,22 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
             }
         }
 
-        await createLink({ url });
+        setLink(url);
+        hcaptchaRef.current?.execute();
     };
+
+    const onHCaptchaChange = async (token: string) => {
+        await verifyCaptcha({ token });
+    }
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <HCaptcha
+                size="invisible"
+                ref={hcaptchaRef}
+                sitekey={env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
+                onVerify={onHCaptchaChange}
+            />
             <div className="flex flex-col gap-2">
                 <p className="text-neutral-300">Link</p>
                 <Input id="url" placeholder="Paste your link" />

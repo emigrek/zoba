@@ -3,7 +3,7 @@ import { FC, forwardRef, HTMLAttributes } from 'react'
 import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
-const navVariants = cva(
+const navbarVariants = cva(
     "w-full sticky top-0 left-0 right-0 h-16 z-10 shadow shadow-lg",
     {
         variants: {
@@ -19,15 +19,15 @@ const navVariants = cva(
     }
 );
 
-interface NavProps extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof navVariants> {
+interface NavbarProps extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof navbarVariants> {
 }
 
-const Nav: FC<NavProps> = forwardRef<HTMLDivElement, NavProps>(({ className, variant, children, ...props }, ref) => {
+const Navbar: FC<NavbarProps> = forwardRef<HTMLDivElement, NavbarProps>(({ className, variant, children, ...props }, ref) => {
     return (
         <nav
             ref={ref}
-            className={cn(navVariants({ className, variant }))}
+            className={cn(navbarVariants({ className, variant }))}
             {...props}
         >
             {children}
@@ -35,4 +35,4 @@ const Nav: FC<NavProps> = forwardRef<HTMLDivElement, NavProps>(({ className, var
     )
 })
 
-export { Nav, navVariants };
+export { Navbar, navbarVariants };

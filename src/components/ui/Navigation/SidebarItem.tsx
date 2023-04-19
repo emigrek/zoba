@@ -4,7 +4,7 @@ import { FC, ReactNode, HTMLAttributes } from 'react'
 import { IconType } from 'react-icons/lib'
 import { iconVariants } from '../Button/Button';
 
-const asideItemVariants = cva(
+const sidebarItemVariants = cva(
     "w-full rounded-lg flex cursor-pointer items-center justify-center md:justify-start transition duration-200 text-neutral-400",
     {
         variants: {
@@ -31,16 +31,16 @@ const asideItemVariants = cva(
     }
 );
 
-interface AsideItemProps extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof asideItemVariants> {
+interface SidebarItemProps extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof sidebarItemVariants> {
     children: ReactNode
     iconLeft?: IconType,
     iconRight?: IconType
 }
 
-const AsideItem: FC<AsideItemProps> = ({ className, size, variant, children, iconLeft: IconL, iconRight: IconR, ...props }) => {
+const SidebarItem: FC<SidebarItemProps> = ({ className, size, variant, children, iconLeft: IconL, iconRight: IconR, ...props }) => {
     return (
-        <div className={cn(asideItemVariants({ className, size, variant }))} {...props}>
+        <div className={cn(sidebarItemVariants({ className, size, variant }))} {...props}>
             {IconL ? <IconL className={cn(iconVariants({ size, variant }))} /> : null}
             <span className='hidden md:block'>{children}</span>
             {IconR ? <IconR className={cn(iconVariants({ size, variant }))} /> : null}
@@ -48,4 +48,4 @@ const AsideItem: FC<AsideItemProps> = ({ className, size, variant, children, ico
     )
 }
 
-export { AsideItem, asideItemVariants }
+export { SidebarItem, sidebarItemVariants }

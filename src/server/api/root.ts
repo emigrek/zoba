@@ -1,6 +1,7 @@
 import { createTRPCRouter } from "@/server/api/trpc";
 import { visitRouter } from "./routers/visit";
 import { linkRouter } from "./routers/link";
+import { captchaRouter } from "./routers/captcha";
 
 /**
  * This is the primary router for your server.
@@ -9,7 +10,8 @@ import { linkRouter } from "./routers/link";
  */
 export const appRouter = createTRPCRouter({
   link: linkRouter,
-  visit: visitRouter
+  visit: visitRouter,
+  captcha: captchaRouter
 });
 
 // export type definition of API

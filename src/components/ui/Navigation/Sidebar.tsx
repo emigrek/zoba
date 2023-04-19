@@ -3,7 +3,7 @@ import { FC, forwardRef, HTMLAttributes } from 'react'
 import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
-const asideVariants = cva(
+const sidebarVariants = cva(
     "backdrop-filter backdrop-blur-sm z-20 fixed top-0 bottom-0",
     {
         variants: {
@@ -19,15 +19,15 @@ const asideVariants = cva(
     }
 );
 
-interface AsideProps extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof asideVariants> {
+interface SidebarProps extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof sidebarVariants> {
 }
 
-const Aside: FC<AsideProps> = forwardRef<HTMLDivElement, AsideProps>(({ className, variant, children, ...props }, ref) => {
+const Sidebar: FC<SidebarProps> = forwardRef<HTMLDivElement, SidebarProps>(({ className, variant, children, ...props }, ref) => {
     return (
         <aside
             ref={ref}
-            className={cn(asideVariants({ className, variant }))}
+            className={cn(sidebarVariants({ className, variant }))}
             {...props}
         >
             {children}
@@ -35,4 +35,4 @@ const Aside: FC<AsideProps> = forwardRef<HTMLDivElement, AsideProps>(({ classNam
     )
 })
 
-export { Aside, asideVariants };
+export { Sidebar, sidebarVariants };

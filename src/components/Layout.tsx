@@ -1,11 +1,10 @@
 import Head from 'next/head'
 import { FC, useState } from 'react'
-import { Aside } from './ui/Navigation/Aside'
-import AsideLinkItem from './ui/Navigation/AsideLinkItem'
+import { Sidebar } from './ui/Navigation/Sidebar'
 import Link from 'next/link'
 import { BiCut, BiLogOut } from 'react-icons/bi'
 import { useRouter } from 'next/router'
-import { Nav } from './ui/Navigation/Nav'
+import { Navbar } from './ui/Navigation/Navbar'
 import Dropdown from './ui/Dropdown/Dropdown'
 import { Avatar } from './ui/Avatar/Avatar'
 import DropdownLinkItem from './ui/Dropdown/DropdownLinkItem'
@@ -16,6 +15,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { Button } from './ui/Button/Button'
 import { useSession } from 'next-auth/react'
 import { signIn, signOut } from 'next-auth/react'
+import SidebarLinkItem from './ui/Navigation/SidebarLinkItem'
 
 interface LayoutProps {
     children: React.ReactNode
@@ -47,20 +47,20 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className='flex min-h-screen'>
-                <Aside className='w-20 md:w-64 flex flex-col px-2 md:px-5 items-center justify-between' variant={'dark'}>
+                <Sidebar className='w-20 md:w-64 flex flex-col px-2 md:px-5 items-center justify-between' variant={'dark'}>
                     <div className='flex flex-col items-center w-full'>
                         <Link href="/">
                             <div className='font-bold text-xl md:text-2xl py-16 px-2 md:p-16'>
                                 Zoba
                             </div>
                         </Link>
-                        <AsideLinkItem variant={active("/shorten") ? 'active' : 'transparent'} iconLeft={BiCut} href="/shorten" size={'large'}>
+                        <SidebarLinkItem variant={active("/shorten") ? 'active' : 'transparent'} iconLeft={BiCut} href="/shorten" size={'large'}>
                             Shorten
-                        </AsideLinkItem>
+                        </SidebarLinkItem>
                     </div>
-                </Aside>
+                </Sidebar>
                 <main className="flex flex-col flex-grow ml-20 md:ml-64">
-                    <Nav variant={'dark'}>
+                    <Navbar variant={'dark'}>
                         <div className="flex items-center justify-between h-full px-6">
                             <div className='text-lg font-semibold flex items-center'>
                                 { pageName }
@@ -89,7 +89,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                                 }
                             </div>
                         </div>
-                    </Nav>
+                    </Navbar>
                     {children}
                 </main>
             </div>
