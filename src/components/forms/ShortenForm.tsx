@@ -62,12 +62,6 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
 
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <HCaptcha
-                size="invisible"
-                ref={hcaptchaRef}
-                sitekey={env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
-                onVerify={onHCaptchaChange}
-            />
             <div className="flex flex-col gap-2">
                 <p className="text-neutral-300">Link</p>
                 <Input id="url" placeholder="Paste your link" />
@@ -75,6 +69,12 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
             <Button type="submit" className="w-full" size="large" variant="blue">
                 Shorten
             </Button>
+            <HCaptcha
+                size="invisible"
+                ref={hcaptchaRef}
+                sitekey={env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
+                onVerify={onHCaptchaChange}
+            />
             <div className="flex flex-col gap-2">
                 <p className="text-neutral-300">Output</p>
                 <CopyToClipboard

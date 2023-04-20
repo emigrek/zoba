@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button/Button";
 import { BiCut } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { Container } from "@/components/ui/Container/Container";
+import QRModal from "@/components/QRModal";
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
@@ -22,8 +23,9 @@ const Dashboard: NextPage = () => {
 
   return (
     <Container className="flex flex-col gap-8 my-0 p-8">
-      <div>
+      <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-neutral-100">All links</h1>
+        <Button onClick={() => router.push('/shorten')} variant={'emerald'} iconRight={BiCut}>New</Button>
       </div>
       {
         links?.length === 0 ? (
@@ -41,6 +43,7 @@ const Dashboard: NextPage = () => {
           </LinkGrid>
         )
       }
+      <QRModal/>
     </Container>
   );
 };

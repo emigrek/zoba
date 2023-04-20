@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Box } from './ui/Box/Box'
 import { Button } from './ui/Button/Button'
-import { BiDotsVerticalRounded, BiLinkExternal, BiTrash } from 'react-icons/bi'
+import { BiDotsVerticalRounded, BiLinkExternal, BiQr, BiTrash } from 'react-icons/bi'
 import Image from 'next/image'
 import Dropdown from './ui/Dropdown/Dropdown'
 import DropdownItem from './ui/Dropdown/DropdownItem'
@@ -9,6 +9,7 @@ import { api } from '@/utils/api'
 import { toast } from 'react-hot-toast'
 import useLinkDetails from '@/hooks/useLinkDetails'
 import { ExtendedLink } from 'types'
+import useQRModal from '@/hooks/useQRModal'
 
 interface LinkItemProps {
     link: ExtendedLink
@@ -18,6 +19,7 @@ const LinkItem: FC<LinkItemProps> = ({
     link
 }) => {
     const { domain, shortened, created, favicon } = useLinkDetails({ link });
+    const { setIsOpen, setUrl } = useQRModal();
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
         onSuccess: () => {
@@ -32,6 +34,11 @@ const LinkItem: FC<LinkItemProps> = ({
     const handleVisit = () => {
         window.open(shortened, '_blank');
     }
+
+    const handleShowQR = () => {
+        setIsOpen(true);
+        setUrl(shortened);
+    };
 
     const handleDelete = () => {
         deleteLink({ id: link.id });
@@ -62,6 +69,7 @@ const LinkItem: FC<LinkItemProps> = ({
                     }
                     items={[
                         <DropdownItem iconLeft={BiLinkExternal} onClick={handleVisit}>Visit</DropdownItem>,
+                        <DropdownItem iconLeft={BiQr} onClick={handleShowQR}>Show QR</DropdownItem>,
                         <DropdownItem iconLeft={BiTrash} onClick={handleDelete}>Delete</DropdownItem>
                     ]}
                 />

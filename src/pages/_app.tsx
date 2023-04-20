@@ -7,6 +7,8 @@ import { Toaster } from "react-hot-toast";
 import toastOptions from "@/utils/toastOptions";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
+import Modal from "react-modal";
+import QRModalContextProvider from "@/contexts/QRModalContext";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -15,6 +17,8 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
+
+Modal.setAppElement("#__next");
 
 const MyApp = ({
   Component,
@@ -25,7 +29,9 @@ const MyApp = ({
   return (
     <SessionProvider session={session}>
       <Toaster position={"bottom-right"} toastOptions={toastOptions} />
-      {getLayout(<Component {...pageProps} />)}
+      <QRModalContextProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </QRModalContextProvider>
     </SessionProvider>
   );
 };
