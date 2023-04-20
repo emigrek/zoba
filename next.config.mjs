@@ -8,7 +8,7 @@
 const config = {
   reactStrictMode: true,
   images: {
-    domains: ["lh3.googleusercontent.com", "ui-avatars.com", "www.google.com"],
+    domains: ["lh3.googleusercontent.com", "ui-avatars.com", "www.google.com", "api.qrserver.com"],
   },
 
   /**
