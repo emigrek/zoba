@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, forwardRef } from 'react'
 import { Box } from './ui/Box/Box'
 import { Button } from './ui/Button/Button'
 import { BiDotsVerticalRounded, BiLinkExternal, BiQr, BiTrash } from 'react-icons/bi'
@@ -15,9 +15,7 @@ interface LinkItemProps {
     link: ExtendedLink
 }
 
-const LinkItem: FC<LinkItemProps> = ({
-    link
-}) => {
+const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const { domain, shortened, created, favicon } = useLinkDetails({ link });
     const { setIsOpen, setUrl } = useQRModal();
     const linkContext = api.useContext();
@@ -45,10 +43,10 @@ const LinkItem: FC<LinkItemProps> = ({
     };
 
     return (
-        <Box variant={'outlined'} size={'small'} className='w-full flex flex-row justify-between items-center'>
+        <Box ref={ref} variant={'outlined'} size={'small'} className='w-full flex flex-row justify-between items-center'>
             <div className='flex items-center gap-5'>
                 <div className='relative w-10 h-10'>
-                    <Image src={favicon} alt={`${domain} favicon`} fill />
+                    <Image src={favicon} alt={`${domain} favicon`} fill sizes="64" />
                 </div>
                 <div className='flex flex-col'>
                     <div className='font-semibold text-lg'>
@@ -76,6 +74,6 @@ const LinkItem: FC<LinkItemProps> = ({
             </div>
         </Box>
     )
-}
+})
 
 export default LinkItem

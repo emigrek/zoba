@@ -66,7 +66,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>,
     iconRight?: IconType
 }
 
-const Button: FC<ButtonProps> = forwardRef<HTMLButtonElement, ButtonProps>(({ children, iconLeft: IconL, iconRight: IconR, className, size, variant, loading, ...props }, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, iconLeft: IconL, iconRight: IconR, className, size, variant, loading, ...props }, ref) => {
     return (
         <button
             ref={ref}

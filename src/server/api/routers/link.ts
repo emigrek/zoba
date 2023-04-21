@@ -97,6 +97,9 @@ export const linkRouter = createTRPCRouter({
                 where: {
                     userId: session.user.id
                 },
+                include: {
+                    visits: true
+                },
                 cursor: cursor ? { id: cursor } : undefined,
             });
 

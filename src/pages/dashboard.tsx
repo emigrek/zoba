@@ -9,11 +9,24 @@ import { BiCut } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { Container } from "@/components/ui/Container/Container";
 import QRModal from "@/components/QRModal";
+import { ExtendedLink } from "types";
+import { Fragment, useEffect } from "react";
+import { useInView } from 'react-intersection-observer';
 
 const Dashboard: NextPage = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const { data: links } = api.link.getAll.useQuery();
+  const { ref, inView } = useInView();
+  const { data, fetchNextPage } = api.link.getInfinite.useInfiniteQuery(
+    { limit: 25 },
+    { getNextPageParam: (lastPage) => lastPage.nextCursor }
+  );
+
+  useEffect(() => {
+    if(inView) {
+      fetchNextPage();
+    }
+  }, [inView]);
 
   if (!session) {
     return (
@@ -28,7 +41,7 @@ const Dashboard: NextPage = () => {
         <Button onClick={() => router.push('/shorten')} variant={'emerald'} iconRight={BiCut}>New</Button>
       </div>
       {
-        links?.length === 0 ? (
+        data?.pages.length === 0 ? (
           <div className="flex flex-col gap-3 items-center justify-center py-10 text-neutral-400">
             <p>You don&apos;t have any links yet.</p>
             <Button onClick={() => router.push('/shorten')} variant={'emerald'} iconRight={BiCut}>Add new</Button>
@@ -36,14 +49,34 @@ const Dashboard: NextPage = () => {
         ) : (
           <LinkGrid>
             {
-              links?.map((link) => (
-                <LinkItem key={link.id} link={link} />
+              data?.pages.map((page, index) => (
+                <Fragment key={index}>
+                  {
+                    page.links.map((link: ExtendedLink, index) => {
+                      const isLast = index === page.links.length - 1;
+                      
+                      if(isLast) {
+                        return (
+                          <div ref={ref} key={link.id}>
+                            <LinkItem link={link} />
+                          </div>
+                        )
+                      } else {
+                        return (
+                          <div key={link.id}>
+                            <LinkItem link={link} />
+                          </div>
+                        )
+                      }
+                    })
+                  }
+                </Fragment>
               ))
             }
           </LinkGrid>
         )
       }
-      <QRModal/>
+      <QRModal />
     </Container>
   );
 };

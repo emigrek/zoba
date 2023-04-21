@@ -29,7 +29,7 @@ interface BoxProps extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof boxVariants> {
 }
 
-const Box: FC<BoxProps> = forwardRef<HTMLDivElement, BoxProps>(({ className, size, variant, ...props }, ref) => {
+const Box = forwardRef<HTMLDivElement, BoxProps>(({ className, size, variant, ...props }, ref) => {
     return (
         <div
             ref={ref}
