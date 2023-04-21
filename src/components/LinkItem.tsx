@@ -21,7 +21,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
         onSuccess: () => {
-            linkContext.link.getAll.invalidate();
+            linkContext.link.getInfinite.invalidate();
             toast.success("Link deleted successfully");
         },
         onError: () => {
