@@ -1,10 +1,8 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import Modal from "react-modal";
 import { Button } from './ui/Button/Button';
 import useQRModal from '@/hooks/useQRModal';
 import { MdClose } from 'react-icons/md';
-import Image from 'next/image';
-import { VscLoading } from 'react-icons/vsc';
 import QRCode from "react-qr-code";
 
 const customStyles = {
@@ -28,7 +26,7 @@ const customStyles = {
     },
 };
 
-interface QRModalProps { }
+interface QRModalProps {}
 
 const QRModal: FC<QRModalProps> = () => {
     const { isOpen, setIsOpen, url } = useQRModal();
