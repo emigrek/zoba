@@ -6,6 +6,6 @@ html {
     @apply bg-night
 }
 
-root {
+:root {
     color-scheme: dark;
 }
