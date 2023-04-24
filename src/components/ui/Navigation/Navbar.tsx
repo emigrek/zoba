@@ -4,7 +4,7 @@ import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
 const navbarVariants = cva(
-    "w-full sticky top-0 left-0 right-0 h-16 z-10 shadow shadow-lg",
+    "w-full sticky top-0 left-0 right-0 h-16 z-10 shadow-xl",
     {
         variants: {
             variant: {

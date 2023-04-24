@@ -19,9 +19,9 @@ const sidebarItemVariants = cva(
                 transparent: "hover:bg-neutral-500/20 focus:ring-1 focus:ring-neutral-100/70",
             },
             size: {
-                small: "px-4 py-2 text-sm gap-1",
-                medium: "px-5 py-3 text-base gap-2",
-                large: "px-5 py-5 text-lg gap-5"
+                small: "px-4 py-2 text-sm gap-3",
+                medium: "px-5 py-3 text-base gap-4",
+                large: "px-5 py-5 text-lg gap-4"
             }
         },
         defaultVariants: {

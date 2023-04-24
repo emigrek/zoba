@@ -21,8 +21,10 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
     const [link, setLink] = useState<string>("");
     const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
 
+    const linkContext = api.useContext();
     const { mutateAsync: createLink, data } = api.link.create.useMutation({
         onSuccess: () => {
+            linkContext.link.getInfinite.invalidate();
             toast.success("Link shortened successfully");
         }
     });

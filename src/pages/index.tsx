@@ -2,6 +2,7 @@ import { Box } from "@/components/ui/Box/Box";
 import { Button } from "@/components/ui/Button/Button";
 import { Container } from "@/components/ui/Container/Container";
 import { type NextPage } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { BiRightArrowAlt, BiSave, BiShareAlt } from "react-icons/bi";
 import { MdManageSearch } from "react-icons/md";
@@ -9,14 +10,19 @@ import { MdManageSearch } from "react-icons/md";
 const Home: NextPage = () => {
   return (
     <Container size={'small'}>
-      <div className="flex flex-col gap-10">
-        <div className="text-neutral-100 text-center flex flex-col gap-3 py-2">
-          <h1 className="text-5xl md:text-6xl font-bold">
-            Shorten your links and watch them grow
-          </h1>
-          <p className="text-neutral-400">
-            Sign in to persist your links and manage them
-          </p>
+      <div className="flex flex-col gap-5 md:gap-10">
+        <div className="flex flex-col md:flex-row items-center justify-between w-full">
+          <div className="relative w-48 h-48 md:w-full md:h-64 mx-auto md:mx-0">
+            <Image src="/man-riding-a-rocket.svg" fill alt="Man riding a rocket" />
+          </div>
+          <div className="text-neutral-100 text-center flex flex-col gap-3 py-2 md:text-right">
+            <h1 className="text-4xl md:text-5xl font-bold">
+              Shorten your links and watch them grow
+            </h1>
+            <p className="text-neutral-400">
+              Sign in to persist your links and manage them
+            </p>
+          </div>
         </div>
         <div className="flex gap-2 justify-center items-center">
           <Box className="flex flex-col items-center justify-center h-44 gap-2 flex-1 p-2 py-3 md:p-5">
@@ -37,7 +43,7 @@ const Home: NextPage = () => {
         </div>
         <div className="flex justify-center">
           <Link href="/shorten">
-            <Button variant={'emerald'} size={'large'} iconRight={BiRightArrowAlt}>
+            <Button variant={'blue'} size={'large'} iconRight={BiRightArrowAlt}>
               Get started
             </Button>
           </Link>

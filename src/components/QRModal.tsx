@@ -5,7 +5,7 @@ import useQRModal from '@/hooks/useQRModal';
 import { MdClose } from 'react-icons/md';
 import QRCode from "react-qr-code";
 
-const customStyles = {
+export const customStyles = {
     overlay: {
         top: 0,
         left: 0,
@@ -21,8 +21,9 @@ const customStyles = {
         bottom: 'auto',
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
-        backgroundColor: '#262626',
+        backgroundColor: '#171717',
         border: 'none',
+        borderRadius: '0.75rem'
     },
 };
 

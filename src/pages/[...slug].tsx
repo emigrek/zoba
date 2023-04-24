@@ -2,7 +2,7 @@ import { Container } from '@/components/ui/Container/Container';
 import useLinkRedirect from '@/hooks/useLinkRedirect';
 import { BiError, BiLoaderAlt } from 'react-icons/bi';
 import { NextPageWithLayout } from './_app';
-import InterstitialLayout from '@/components/InterstitialLayout';
+import InterstitialLayout from '@/components/layouts/InterstitialLayout';
 
 const Interstitial: NextPageWithLayout = () => {
     const link = useLinkRedirect();

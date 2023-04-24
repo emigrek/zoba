@@ -43,7 +43,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     };
 
     return (
-        <Box ref={ref} variant={'outlined'} size={'small'} className='w-full flex flex-row justify-between items-center'>
+        <Box ref={ref} size={'small'} className='w-full flex flex-row justify-between items-center'>
             <div className='flex items-center gap-5'>
                 <div className='relative w-10 h-10'>
                     <Image src={favicon} alt={`${domain} favicon`} fill sizes="64" />
