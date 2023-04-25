@@ -4,8 +4,7 @@ import { api } from "@/utils/api";
 import LinkItem from "@/components/LinkItem";
 import LinkGrid from "@/components/LinkGrid";
 import { Button } from "@/components/ui/Button/Button";
-import { BiCut, BiPlus } from "react-icons/bi";
-import { useRouter } from "next/router";
+import { BiPlus, BiSearch } from "react-icons/bi";
 import { Container } from "@/components/ui/Container/Container";
 import QRModal from "@/components/QRModal";
 import { ExtendedLink } from "types";
@@ -15,18 +14,24 @@ import { NextPageWithLayout } from "@/pages/_app";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import ShortenModal from "@/components/ShortenModal";
 import useShortenModal from "@/hooks/useShortenModal";
-import { MdOutlet } from "react-icons/md";
+import { MdClose, MdOutlet } from "react-icons/md";
+import SiteHeader from "@/components/SiteHeader";
+import useSearchModal from "@/hooks/useSearchModal";
+import SearchModal from "@/components/SearchModal";
 
 const Links: NextPageWithLayout = () => {
-    const router = useRouter();
     const { data: session } = useSession();
     const { ref, inView } = useInView();
     const { setIsOpen: setShortenModalOpen } = useShortenModal();
+    const { setIsOpen: setSearchModalOpen, query, setQuery } = useSearchModal();
 
     const { data, fetchNextPage } = api.link.getInfinite.useInfiniteQuery(
-        { limit: 25 },
+        { limit: 25, query },
         { getNextPageParam: (lastPage) => lastPage.nextCursor }
     );
+
+    const noLinksLogic = data?.pages.length === 0;
+    const noSearchResultsLogic = query && data?.pages.length && data?.pages[0]?.links.length === 0;
 
     useEffect(() => {
         if (inView) {
@@ -42,13 +47,29 @@ const Links: NextPageWithLayout = () => {
 
     return (
         <Container className="flex flex-col gap-8 my-0 p-8">
-            <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold text-neutral-100">All links</h1>
+            <SiteHeader label="Links" action={[
+                <>
+                    {
+                        query ? (
+                            <Button onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
+                        ) : (
+                            <Button onClick={() => setSearchModalOpen(true)} variant={'blue'} iconRight={BiSearch}>Search</Button>
+                        )
+                    }
+                </>,
                 <Button onClick={() => setShortenModalOpen(true)} variant={'blue'} iconRight={BiPlus}>Add</Button>
-            </div>
+            ]} />
             {
-                data?.pages.length === 0 ? (
-                    <div className="flex flex-col gap-1 items-center justify-center text-neutral-500 py-10">
+                noSearchResultsLogic ? (
+                    <div className="flex flex-col gap-3 items-center justify-center text-neutral-500 py-10">
+                        <MdOutlet className="w-20 h-20" />
+                        <p>No links matched your search.</p>
+                    </div>
+                ) : null
+            }
+            {
+                noLinksLogic ? (
+                    <div className="flex flex-col gap-3 items-center justify-center text-neutral-500 py-10">
                         <MdOutlet className="w-20 h-20" />
                         <p>You don&apos;t have any links yet.</p>
                     </div>
@@ -84,6 +105,7 @@ const Links: NextPageWithLayout = () => {
             }
             <ShortenModal />
             <QRModal />
+            <SearchModal />
         </Container>
     );
 };

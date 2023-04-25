@@ -2,7 +2,7 @@ import cn from '@/utils/cn'
 import { VariantProps, cva } from 'class-variance-authority';
 import { FC, ReactNode, HTMLAttributes } from 'react'
 import { IconType } from 'react-icons/lib'
-import { iconVariants } from '../Button/Button';
+import { iconVariants } from '@/components/ui/Button/Button';
 
 const sidebarItemVariants = cva(
     "w-full rounded-lg flex cursor-pointer items-center justify-center md:justify-start transition duration-200 text-neutral-400",

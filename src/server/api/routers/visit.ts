@@ -1,5 +1,5 @@
 import { createVisitSchema } from "@/schema/visit";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const visitRouter = createTRPCRouter({
     create: publicProcedure
@@ -29,5 +29,21 @@ export const visitRouter = createTRPCRouter({
             } else {
                 throw new Error("Link not found");
             }
+        }),
+    count: protectedProcedure
+        .query(async ({ ctx }) => {
+            const { prisma, session } = ctx;
+
+            const count = await prisma.visit.count({
+                where: {
+                    link: {
+                        user: {
+                            id: session.user.id
+                        }
+                    }
+                }
+            });
+
+            return count;
         })
 });

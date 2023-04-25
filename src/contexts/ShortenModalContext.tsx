@@ -11,7 +11,7 @@ export const ShortenModalContext = createContext<ShortenModalContextProps>({
 });
 
 interface ShortenModalContextProviderProps {
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 const ShortenModalContextProvider: FC<ShortenModalContextProviderProps> = (

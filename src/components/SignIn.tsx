@@ -1,13 +1,11 @@
 import { FC, useState } from 'react'
 import { BiError } from 'react-icons/bi'
-import { Button } from './ui/Button/Button'
+import { Button } from '@/components/ui/Button/Button'
 import { signIn } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc'
-import { Container } from './ui/Container/Container';
+import { Container } from '@/components/ui/Container/Container';
 
-interface SignInProps { }
-
-const SignIn: FC<SignInProps> = ({ }) => {
+const SignIn: FC = () => {
     const [loading, setLoading] = useState(false);
 
     const handleSignIn = async () => {

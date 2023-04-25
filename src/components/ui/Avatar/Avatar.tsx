@@ -35,8 +35,7 @@ const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(({ src, 
             <Image
                 src={src}
                 alt={"Avatar"}
-                layout="fill"
-                objectFit="cover"
+                fill
                 className="rounded-full"
             />
         </div>

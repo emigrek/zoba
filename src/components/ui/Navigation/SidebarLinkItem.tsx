@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { FC, ReactNode, HTMLAttributes } from 'react'
 import { IconType } from 'react-icons/lib'
 import { sidebarItemVariants } from './SidebarItem'
-import { iconVariants } from '../Button/Button'
+import { iconVariants } from '@/components/ui/Button/Button'
 
 interface SidebarLinkItemProps extends HTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof sidebarItemVariants> {

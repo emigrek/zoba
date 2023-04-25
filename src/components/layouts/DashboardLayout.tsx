@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Sidebar } from '@/components/ui/Navigation/Sidebar'
 import Link from 'next/link'
-import { BiCut, BiLogOut } from 'react-icons/bi'
+import { BiLogOut } from 'react-icons/bi'
 import { useRouter } from 'next/router'
 import { Navbar } from '@/components/ui/Navigation/Navbar'
 import Dropdown from '@/components/ui/Dropdown/Dropdown'
@@ -15,11 +15,10 @@ import { Button } from '@/components/ui/Button/Button'
 import { useSession } from 'next-auth/react'
 import { signIn, signOut } from 'next-auth/react'
 import SidebarLinkItem from '@/components/ui/Navigation/SidebarLinkItem';
-import { siteConfig } from '@/config/site'
-import { SidebarItem } from '../ui/Navigation/SidebarItem'
+import { SidebarItem } from '@/components/ui/Navigation/SidebarItem'
 import { dashboardSidebarConfig } from '@/config/dashboardSidebar'
 import Breadcrumb from '@/components/Breadcrumb'
-import Brand from '../Brand'
+import Brand from '@/components/Brand'
 
 interface DashboardLayoutProps {
     children: React.ReactNode

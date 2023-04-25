@@ -15,7 +15,7 @@ export const QRModalContext = createContext<QRModalContextProps>({
 });
 
 interface QRModalContextProviderProps {
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 const QRModalContextProvider: FC<QRModalContextProviderProps> = (

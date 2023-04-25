@@ -1,5 +1,5 @@
-import { FC, forwardRef } from 'react'
-import { Box } from './ui/Box/Box'
+import { forwardRef } from 'react'
+import { Sheet } from './ui/Sheet/Sheet'
 import { Button } from './ui/Button/Button'
 import { BiDotsVerticalRounded, BiLinkExternal, BiQr, BiTrash } from 'react-icons/bi'
 import Image from 'next/image'
@@ -43,19 +43,19 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     };
 
     return (
-        <Box ref={ref} size={'small'} className='w-full flex flex-row justify-between items-center'>
+        <Sheet ref={ref} size={'small'} className='w-full flex flex-row justify-between items-center'>
             <div className='flex items-center gap-5'>
-                <div className='relative w-10 h-10'>
-                    <Image src={favicon} alt={`${domain} favicon`} fill sizes="64" />
+                <div className='relative w-12 h-12'>
+                    <Image src={favicon} alt={`${domain} favicon`} fill sizes="128" />
                 </div>
                 <div className='flex flex-col'>
                     <div className='font-semibold text-lg'>
                         {domain}
                     </div>
-                    <div>
+                    <div className='uppercase text-sm text-neutral-300 tracking-wide'>
                         {link.visits.length} visits
                     </div>
-                    <div className='text-neutral-400'>
+                    <div className='text-neutral-400 text-sm mt-1'>
                         {created}
                     </div>
                 </div>
@@ -72,7 +72,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                     ]}
                 />
             </div>
-        </Box>
+        </Sheet>
     )
 })
 

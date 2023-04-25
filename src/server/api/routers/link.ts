@@ -89,18 +89,33 @@ export const linkRouter = createTRPCRouter({
         .input(getInfiniteSchema)
         .query(async ({ input, ctx }) => {
             const limit = input.limit ?? 10;
-            const { cursor } = input;
+            const { cursor, query } = input;
             const { prisma, session } = ctx;
 
             const links = await prisma.link.findMany({
-                take: limit + 1,
                 where: {
-                    userId: session.user.id
+                    userId: session.user.id,
+                    OR: [
+                        {
+                            url: {
+                                contains: query
+                            }
+                        },
+                        {
+                            slug: {
+                                contains: query
+                            }
+                        }
+                    ]
                 },
                 include: {
                     visits: true
                 },
+                take: limit + 1,
                 cursor: cursor ? { id: cursor } : undefined,
+                orderBy: {
+                    createdAt: "desc"
+                }
             });
 
             let nextCursor: typeof cursor | undefined = undefined;
@@ -126,5 +141,17 @@ export const linkRouter = createTRPCRouter({
             });
 
             return link;
+        }),
+    count: protectedProcedure
+        .query(async ({ ctx }) => {
+            const { prisma, session } = ctx;
+
+            const count = await prisma.link.count({
+                where: {
+                    userId: session.user.id
+                }
+            });
+
+            return count;
         })
 });

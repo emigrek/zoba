@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority'
-import { ButtonHTMLAttributes, FC, forwardRef } from 'react'
+import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
@@ -20,9 +20,9 @@ const buttonVariants = cva(
                 transparent: "bg-transparent hover:bg-gray-500/20 focus:ring-2 focus:ring-gray-500/50",
             },
             size: {
-                small: "px-4 py-2 text-sm gap-1",
-                medium: "px-5 py-3 text-base gap-2",
-                large: "px-6 py-4 text-lg gap-2"
+                small: "px-4 h-8 text-sm gap-1",
+                medium: "px-5 h-12 text-base gap-2",
+                large: "px-6 h-16 text-lg gap-2"
             }
         },
         defaultVariants: {

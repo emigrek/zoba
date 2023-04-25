@@ -14,6 +14,7 @@ export const createCaptchaLinkSchema = z.object({
 });
 
 export const getInfiniteSchema = z.object({
+    query: z.string(),
     limit: z.number().min(1).max(100).nullish(),
     cursor: z.string().nullish()
 });

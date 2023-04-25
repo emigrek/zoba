@@ -1,6 +1,6 @@
 import { FC, useRef, useState } from 'react'
-import { Input } from '../ui/Input/Input';
-import { Button } from '../ui/Button/Button';
+import { Input } from '@/components/ui/Input/Input';
+import { Button } from '@/components/ui/Button/Button';
 import { createLinkSchema } from "@/schema/link";
 import { ZodError } from "zod";
 import { useMemo } from "react";
@@ -65,7 +65,7 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
-                <p className="text-neutral-300">Link</p>
+                <p className="text-neutral-400">Link</p>
                 <Input id="url" placeholder="Paste your link" />
             </div>
             <Button type="submit" className="w-full" size="large" variant="blue">
@@ -78,7 +78,7 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
                 onVerify={onHCaptchaChange}
             />
             <div className="flex flex-col gap-2">
-                <p className="text-neutral-300">Output</p>
+                <p className="text-neutral-400">Output</p>
                 <CopyToClipboard
                     text={shortened}
                     onCopy={() => toast.success("Copied to clipboard")}

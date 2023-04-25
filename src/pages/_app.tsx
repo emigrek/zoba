@@ -8,7 +8,6 @@ import toastOptions from "@/utils/toastOptions";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
 import Modal from "react-modal";
-import QRModalContextProvider from "@/contexts/QRModalContext";
 import Head from "next/head";
 import { siteConfig } from "@/config/site";
 import { AppContextProvider } from "@/contexts/AppContext";

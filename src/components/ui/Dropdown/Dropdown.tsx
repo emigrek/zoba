@@ -1,5 +1,5 @@
 import cn from '@/utils/cn';
-import { FC, HTMLAttributes, ReactNode, useState, useRef } from 'react'
+import { FC, HTMLAttributes, ReactNode, useState } from 'react'
 import { useClickOutside } from '@mantine/hooks';
 
 interface DropdownProps extends HTMLAttributes<HTMLDivElement> {

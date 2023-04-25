@@ -1,9 +1,9 @@
 import { cva } from 'class-variance-authority'
-import { FC, forwardRef, HTMLAttributes } from 'react'
+import { forwardRef, HTMLAttributes } from 'react'
 import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
-const boxVariants = cva(
+const sheetVariants = cva(
     "w-fit rounded-xl",
     {
         variants: {
@@ -25,18 +25,18 @@ const boxVariants = cva(
     }
 );
 
-interface BoxProps extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof boxVariants> {
+interface SheetProps extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof sheetVariants> {
 }
 
-const Box = forwardRef<HTMLDivElement, BoxProps>(({ className, size, variant, ...props }, ref) => {
+const Sheet = forwardRef<HTMLDivElement, SheetProps>(({ className, size, variant, ...props }, ref) => {
     return (
         <div
             ref={ref}
-            className={cn(boxVariants({ className, size, variant }))}
+            className={cn(sheetVariants({ className, size, variant }))}
             {...props}
         />
     )
 })
 
-export { Box, boxVariants };
+export { Sheet, sheetVariants };
