@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/Input/Input';
 import QRCode from 'react-qr-code';
 import { BiDownload, BiQr } from 'react-icons/bi';
 import extractDomain from 'extract-domain';
+import saveSVG from '@/utils/saveSvg';
 
 interface QRFormProps {
     initialUrl?: string;
@@ -17,26 +18,11 @@ const QRForm: FC<QRFormProps> = ({ initialUrl }) => {
 
         if(!url) return;
 
-        saveQrSvg();
+        saveSVG({
+            id: 'qr-code',
+            filename: `QR-${extractDomain(url)}`
+        });
     };
-
-    const saveQrSvg = () => {
-        const svg = document.getElementById('qr-code') as HTMLElement;
-        const svgData = new XMLSerializer().serializeToString(svg);
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const img = document.createElement('img');
-        img.setAttribute('src', 'data:image/svg+xml;base64,' + btoa(svgData));
-        img.onload = function () {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx?.drawImage(img, 0, 0);
-            const a = document.createElement('a');
-            a.download = `QR-${extractDomain(url)}.png`;
-            a.href = canvas.toDataURL('image/png');
-            a.click();
-        };
-    }
 
     const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(e.target.value);
