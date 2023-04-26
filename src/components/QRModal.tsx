@@ -5,6 +5,7 @@ import useQRModal from '@/hooks/useQRModal';
 import { MdClose } from 'react-icons/md';
 import QRCode from "react-qr-code";
 import ModalHeader from './ModalHeader';
+import QRForm from './forms/QRForm';
 
 export const customStyles = {
     overlay: {
@@ -37,9 +38,7 @@ const QRModal: FC<QRModalProps> = () => {
         <Modal isOpen={isOpen} style={customStyles} onRequestClose={() => setIsOpen(false)}>
             <div className="flex flex-col p-2 gap-5">
                 <ModalHeader label="QR Code" />
-                <div className='relative aspect-square'>
-                    <QRCode value={url} size={300} bgColor="#171717" fgColor="#fff" />
-                </div>
+                <QRForm initialUrl={url} />
                 <div className='flex-grow mx-auto'>
                     <Button iconLeft={MdClose} onClick={() => setIsOpen(false)} variant={'red'}>Close</Button>
                 </div>
