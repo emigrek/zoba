@@ -53,11 +53,11 @@ const Links: NextPageWithLayout = () => {
                         query ? (
                             <Button onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
                         ) : (
-                            <Button onClick={() => setSearchModalOpen(true)} variant={'blue'} iconRight={BiSearch}>Search</Button>
+                            <Button onClick={() => setSearchModalOpen(true)} variant={'accent'} iconRight={BiSearch}>Search</Button>
                         )
                     }
                 </>,
-                <Button onClick={() => setShortenModalOpen(true)} variant={'blue'} iconRight={BiPlus}>Add</Button>
+                <Button onClick={() => setShortenModalOpen(true)} variant={'accent'} iconRight={BiPlus}>Add</Button>
             ]} />
             {
                 noSearchResultsLogic ? (

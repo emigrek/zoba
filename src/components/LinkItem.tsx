@@ -52,10 +52,10 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                     <div className='font-semibold text-lg'>
                         {domain}
                     </div>
-                    <div className='uppercase text-sm text-neutral-300 tracking-wide'>
+                    <div className='text-sm text-neutral-300 tracking-wide'>
                         {link.visits.length} visits
                     </div>
-                    <div className='text-neutral-400 text-sm mt-1'>
+                    <div className='text-neutral-500 text-sm'>
                         {created}
                     </div>
                 </div>

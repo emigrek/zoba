@@ -22,7 +22,7 @@ const SignIn: FC = () => {
                     <p className='text-neutral-400 text-xl'>You must be signed in to view this page</p>
                 </div>
                 <div className="flex justify-center">
-                    <Button variant={'blue'} size={'large'} loading={loading} iconRight={FcGoogle} onClick={handleSignIn}>
+                    <Button variant={'accent'} size={'large'} loading={loading} iconRight={FcGoogle} onClick={handleSignIn}>
                         Sign in
                     </Button>
                 </div>

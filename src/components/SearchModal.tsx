@@ -38,7 +38,7 @@ const SearchModal: FC<SearchModalProps> = () => {
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 <Button
-                    variant="blue"
+                    variant="accent"
                     onClick={() => {
                         setIsOpen(false);
                         setQuery(search);

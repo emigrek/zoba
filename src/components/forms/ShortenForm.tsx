@@ -68,7 +68,7 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
                 <p className="text-neutral-400">Link</p>
                 <Input id="url" placeholder="Paste your link" />
             </div>
-            <Button type="submit" className="w-full" size="large" variant="blue">
+            <Button type="submit" className="w-full" size="large" variant={'accent'}>
                 Shorten
             </Button>
             <HCaptcha

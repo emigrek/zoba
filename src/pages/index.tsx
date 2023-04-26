@@ -43,7 +43,7 @@ const Home: NextPage = () => {
         </div>
         <div className="flex justify-center">
           <Link href="/shorten">
-            <Button variant={'blue'} size={'large'} iconRight={BiRightArrowAlt}>
+            <Button variant={'accent'} size={'large'} iconRight={BiRightArrowAlt}>
               Get started
             </Button>
           </Link>

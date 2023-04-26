@@ -10,6 +10,7 @@ const sidebarItemVariants = cva(
         variants: {
             variant: {
                 default: "bg-gray-500 hover:bg-gray-600  focus:ring-1 focus:ring-gray-100/70",
+                accent: "bg-accent-500 hover:bg-accent-600 focus:ring-1 focus:ring-accent-100/70",
                 blue: "bg-blue-500/20 hover:bg-blue-600/60 focus:ring-1 focus:ring-blue-100/70",
                 emerald: "bg-emerald-500/20 hover:bg-emerald-600/60 focus:ring-1 focus:ring-emerald-100/70",
                 red: "bg-red-500/20 hover:bg-red-600/60 focus:ring-1 focus:ring-red-100/70",
