@@ -6,18 +6,18 @@ import LinkGrid from "@/components/LinkGrid";
 import { Button } from "@/components/ui/Button/Button";
 import { BiPlus, BiSearch } from "react-icons/bi";
 import { Container } from "@/components/ui/Container/Container";
-import QRModal from "@/components/QRModal";
+import QRModal from "@/components/modals/QRModal";
 import { ExtendedLink } from "types";
 import { Fragment, useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
 import { NextPageWithLayout } from "@/pages/_app";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-import ShortenModal from "@/components/ShortenModal";
+import ShortenModal from "@/components/modals/ShortenModal";
 import useShortenModal from "@/hooks/useShortenModal";
 import { MdClose, MdOutlet } from "react-icons/md";
 import SiteHeader from "@/components/SiteHeader";
 import useSearchModal from "@/hooks/useSearchModal";
-import SearchModal from "@/components/SearchModal";
+import SearchModal from "@/components/modals/SearchModal";
 
 const Links: NextPageWithLayout = () => {
     const { data: session } = useSession();
@@ -53,11 +53,11 @@ const Links: NextPageWithLayout = () => {
                         query ? (
                             <Button onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
                         ) : (
-                            <Button onClick={() => setSearchModalOpen(true)} variant={'accent'} iconRight={BiSearch}>Search</Button>
+                            <Button onClick={() => setSearchModalOpen(true)} variant={'blue'} iconRight={BiSearch}>Search</Button>
                         )
                     }
                 </>,
-                <Button onClick={() => setShortenModalOpen(true)} variant={'accent'} iconRight={BiPlus}>Add</Button>
+                <Button onClick={() => setShortenModalOpen(true)} variant={'emerald'} iconRight={BiPlus}>Add</Button>
             ]} />
             {
                 noSearchResultsLogic ? (

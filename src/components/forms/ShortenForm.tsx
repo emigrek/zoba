@@ -13,6 +13,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 import { env } from "@/env.mjs";
 import { TRPCClientError } from '@trpc/client';
+import { BiCut } from 'react-icons/bi';
 
 interface ShortenFormProps { }
 
@@ -29,7 +30,7 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
         }
     });
 
-    const shortened = useMemo(() => `${origin}/${data ? data?.slug : ""}`, [data, origin]);
+    const shortened = useMemo(() => `${origin}/z/${data ? data?.slug : ""}`, [data, origin]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -68,7 +69,7 @@ const ShortenForm: FC<ShortenFormProps> = ({ }) => {
                 <p className="text-neutral-400">Link</p>
                 <Input id="url" placeholder="Paste your link" />
             </div>
-            <Button type="submit" className="w-full" size="large" variant={'accent'}>
+            <Button type="submit" className="w-full" size="large" variant={'accent'} iconRight={BiCut}>
                 Shorten
             </Button>
             <HCaptcha

@@ -2,7 +2,7 @@ import { FC } from 'react'
 import Modal from "react-modal";
 import useShortenModal from '@/hooks/useShortenModal';
 import ShortenForm from '@/components/forms/ShortenForm';
-import { customStyles } from '@/components/QRModal';
+import { customStyles } from '@/components/modals/QRModal';
 import ModalHeader from '@/components/ModalHeader';
 
 interface ShortenModalProps {}

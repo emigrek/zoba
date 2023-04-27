@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import { Sheet } from './ui/Sheet/Sheet'
 import { Button } from './ui/Button/Button'
-import { BiDotsVerticalRounded, BiLinkExternal, BiQr, BiTrash } from 'react-icons/bi'
+import { BiCopy, BiDotsVerticalRounded, BiLinkExternal, BiQr, BiTrash } from 'react-icons/bi'
 import Image from 'next/image'
 import Dropdown from './ui/Dropdown/Dropdown'
 import DropdownItem from './ui/Dropdown/DropdownItem'
@@ -10,6 +10,7 @@ import { toast } from 'react-hot-toast'
 import useLinkDetails from '@/hooks/useLinkDetails'
 import { ExtendedLink } from 'types'
 import useQRModal from '@/hooks/useQRModal'
+import DropdownDivider from '@/components/ui/Dropdown/DropdownDivider'
 
 interface LinkItemProps {
     link: ExtendedLink
@@ -32,6 +33,15 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const handleVisit = () => {
         window.open(shortened, '_blank');
     }
+
+    const handleClipboard = () => {
+        try {
+            navigator.clipboard.writeText(shortened);
+            toast.success("Copied to clipboard");
+        } catch (error) {
+            toast.error("Something went wrong");
+        }
+    };
 
     const handleShowQR = () => {
         setIsOpen(true);
@@ -67,7 +77,9 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                     }
                     items={[
                         <DropdownItem iconLeft={BiLinkExternal} onClick={handleVisit}>Visit</DropdownItem>,
+                        <DropdownItem iconLeft={BiCopy} onClick={handleClipboard}>Copy to clipboard</DropdownItem>,
                         <DropdownItem iconLeft={BiQr} onClick={handleShowQR}>Show QR</DropdownItem>,
+                        <DropdownDivider/>,
                         <DropdownItem iconLeft={BiTrash} onClick={handleDelete}>Delete</DropdownItem>
                     ]}
                 />

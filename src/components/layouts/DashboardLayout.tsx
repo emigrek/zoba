@@ -48,6 +48,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
                     <Link href="/">
                         <Brand/>
                     </Link>
+                    <div className='w-full h-1 border-b border-neutral-800 mb-2'/>
                     {
                         dashboardSidebarConfig.items.map((item, index) => {
                             if (item.href) {

@@ -6,8 +6,8 @@ import QRForm from "@/components/forms/QRForm";
 const QR: NextPage = () => {
   return (
     <Container size={'small'}>
-      <div className="flex flex-col w-full gap-5">
-        <Sheet className="w-full">
+      <div className="flex flex-col w-full gap-5 items-center">
+        <Sheet>
           <QRForm/>
         </Sheet>
       </div>

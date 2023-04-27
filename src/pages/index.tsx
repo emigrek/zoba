@@ -17,7 +17,7 @@ const Home: NextPage = () => {
           </div>
           <div className="text-neutral-100 text-center flex flex-col gap-3 py-2 md:text-right">
             <h1 className="text-4xl md:text-5xl font-bold">
-              Shorten your links and watch them grow
+              Shorten your links and watch them fly
             </h1>
             <p className="text-neutral-400">
               Sign in to persist your links and manage them
