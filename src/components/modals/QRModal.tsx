@@ -3,9 +3,8 @@ import Modal from "react-modal";
 import { Button } from '../ui/Button/Button';
 import useQRModal from '@/hooks/useQRModal';
 import { MdClose } from 'react-icons/md';
-import QRCode from "react-qr-code";
-import ModalHeader from '../ModalHeader';
-import QRForm from '../forms/QRForm';
+import ModalHeader from '@/components/ModalHeader';
+import QRForm from '@/components/forms/QRForm';
 
 export const customStyles = {
     overlay: {

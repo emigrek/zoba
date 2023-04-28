@@ -4,9 +4,13 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 import { useSession } from "next-auth/react";
 import { Sheet } from "@/components/ui/Sheet/Sheet";
 import { BiLink } from "react-icons/bi";
+import { BsArrowRightShort } from "react-icons/bs"; 
 import { IoEye } from "react-icons/io5";
 import { api } from "@/utils/api";
 import SiteHeader from "@/components/SiteHeader";
+import SiteSubheader from "@/components/SiteSubheader";
+import ClickableLinks from "@/components/ClickableLinks";
+import Link from "next/link";
 
 const Dashboard: NextPageWithLayout = () => {
     const { data: session } = useSession();
@@ -33,6 +37,15 @@ const Dashboard: NextPageWithLayout = () => {
                     <div className="text-5xl font-bold">{visitsCount}</div>
                 </Sheet>
             </div>
+            <SiteSubheader label="Most clickable links" actions={[
+                <Link href="/dashboard/links">
+                    <div className="flex gap-2 text-accent-300 items-center justify-center">
+                        <div>See all</div>
+                        <BsArrowRightShort className="w-8 h-8 opacity-40" />
+                    </div>
+                </Link>
+            ]} />
+            <ClickableLinks />
         </Container>
     );
 };

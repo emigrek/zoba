@@ -1,14 +1,14 @@
 import { FC, ReactNode } from 'react'
 
-interface SiteHeaderProps {
+interface SiteSubheaderProps {
     label: string,
     actions?: ReactNode[]
 }
 
-const SiteHeader: FC<SiteHeaderProps> = ({ label, actions }) => {
+const SiteSubheader: FC<SiteSubheaderProps> = ({ label, actions }) => {
     return (
-        <div className="flex flex-col md:flex-row justify-between gap-3 md:items-center">
-            <div className="font-bold text-3xl">
+        <div className="flex flex-col md:flex-row justify-between gap-3 text-neutral-300 md:items-center">
+            <div className="font-bold text-2xl">
                 {label}
             </div>
             <div className="flex gap-2">
@@ -22,4 +22,4 @@ const SiteHeader: FC<SiteHeaderProps> = ({ label, actions }) => {
     )
 }
 
-export default SiteHeader
+export default SiteSubheader

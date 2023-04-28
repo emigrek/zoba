@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Modal from "react-modal";
-import { customStyles } from './QRModal';
+import { customStyles } from '@/components/modals/QRModal';
 import useSearchModal from '@/hooks/useSearchModal';
 import { Input } from '@/components/ui/Input/Input';
 import { useState } from 'react';

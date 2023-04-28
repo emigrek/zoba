@@ -128,6 +128,27 @@ export const linkRouter = createTRPCRouter({
                 nextCursor,
             };
         }),
+    getMostVisited: protectedProcedure
+        .query(async ({ ctx }) => {
+            const { prisma, session } = ctx;
+
+            const links = await prisma.link.findMany({
+                where: {
+                    userId: session.user.id
+                },
+                include: {
+                    visits: true
+                },
+                orderBy: {
+                    visits: {
+                        _count: "desc"
+                    }
+                },
+                take: 3
+            });
+
+            return links;
+        }),
     delete: protectedProcedure
         .input(deleteLinkSchema)
         .mutation(async ({ input, ctx }) => {

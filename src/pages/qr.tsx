@@ -7,7 +7,7 @@ const QR: NextPage = () => {
   return (
     <Container size={'small'}>
       <div className="flex flex-col w-full gap-5 items-center">
-        <Sheet>
+        <Sheet className="w-full">
           <QRForm/>
         </Sheet>
       </div>

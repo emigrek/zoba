@@ -47,17 +47,17 @@ const Links: NextPageWithLayout = () => {
 
     return (
         <Container className="flex flex-col gap-8 my-0 p-8">
-            <SiteHeader label="Links" action={[
+            <SiteHeader label="Links" actions={[
                 <>
                     {
                         query ? (
-                            <Button onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
+                            <Button className="w-full" onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
                         ) : (
-                            <Button onClick={() => setSearchModalOpen(true)} variant={'blue'} iconRight={BiSearch}>Search</Button>
+                            <Button className="w-full" onClick={() => setSearchModalOpen(true)} variant={'blue'} iconRight={BiSearch}>Search</Button>
                         )
                     }
                 </>,
-                <Button onClick={() => setShortenModalOpen(true)} variant={'emerald'} iconRight={BiPlus}>Add</Button>
+                <Button className="w-full" onClick={() => setShortenModalOpen(true)} variant={'emerald'} iconRight={BiPlus}>Add</Button>
             ]} />
             {
                 noSearchResultsLogic ? (
