@@ -2,9 +2,8 @@ import { cva } from 'class-variance-authority'
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
-
-import { VscLoading } from "react-icons/vsc";
 import { IconType } from 'react-icons/lib';
+import Spinner from '@/components/ui/Spinner/Spinner';
 
 const buttonVariants = cva(
     "relative w-fit flex items-center justify-center rounded-full text-white font-semibold tracking-wide transition duration-200 ease-in-out focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
@@ -79,7 +78,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, iconLeft:
             {IconL ? <IconL className={cn(iconVariants({ size, variant }))} /> : null}
             {loading ? (
                 <div className="absolute relative-0 bg-black/80 w-full h-full rounded-full inset-0 flex items-center justify-center">
-                    <VscLoading className="animate-spin w-6 h-6" />
+                    <Spinner/>
                 </div>
             ) : null}
             {children}

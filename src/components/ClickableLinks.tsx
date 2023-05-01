@@ -2,11 +2,21 @@ import { api } from '@/utils/api'
 import { FC } from 'react'
 import LinkGrid from './LinkGrid';
 import LinkItem from './LinkItem';
+import LinkItemSkeleton from '@/components/LinkItemSkeleton';
 
-interface ClickableLinksProps { }
+const ClickableLinks: FC = () => {
+    const { data: links, isLoading } = api.link.getMostVisited.useQuery();
 
-const ClickableLinks: FC<ClickableLinksProps> = ({ }) => {
-    const { data: links } = api.link.getMostVisited.useQuery();
+    if (isLoading)
+        return (
+            <LinkGrid>
+                {
+                    [...Array(3)].map((_, index) => {
+                        return <LinkItemSkeleton key={index} />
+                    })
+                }
+            </LinkGrid>
+        )
 
     return (
         <LinkGrid>

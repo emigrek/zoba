@@ -18,6 +18,7 @@ import { MdClose, MdOutlet } from "react-icons/md";
 import SiteHeader from "@/components/SiteHeader";
 import useSearchModal from "@/hooks/useSearchModal";
 import SearchModal from "@/components/modals/SearchModal";
+import LinkItemSkeleton from "@/components/LinkItemSkeleton";
 
 const Links: NextPageWithLayout = () => {
     const { data: session } = useSession();
@@ -25,7 +26,7 @@ const Links: NextPageWithLayout = () => {
     const { setIsOpen: setShortenModalOpen } = useShortenModal();
     const { setIsOpen: setSearchModalOpen, query, setQuery } = useSearchModal();
 
-    const { data, fetchNextPage } = api.link.getInfinite.useInfiniteQuery(
+    const { data, fetchNextPage, isLoading } = api.link.getInfinite.useInfiniteQuery(
         { limit: 25, query },
         { getNextPageParam: (lastPage) => lastPage.nextCursor }
     );
@@ -34,7 +35,7 @@ const Links: NextPageWithLayout = () => {
     const noSearchResultsLogic = query && data?.pages.length && data?.pages[0]?.links.length === 0;
 
     useEffect(() => {
-        if (inView) {
+        if (inView && !isLoading) {
             fetchNextPage();
         }
     }, [inView]);
@@ -59,6 +60,17 @@ const Links: NextPageWithLayout = () => {
                 </>,
                 <Button className="w-full" onClick={() => setShortenModalOpen(true)} variant={'emerald'} iconRight={BiPlus}>Add</Button>
             ]} />
+            {
+                isLoading ? (
+                    <LinkGrid>
+                        {
+                            [...Array(6)].map((_, index) => (
+                                <LinkItemSkeleton key={index}/>
+                            ))
+                        }
+                    </LinkGrid>
+                ) : null
+            }
             {
                 noSearchResultsLogic ? (
                     <div className="flex flex-col gap-3 items-center justify-center text-neutral-500 py-10">

@@ -11,33 +11,45 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteSubheader from "@/components/SiteSubheader";
 import ClickableLinks from "@/components/ClickableLinks";
 import Link from "next/link";
+import Spinner from "@/components/ui/Spinner/Spinner";
 
 const Dashboard: NextPageWithLayout = () => {
     const { data: session } = useSession();
 
-    const { data: linksCount } = api.link.count.useQuery();
-    const { data: visitsCount } = api.visit.count.useQuery();
+    const { data, isLoading } = api.analytics.getCount.useQuery();
 
     return (
         <Container className="flex flex-col gap-8 my-0 p-8">
-            <SiteHeader label={`Hello, ${session?.user.name}!`} />
+            <SiteHeader label={`Hello${session ? ` ${session?.user.name}` : ''}!`} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-neutral-300">
                 <Sheet className="h-40 w-full flex flex-col justify-between">
                     <div className="flex justify-between">
                         <div className="text-xl text-neutral-400">Links</div>
                         <BiLink className="w-16 h-16 opacity-40" />
                     </div>
-                    <div className="text-5xl font-bold">{linksCount}</div>
+                    {
+                        isLoading ? (
+                            <Spinner className="w-10 h-10"/>
+                        ) : (
+                            <div className="text-5xl font-bold">{data?.linksCount}</div>
+                        )
+                    }
                 </Sheet>
                 <Sheet className="h-40 w-full flex flex-col justify-between">
                     <div className="flex justify-between">
                         <div className="text-xl text-neutral-400">Visits</div>
                         <IoEye className="w-16 h-16 opacity-40" />
                     </div>
-                    <div className="text-5xl font-bold">{visitsCount}</div>
+                    {
+                        isLoading ? (
+                            <Spinner className="w-10 h-10"/>
+                        ) : (
+                            <div className="text-5xl font-bold">{data?.visitsCount}</div>
+                        )
+                    }
                 </Sheet>
             </div>
-            <SiteSubheader label="Most clickable links" actions={[
+            <SiteSubheader label="Clickable links" actions={[
                 <Link href="/dashboard/links">
                     <div className="flex gap-2 text-accent-300 items-center justify-center">
                         <div>See all</div>
