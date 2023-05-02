@@ -4,7 +4,7 @@ import LinkGrid from './LinkGrid';
 import LinkItem from './LinkItem';
 import LinkItemSkeleton from '@/components/LinkItemSkeleton';
 
-const ClickableLinks: FC = () => {
+const MostViewedLinks: FC = () => {
     const { data: links, isLoading } = api.link.getMostVisited.useQuery();
 
     if (isLoading)
@@ -29,4 +29,4 @@ const ClickableLinks: FC = () => {
     )
 }
 
-export default ClickableLinks
+export default MostViewedLinks

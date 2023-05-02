@@ -54,7 +54,7 @@ const Links: NextPageWithLayout = () => {
                         query ? (
                             <Button className="w-full" onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
                         ) : (
-                            <Button className="w-full" onClick={() => setSearchModalOpen(true)} variant={'blue'} iconRight={BiSearch}>Search</Button>
+                            <Button className="w-full" onClick={() => setSearchModalOpen(true)} iconRight={BiSearch}>Search</Button>
                         )
                     }
                 </>,
