@@ -11,7 +11,6 @@ import { ExtendedLink } from "types";
 import { Fragment, useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
 import { NextPageWithLayout } from "@/pages/_app";
-import DashboardLayout from "@/components/layouts/DashboardLayout";
 import ShortenModal from "@/components/modals/ShortenModal";
 import useShortenModal from "@/hooks/useShortenModal";
 import { MdClose, MdOutlet } from "react-icons/md";
@@ -19,9 +18,11 @@ import SiteHeader from "@/components/SiteHeader";
 import useSearchModal from "@/hooks/useSearchModal";
 import SearchModal from "@/components/modals/SearchModal";
 import LinkItemSkeleton from "@/components/LinkItemSkeleton";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { getServerAuthSession } from "@/server/auth";
+import Layout from "@/components/layouts/Layout";
 
 const Links: NextPageWithLayout = () => {
-    const { data: session } = useSession();
     const { ref, inView } = useInView();
     const { setIsOpen: setShortenModalOpen } = useShortenModal();
     const { setIsOpen: setSearchModalOpen, query, setQuery } = useSearchModal();
@@ -39,12 +40,6 @@ const Links: NextPageWithLayout = () => {
             fetchNextPage();
         }
     }, [inView]);
-
-    if (!session) {
-        return (
-            <SignIn />
-        );
-    }
 
     return (
         <Container className="flex flex-col gap-8 my-0 p-8">
@@ -122,9 +117,25 @@ const Links: NextPageWithLayout = () => {
     );
 };
 
-Links.getLayout = (page) => {
-    return <DashboardLayout>{page}</DashboardLayout>
-}
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    const session = await getServerAuthSession(ctx);
 
+    if (!session) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: { session }
+    }
+};
+
+Links.getLayout = (page) => {
+    return <Layout type="dashboard">{page}</Layout>
+}
 
 export default Links;

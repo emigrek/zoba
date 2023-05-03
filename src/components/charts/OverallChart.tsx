@@ -23,7 +23,7 @@ const OverallChart: FC = () => {
             visits: 7
         },
         {
-            date: new Date('2023-04-20T08:23:48.809+00:00').getTime(),
+            date: new Date('2023-05-04T08:23:48.809+00:00').getTime(),
             visits: 10
         },
     ];

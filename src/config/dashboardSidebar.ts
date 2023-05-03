@@ -1,6 +1,5 @@
 import { BiCog, BiLink } from "react-icons/bi";
 import { MdDashboard } from "react-icons/md";
-import { IoAnalytics } from "react-icons/io5";
 import { SidebarConfig } from "./mainSidebar";
 
 export const dashboardSidebarConfig: SidebarConfig = {
@@ -14,11 +13,6 @@ export const dashboardSidebarConfig: SidebarConfig = {
             name: "Links",
             icon: BiLink,
             href: "/dashboard/links"
-        },
-        {
-            name: "Analytics",
-            icon: IoAnalytics,
-            href: "/dashboard/analytics"
         },
         {
             name: "Settings",

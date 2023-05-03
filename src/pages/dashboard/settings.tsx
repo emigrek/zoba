@@ -1,7 +1,9 @@
 import { Container } from "@/components/ui/Container/Container";
 import { NextPageWithLayout } from "@/pages/_app";
-import DashboardLayout from "@/components/layouts/DashboardLayout";
 import SiteHeader from "@/components/SiteHeader";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { getServerAuthSession } from "@/server/auth";
+import Layout from "@/components/layouts/Layout";
 
 const Settings: NextPageWithLayout = () => {
     return (
@@ -10,8 +12,26 @@ const Settings: NextPageWithLayout = () => {
         </Container>
     );
 };
- Settings.getLayout = (page) => {
-    return <DashboardLayout>{page}</DashboardLayout>
+
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    const session = await getServerAuthSession(ctx);
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false
+            }
+        }
+    }
+
+    return {
+        props: { session }
+    }
+};
+
+Settings.getLayout = (page) => {
+    return <Layout type="dashboard">{page}</Layout>
 }
 
 

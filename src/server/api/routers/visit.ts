@@ -1,4 +1,4 @@
-import { createVisitSchema } from "@/schema/visit";
+import { createVisitSchema } from "@/validation/visit";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const visitRouter = createTRPCRouter({

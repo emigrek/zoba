@@ -1,4 +1,4 @@
-import { createCaptchaLinkSchema, deleteLinkSchema, getInfiniteSchema, getLinkSchema } from "@/schema/link";
+import { createCaptchaLinkSchema, deleteLinkSchema, getInfiniteSchema, getLinkSchema } from "@/validation/link";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { env } from "@/env.mjs";
 import { TRPCError } from "@trpc/server";

@@ -37,7 +37,7 @@ const QRModal: FC<QRModalProps> = () => {
         <Modal isOpen={isOpen} style={customStyles} onRequestClose={() => setIsOpen(false)}>
             <div className="flex flex-col p-2 gap-5">
                 <ModalHeader label="QR Code" />
-                <QRForm initialUrl={url} />
+                <QRForm initialText={url} />
                 <div className='flex-grow mx-auto'>
                     <Button iconLeft={MdClose} onClick={() => setIsOpen(false)} variant={'red'}>Close</Button>
                 </div>

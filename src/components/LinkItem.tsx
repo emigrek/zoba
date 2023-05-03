@@ -23,10 +23,10 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
         onSuccess: () => {
             linkContext.link.getInfinite.invalidate();
-            toast.success("Link deleted successfully");
+            toast.success("Link deleted successfully", { icon: '🥳' });
         },
         onError: () => {
-            toast.error("Something went wrong");
+            toast.error("Something went wrong", { icon: '🤔' });
         }
     });
 
@@ -37,9 +37,9 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const handleClipboard = () => {
         try {
             navigator.clipboard.writeText(shortened);
-            toast.success("Copied to clipboard");
+            toast.success("Copied to clipboard", { icon: '📋' });
         } catch (error) {
-            toast.error("Something went wrong");
+            toast.error("Something went wrong", { icon: '🤔' });
         }
     };
 

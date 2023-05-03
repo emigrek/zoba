@@ -8,9 +8,10 @@ import toastOptions from "@/utils/toastOptions";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
 import Modal from "react-modal";
-import Head from "next/head";
-import { siteConfig } from "@/config/site";
 import { AppContextProvider } from "@/contexts/AppContext";
+import NextNProgress from "nextjs-progressbar";
+import { DefaultSeo } from "next-seo";
+import nextSeoConfig from "next-seo.config";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -30,15 +31,12 @@ const MyApp = ({
 
   return (
     <SessionProvider session={session}>
-      <Head>
-        <title>{siteConfig.name}</title>
-        <meta name="description" content={siteConfig.description} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Toaster position={"bottom-right"} toastOptions={toastOptions} />
+      <DefaultSeo {...nextSeoConfig}/>
+      <NextNProgress color="#6b5cff" height={2} options={{ showSpinner: false }} showOnShallow/>
       <AppContextProvider>
         {getLayout(<Component {...pageProps} />)}
       </AppContextProvider>
+      <Toaster position={"bottom-right"} toastOptions={toastOptions} />
     </SessionProvider>
   );
 };
