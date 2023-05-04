@@ -31,13 +31,13 @@ export const customStyles = {
 interface QRModalProps {}
 
 const QRModal: FC<QRModalProps> = () => {
-    const { isOpen, setIsOpen, url } = useQRModal();
+    const { isOpen, setIsOpen, text } = useQRModal();
 
     return (
         <Modal isOpen={isOpen} style={customStyles} onRequestClose={() => setIsOpen(false)}>
             <div className="flex flex-col p-2 gap-5">
                 <ModalHeader label="QR Code" />
-                <QRForm initialText={url} />
+                <QRForm initialText={text} />
                 <div className='flex-grow mx-auto'>
                     <Button iconLeft={MdClose} onClick={() => setIsOpen(false)} variant={'red'}>Close</Button>
                 </div>

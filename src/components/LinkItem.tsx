@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import { Sheet } from './ui/Sheet/Sheet'
 import { Button } from './ui/Button/Button'
-import { BiCopy, BiDotsVerticalRounded, BiLinkExternal, BiQr, BiTrash } from 'react-icons/bi'
+import { BiCopy, BiDotsVerticalRounded, BiEdit, BiQr, BiTrash } from 'react-icons/bi'
 import Image from 'next/image'
 import Dropdown from './ui/Dropdown/Dropdown'
 import DropdownItem from './ui/Dropdown/DropdownItem'
@@ -11,6 +11,7 @@ import useLinkDetails from '@/hooks/useLinkDetails'
 import { ExtendedLink } from 'types'
 import useQRModal from '@/hooks/useQRModal'
 import DropdownDivider from '@/components/ui/Dropdown/DropdownDivider'
+import useEditModal from '@/hooks/useEditModal'
 
 interface LinkItemProps {
     link: ExtendedLink
@@ -18,9 +19,12 @@ interface LinkItemProps {
 
 const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const { domain, shortened, created, favicon } = useLinkDetails({ link });
-    const { setIsOpen, setUrl } = useQRModal();
+
+    const { setIsOpen: setQRModalOpen, setText: setQRModalText } = useQRModal();
+    const { setIsOpen: setEditModalOpen, setId: setEditModalLinkId } = useEditModal();
+    
     const linkContext = api.useContext();
-    const { mutateAsync: deleteLink, data } = api.link.delete.useMutation({
+    const { mutateAsync: deleteLink } = api.link.delete.useMutation({
         onSuccess: () => {
             linkContext.link.getInfinite.invalidate();
             toast.success("Link deleted successfully", { icon: '🥳' });
@@ -30,9 +34,10 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
         }
     });
 
-    const handleVisit = () => {
-        window.open(shortened, '_blank');
-    }
+    const handleEdit = () => {
+        setEditModalOpen(true);
+        setEditModalLinkId(link.id);
+    };
 
     const handleClipboard = () => {
         try {
@@ -44,8 +49,8 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     };
 
     const handleShowQR = () => {
-        setIsOpen(true);
-        setUrl(shortened);
+        setQRModalOpen(true);
+        setQRModalText(shortened);
     };
 
     const handleDelete = () => {
@@ -76,7 +81,8 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                         <Button variant={'transparent'} iconRight={BiDotsVerticalRounded} />
                     }
                     items={[
-                        <DropdownItem iconLeft={BiLinkExternal} onClick={handleVisit}>Visit</DropdownItem>,
+                        <DropdownItem iconLeft={BiEdit} onClick={handleEdit}>Edit</DropdownItem>,
+                        <DropdownDivider/>,
                         <DropdownItem iconLeft={BiCopy} onClick={handleClipboard}>Copy to clipboard</DropdownItem>,
                         <DropdownItem iconLeft={BiQr} onClick={handleShowQR}>Show QR</DropdownItem>,
                         <DropdownDivider/>,

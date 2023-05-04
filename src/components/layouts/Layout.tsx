@@ -25,6 +25,9 @@ const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
 
     const sidebarItems = type === 'main' ? mainSidebarConfig.items : dashboardSidebarConfig.items;
 
+    // TODO
+    // Add sidebar collapse
+
     return (
         <div className='flex min-h-screen'>
             <Sidebar className='w-20 md:w-64 flex flex-col px-2 md:px-5 items-center justify-between' variant={'dark'}>

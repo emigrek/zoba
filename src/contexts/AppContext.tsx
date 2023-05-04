@@ -3,6 +3,7 @@ import { FC, ReactNode } from "react";
 import ShortenModalContextProvider from "@/contexts/ShortenModalContext";
 import QRModalContextProvider from "@/contexts/QRModalContext";
 import SearchModalContextProvider from "@/contexts/SearchModalContext";
+import ChangeSlugModalContextProvider from "@/contexts/EditModalContext";
 
 import Compose from "@/utils/Compose";
 
@@ -16,7 +17,8 @@ export const AppContextProvider: FC<AppContextProviderProps> = ({ children }) =>
             contexts={[
                 <QRModalContextProvider />,
                 <ShortenModalContextProvider />,
-                <SearchModalContextProvider/>
+                <SearchModalContextProvider/>,
+                <ChangeSlugModalContextProvider/>
             ]}
         >
             {children}

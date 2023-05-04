@@ -30,15 +30,18 @@ const QRForm: FC<QRFormProps> = ({ initialText }) => {
         setText(e.target.value);
     };
 
+    // TODO
+    // Add color customization
+
     return (
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-5 flex-grow">
             <div className='flex items-center justify-center'>
-                <div className='w-48 md:w-64'>
+                <div className='w-60 md:w-64 bg-neutral-500/10 rounded-lg'>
                     {
                         text ?
-                            <QRCode id="qr-code" className="w-full" value={text} bgColor="#171717" fgColor="#fff" />
+                            <QRCode id="qr-code" className="w-10/12 mx-auto" value={text} bgColor="#000" fgColor="#fff" />
                             :
-                            <div className='bg-neutral-500/5 rounded-lg aspect-square p-3 relative flex-col flex justify-center items-center text-neutral-500'>
+                            <div className='aspect-square p-3 relative flex-col flex justify-center items-center text-neutral-500'>
                                 <BiQr className='w-40 h-40' />
                                 <p>No text provided</p>
                             </div>

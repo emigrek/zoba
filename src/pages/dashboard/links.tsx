@@ -21,6 +21,7 @@ import LinkItemSkeleton from "@/components/LinkItemSkeleton";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "@/server/auth";
 import Layout from "@/components/layouts/Layout";
+import EditModal from "@/components/modals/EditModal";
 
 const Links: NextPageWithLayout = () => {
     const { ref, inView } = useInView();
@@ -113,6 +114,7 @@ const Links: NextPageWithLayout = () => {
             <ShortenModal />
             <QRModal />
             <SearchModal />
+            <EditModal/>
         </Container>
     );
 };

@@ -3,15 +3,15 @@ import { createContext, FC, ReactNode, useState, Dispatch, SetStateAction } from
 interface QRModalContextProps {
     isOpen: boolean;
     setIsOpen: Dispatch<SetStateAction<boolean>>;
-    url: string;
-    setUrl: Dispatch<SetStateAction<string>>;
+    text: string;
+    setText: Dispatch<SetStateAction<string>>;
 }
 
 export const QRModalContext = createContext<QRModalContextProps>({
     isOpen: false,
     setIsOpen: () => { },
-    url: '',
-    setUrl: () => { },
+    text: '',
+    setText: () => { },
 });
 
 interface QRModalContextProviderProps {
@@ -22,10 +22,10 @@ const QRModalContextProvider: FC<QRModalContextProviderProps> = (
     { children }
 ) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const [url, setUrl] = useState<string>('');
+    const [text, setText] = useState<string>('');
 
     return (
-        <QRModalContext.Provider value={{ isOpen, setIsOpen, url, setUrl }}>
+        <QRModalContext.Provider value={{ isOpen, setIsOpen, text, setText }}>
             {children}
         </QRModalContext.Provider>
     )

@@ -2,7 +2,6 @@ import cn from '@/utils/cn'
 import { VariantProps, cva } from 'class-variance-authority';
 import { FC, ReactNode, HTMLAttributes } from 'react'
 import { IconType } from 'react-icons/lib'
-import { iconVariants } from '@/components/ui/Button/Button';
 
 const sidebarItemVariants = cva(
     "w-full rounded-lg flex cursor-pointer items-center justify-center md:justify-start transition duration-200 text-neutral-400",
@@ -32,6 +31,35 @@ const sidebarItemVariants = cva(
     }
 );
 
+const sidebarItemIconVariants = cva(
+    "w-5 h-5",
+    {
+        variants: {
+            variant: {
+                default: "fill-neutral-100",
+                accent: "fill-accent-500",
+                blue: "fill-blue-500",
+                emerald: "fill-emerald-500",
+                red: "fill-red-500",
+                yellow: "fill-yellow-500",
+                cyan: "fill-cyan-500",
+                active: "fill-neutral-100",
+                transparent: "fill-neutral-400"
+            },
+            size: {
+                small: "w-4 h-4",
+                medium: "w-5 h-5",
+                large: "w-6 h-6"
+            }
+        },
+        defaultVariants: {
+            variant: "default",
+            size: "medium"
+        }
+    }
+)
+
+
 interface SidebarItemProps extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof sidebarItemVariants> {
     children: ReactNode
@@ -42,11 +70,11 @@ interface SidebarItemProps extends HTMLAttributes<HTMLDivElement>,
 const SidebarItem: FC<SidebarItemProps> = ({ className, size, variant, children, iconLeft: IconL, iconRight: IconR, ...props }) => {
     return (
         <div className={cn(sidebarItemVariants({ className, size, variant }))} {...props}>
-            {IconL ? <IconL className={cn(iconVariants({ size, variant }))} /> : null}
+            {IconL ? <IconL className={cn(sidebarItemIconVariants({ size, variant }))} /> : null}
             <span className='hidden md:block'>{children}</span>
-            {IconR ? <IconR className={cn(iconVariants({ size, variant }))} /> : null}
+            {IconR ? <IconR className={cn(sidebarItemIconVariants({ size, variant }))} /> : null}
         </div>
     )
 }
 
-export { SidebarItem, sidebarItemVariants }
+export { SidebarItem, sidebarItemVariants, sidebarItemIconVariants }

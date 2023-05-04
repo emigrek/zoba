@@ -6,7 +6,7 @@ interface ModalHeaderProps {
 
 const ModalHeader: FC<ModalHeaderProps> = ({ label }) => {
     return (
-        <div className='pb-2 border-b border-neutral-700'>
+        <div className='pb-3 border-b border-neutral-700'>
             <h1 className="text-2xl font-semibold">{label}</h1>
         </div>
     )

@@ -3,8 +3,8 @@ import { VariantProps } from 'class-variance-authority'
 import Link from 'next/link'
 import { FC, ReactNode, HTMLAttributes } from 'react'
 import { IconType } from 'react-icons/lib'
-import { sidebarItemVariants } from './SidebarItem'
-import { iconVariants } from '@/components/ui/Button/Button'
+import { sidebarItemVariants } from '@/components/ui/Navigation/SidebarItem'
+import { sidebarItemIconVariants } from '@/components/ui/Navigation/SidebarItem'
 
 interface SidebarLinkItemProps extends HTMLAttributes<HTMLAnchorElement>,
     VariantProps<typeof sidebarItemVariants> {
@@ -17,9 +17,9 @@ interface SidebarLinkItemProps extends HTMLAttributes<HTMLAnchorElement>,
 const SidebarLinkItem: FC<SidebarLinkItemProps> = ({ className, size, variant, href, children, iconLeft: IconL, iconRight: IconR, ...props }) => {
     return (
         <Link href={href} className={cn(sidebarItemVariants({ className, size, variant }))} {...props}>
-            {IconL ? <IconL className={cn(iconVariants({ size, variant }))} /> : null}
+            {IconL ? <IconL className={cn(sidebarItemIconVariants({ size, variant }))} /> : null}
             <span className='hidden md:block'>{children}</span>
-            {IconR ? <IconR className={cn(iconVariants({ size, variant }))} /> : null}
+            {IconR ? <IconR className={cn(sidebarItemIconVariants({ size, variant }))} /> : null}
         </Link>
     )
 }

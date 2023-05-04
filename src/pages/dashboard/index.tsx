@@ -15,6 +15,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "@/server/auth";
 import QRModal from "@/components/modals/QRModal";
 import Layout from "@/components/layouts/Layout";
+import EditModal from "@/components/modals/EditModal";
 
 const Dashboard: NextPageWithLayout = () => {
     const { data: session } = useSession();
@@ -51,6 +52,7 @@ const Dashboard: NextPageWithLayout = () => {
             <MostViewedLinks />
 
             <QRModal/>
+            <EditModal/>
         </Container>
     );
 };

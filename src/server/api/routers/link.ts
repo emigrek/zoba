@@ -1,4 +1,4 @@
-import { createCaptchaLinkSchema, deleteLinkSchema, getInfiniteSchema, getLinkSchema } from "@/validation/link";
+import { checkSlugSchema, createCaptchaLinkSchema, deleteLinkSchema, editLinkSchema, getInfiniteSchema, getLinkByIdSchema, getLinkBySlugSchema } from "@/validation/link";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { env } from "@/env.mjs";
 import { TRPCError } from "@trpc/server";
@@ -56,8 +56,80 @@ export const linkRouter = createTRPCRouter({
                 return link;
             }
         }),
-    get: publicProcedure
-        .input(getLinkSchema)
+    edit: protectedProcedure
+        .input(editLinkSchema)
+        .mutation(async ({ input, ctx }) => {
+            const { id, url, slug } = input;
+            const { prisma, session } = ctx;
+
+            const link = await prisma.link.findUnique({
+                where: {
+                    id
+                }
+            });
+
+            const slugTaken = await prisma.link.findFirst({
+                where: {
+                    slug
+                }
+            }) !== null;
+            
+            if(!link) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Link not found"
+                });
+            }
+
+            if(slugTaken && link.slug !== slug) {
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Slug already taken"
+                });
+            }
+
+            if(link.userId !== session.user.id) {
+                throw new TRPCError({
+                    code: "FORBIDDEN",
+                    message: "You don't have permission to edit this link"
+                });
+            }
+
+            if(link.url === url && link.slug === slug) {
+                throw new TRPCError({
+                    code: "BAD_REQUEST",
+                    message: "Nothing to update"
+                });
+            }
+
+            const updatedLink = await prisma.link.update({
+                where: {
+                    id
+                },
+                data: {
+                    url,
+                    slug
+                }
+            });
+
+            return updatedLink;
+        }),
+    getById: publicProcedure
+        .input(getLinkByIdSchema)
+        .query(async ({ input, ctx }) => {
+            const { id } = input;
+            const { prisma } = ctx;
+
+            const link = await prisma.link.findUnique({
+                where: {
+                    id
+                }
+            });
+
+            return link;
+        }),
+    getBySlug: publicProcedure
+        .input(getLinkBySlugSchema)
         .query(async ({ input, ctx }) => {
             const { slug } = input;
             const { prisma } = ctx;
@@ -148,6 +220,20 @@ export const linkRouter = createTRPCRouter({
             });
 
             return links;
+        }),
+    checkSlug: publicProcedure
+        .input(checkSlugSchema)
+        .query(async ({ input, ctx }) => {
+            const { slug } = input;
+            const { prisma } = ctx;
+
+            const link = await prisma.link.findUnique({
+                where: {
+                    slug
+                }
+            });
+
+            return link ? false : true;
         }),
     delete: protectedProcedure
         .input(deleteLinkSchema)

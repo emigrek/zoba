@@ -32,8 +32,8 @@ const buttonVariants = cva(
     }
 );
 
-const iconVariants = cva(
-    "w-5 h-5",
+const buttonIconVariants = cva(
+    "",
     {
         variants: {
             variant: {
@@ -45,7 +45,7 @@ const iconVariants = cva(
                 yellow: "fill-yellow-500",
                 cyan: "fill-cyan-500",
                 active: "fill-neutral-100",
-                transparent: "fill-gray-500"
+                transparent: "fill-neutral-100"
             },
             size: {
                 small: "w-4 h-4",
@@ -75,16 +75,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, iconLeft:
             disabled={loading}
             {...props}
         >
-            {IconL ? <IconL className={cn(iconVariants({ size, variant }))} /> : null}
+            {IconL ? <IconL className={cn(buttonIconVariants({ size, variant }))} /> : null}
             {loading ? (
                 <div className="absolute relative-0 bg-black/80 w-full h-full rounded-full inset-0 flex items-center justify-center">
                     <Spinner/>
                 </div>
             ) : null}
             {children}
-            {IconR ? <IconR className={cn(iconVariants({ size, variant }))} /> : null}
+            {IconR ? <IconR className={cn(buttonIconVariants({ size, variant }))} /> : null}
         </button>
     )
 })
 
-export { Button, buttonVariants, iconVariants };
+export { Button, buttonVariants, buttonIconVariants };
