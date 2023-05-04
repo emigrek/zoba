@@ -1,36 +1,13 @@
 import { FC } from 'react'
 import Modal from "react-modal";
-import { Button } from '../ui/Button/Button';
+import { Button } from '@/components/ui/Button/Button';
 import useQRModal from '@/hooks/useQRModal';
 import { MdClose } from 'react-icons/md';
 import ModalHeader from '@/components/ModalHeader';
 import QRForm from '@/components/forms/QRForm';
+import { customStyles } from '@/components/modals/shared';
 
-export const customStyles = {
-    overlay: {
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 50,
-        backgroundColor: 'rgba(0, 0, 0, 0.8)'
-    },
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        backgroundColor: '#171717',
-        border: 'none',
-        borderRadius: '0.75rem'
-    },
-};
-
-interface QRModalProps {}
-
-const QRModal: FC<QRModalProps> = () => {
+const QRModal: FC = () => {
     const { isOpen, setIsOpen, text } = useQRModal();
 
     return (

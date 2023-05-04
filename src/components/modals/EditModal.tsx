@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import Modal from "react-modal";
-import { customStyles } from '@/components/modals/QRModal';
 import ModalHeader from '@/components/ModalHeader';
 import useEditModal from '@/hooks/useEditModal';
 import EditForm from '@/components/forms/EditForm';
+import { customStyles } from '@/components/modals/shared';
 
 const EditModal: FC = () => {
     const { isOpen, setIsOpen, id } = useEditModal();

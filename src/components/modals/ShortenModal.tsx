@@ -2,12 +2,10 @@ import { FC } from 'react'
 import Modal from "react-modal";
 import useShortenModal from '@/hooks/useShortenModal';
 import ShortenForm from '@/components/forms/ShortenForm';
-import { customStyles } from '@/components/modals/QRModal';
+import { customStyles } from '@/components/modals/shared';
 import ModalHeader from '@/components/ModalHeader';
 
-interface ShortenModalProps {}
-
-const ShortenModal: FC<ShortenModalProps> = () => {
+const ShortenModal: FC = () => {
     const { isOpen, setIsOpen } = useShortenModal();
 
     return (

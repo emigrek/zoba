@@ -1,10 +1,10 @@
 import { forwardRef } from 'react'
-import { Sheet } from './ui/Sheet/Sheet'
+import { Sheet } from '@/components/ui/Sheet/Sheet'
 import { Button } from './ui/Button/Button'
 import { BiCopy, BiDotsVerticalRounded, BiEdit, BiQr, BiTrash } from 'react-icons/bi'
 import Image from 'next/image'
-import Dropdown from './ui/Dropdown/Dropdown'
-import DropdownItem from './ui/Dropdown/DropdownItem'
+import Dropdown from '@/components/ui/Dropdown/Dropdown'
+import DropdownItem from '@/components/ui/Dropdown/DropdownItem'
 import { api } from '@/utils/api'
 import { toast } from 'react-hot-toast'
 import useLinkDetails from '@/hooks/useLinkDetails'
@@ -60,17 +60,17 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     return (
         <Sheet ref={ref} size={'small'} className='w-full flex flex-row justify-between items-center'>
             <div className='flex items-center gap-5'>
-                <div className='relative w-12 h-12'>
+                <div className='relative w-10 h-10 md:w-14 md:h-14'>
                     <Image src={favicon} alt={`${domain} favicon`} fill sizes="128" />
                 </div>
                 <div className='flex flex-col'>
-                    <div className='font-semibold text-lg'>
+                    <div className='font-semibold text-md md:text-lg'>
                         {domain}
                     </div>
-                    <div className='text-sm text-neutral-300 tracking-wide'>
+                    <div className='text-sm md:text-md text-neutral-300 tracking-wide'>
                         {link.visits.length} visits
                     </div>
-                    <div className='text-neutral-500 text-sm'>
+                    <div className='text-neutral-500 text-xs md:text-sm'>
                         {created}
                     </div>
                 </div>

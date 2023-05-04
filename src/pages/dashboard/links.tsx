@@ -11,17 +11,14 @@ import { ExtendedLink } from "types";
 import { Fragment, useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
 import { NextPageWithLayout } from "@/pages/_app";
-import ShortenModal from "@/components/modals/ShortenModal";
 import useShortenModal from "@/hooks/useShortenModal";
 import { MdClose, MdOutlet } from "react-icons/md";
 import SiteHeader from "@/components/SiteHeader";
 import useSearchModal from "@/hooks/useSearchModal";
-import SearchModal from "@/components/modals/SearchModal";
 import LinkItemSkeleton from "@/components/LinkItemSkeleton";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "@/server/auth";
 import Layout from "@/components/layouts/Layout";
-import EditModal from "@/components/modals/EditModal";
 
 const Links: NextPageWithLayout = () => {
     const { ref, inView } = useInView();
@@ -89,20 +86,7 @@ const Links: NextPageWithLayout = () => {
                                     {
                                         page.links.map((link: ExtendedLink, index) => {
                                             const isLast = index === page.links.length - 1;
-
-                                            if (isLast) {
-                                                return (
-                                                    <div ref={ref} key={link.id}>
-                                                        <LinkItem link={link} />
-                                                    </div>
-                                                )
-                                            } else {
-                                                return (
-                                                    <div key={link.id}>
-                                                        <LinkItem link={link} />
-                                                    </div>
-                                                )
-                                            }
+                                            return isLast ? <LinkItem key={link.id} ref={ref} link={link} /> : <LinkItem key={link.id} link={link} />;
                                         })
                                     }
                                 </Fragment>
