@@ -50,9 +50,6 @@ const Dashboard: NextPageWithLayout = () => {
                 </Link>
             ]} />
             <MostViewedLinks />
-
-            <QRModal/>
-            <EditModal/>
         </Container>
     );
 };

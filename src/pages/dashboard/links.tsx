@@ -111,10 +111,6 @@ const Links: NextPageWithLayout = () => {
                     </LinkGrid>
                 )
             }
-            <ShortenModal />
-            <QRModal />
-            <SearchModal />
-            <EditModal/>
         </Container>
     );
 };

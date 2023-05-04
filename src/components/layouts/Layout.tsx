@@ -8,6 +8,10 @@ import { SidebarItem } from '@/components/ui/Navigation/SidebarItem'
 import Breadcrumb from '@/components/Breadcrumb'
 import Brand from '@/components/Brand'
 import AuthDropdown from '@/components/AuthDropdown'
+import ShortenModal from '@/components/modals/ShortenModal'
+import QRModal from '@/components/modals/QRModal'
+import SearchModal from '@/components/modals/SearchModal'
+import EditModal from '@/components/modals/EditModal'
 
 import { dashboardSidebarConfig } from '@/config/dashboardSidebar'
 import { mainSidebarConfig } from '@/config/mainSidebar'
@@ -70,11 +74,17 @@ const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
                 <Navbar variant={'dark'}>
                     <div className="flex items-center justify-between h-full px-6">
                         <Breadcrumb />
-                        <AuthDropdown/>
+                        <AuthDropdown />
                     </div>
                 </Navbar>
                 {children}
             </main>
+
+            {/* Modals */}
+            <ShortenModal />
+            <QRModal />
+            <SearchModal />
+            <EditModal />
         </div>
     )
 }
