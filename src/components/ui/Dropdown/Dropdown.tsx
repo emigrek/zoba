@@ -1,43 +1,27 @@
-import cn from '@/utils/cn';
-import { FC, HTMLAttributes, ReactNode, useState } from 'react'
-import { useClickOutside } from '@mantine/hooks';
+import { HTMLAttributes } from 'react'
+import DropdownContextProvider from './DropdownContext';
+import DropdownTrigger from './DropdownTrigger';
+import DropdownContent from './DropdownContent';
+import DropdownLinkItem from './DropdownLinkItem';
+import DropdownItem from './DropdownItem';
+import DropdownDivider from './DropdownDivider';
 
-interface DropdownProps extends HTMLAttributes<HTMLDivElement> {
-    trigger: ReactNode,
-    items: ReactNode[],
-    defaultOpen?: boolean
-}
+interface DropdownProps extends HTMLAttributes<HTMLDivElement> {}
 
-const Dropdown: FC<DropdownProps> = ({
-    className,
-    trigger,
-    items,
-    defaultOpen = false,
-    ...props
-}) => {
-    const [open, setOpen] = useState(defaultOpen);
-    const dropdownRef = useClickOutside(() => setOpen(false));
-
+function Dropdown ({
+    children
+}: DropdownProps) {
     return (
-        <div className="relative">
-            <div className="relative cursor-pointer" onClick={() => setOpen(!open)}>
-                {trigger}
-            </div>
-            {
-                open ? (
-                    <div ref={dropdownRef} className={cn("absolute top-10 z-10 right-0 w-56 bg-neutral-900 my-2 p-2 rounded-lg flex flex-col gap-2 shadow-lg", className)} {...props}>
-                        {
-                            items.map((item, index) => (
-                                <div onClick={() => setOpen(false)} key={index}>
-                                    {item}
-                                </div>
-                            ))
-                        }
-                    </div>
-                ) : null
-            }
-        </div>
+        <DropdownContextProvider>
+            <div className='relative'>{children}</div>
+        </DropdownContextProvider>
     )
 }
+
+Dropdown.Trigger = DropdownTrigger;
+Dropdown.Content = DropdownContent;
+Dropdown.LinkItem = DropdownLinkItem;
+Dropdown.Item = DropdownItem;
+Dropdown.Divider = DropdownDivider;
 
 export default Dropdown

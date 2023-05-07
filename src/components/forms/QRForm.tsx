@@ -30,9 +30,6 @@ const QRForm: FC<QRFormProps> = ({ initialText }) => {
         setText(e.target.value);
     };
 
-    // TODO
-    // Add color customization
-
     return (
         <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-5 flex-grow">
             <div className='flex items-center justify-center'>

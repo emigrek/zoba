@@ -4,13 +4,11 @@ import { Button } from './ui/Button/Button'
 import { BiCopy, BiDotsVerticalRounded, BiEdit, BiQr, BiTrash } from 'react-icons/bi'
 import Image from 'next/image'
 import Dropdown from '@/components/ui/Dropdown/Dropdown'
-import DropdownItem from '@/components/ui/Dropdown/DropdownItem'
 import { api } from '@/utils/api'
 import { toast } from 'react-hot-toast'
 import useLinkDetails from '@/hooks/useLinkDetails'
 import { ExtendedLink } from 'types'
 import useQRModal from '@/hooks/useQRModal'
-import DropdownDivider from '@/components/ui/Dropdown/DropdownDivider'
 import useEditModal from '@/hooks/useEditModal'
 
 interface LinkItemProps {
@@ -76,19 +74,19 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                 </div>
             </div>
             <div className='flex items-center'>
-                <Dropdown
-                    trigger={
+                <Dropdown>
+                    <Dropdown.Trigger>
                         <Button variant={'transparent'} iconRight={BiDotsVerticalRounded} />
-                    }
-                    items={[
-                        <DropdownItem iconLeft={BiEdit} onClick={handleEdit}>Edit</DropdownItem>,
-                        <DropdownDivider/>,
-                        <DropdownItem iconLeft={BiCopy} onClick={handleClipboard}>Copy to clipboard</DropdownItem>,
-                        <DropdownItem iconLeft={BiQr} onClick={handleShowQR}>Show QR</DropdownItem>,
-                        <DropdownDivider/>,
-                        <DropdownItem iconLeft={BiTrash} onClick={handleDelete}>Delete</DropdownItem>
-                    ]}
-                />
+                    </Dropdown.Trigger>
+                    <Dropdown.Content>
+                        <Dropdown.Item iconLeft={BiEdit} onClick={handleEdit}>Edit</Dropdown.Item>
+                        <Dropdown.Divider/>
+                        <Dropdown.Item iconLeft={BiCopy} onClick={handleClipboard}>Copy to clipboard</Dropdown.Item>
+                        <Dropdown.Item iconLeft={BiQr} onClick={handleShowQR}>Show QR</Dropdown.Item>
+                        <Dropdown.Divider/>
+                        <Dropdown.Item iconLeft={BiTrash} onClick={handleDelete}>Delete</Dropdown.Item>
+                    </Dropdown.Content>
+                </Dropdown>
             </div>
         </Sheet>
     )

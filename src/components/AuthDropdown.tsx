@@ -1,9 +1,6 @@
 import { FC, useState } from 'react'
 import Dropdown from '@/components/ui/Dropdown/Dropdown'
 import { Avatar } from '@/components/ui/Avatar/Avatar'
-import DropdownLinkItem from '@/components/ui/Dropdown/DropdownLinkItem'
-import DropdownDivider from '@/components/ui/Dropdown/DropdownDivider'
-import DropdownItem from '@/components/ui/Dropdown/DropdownItem'
 import { Button } from '@/components/ui/Button/Button'
 import Spinner from '@/components/ui/Spinner/Spinner'
 import { MdDashboard } from 'react-icons/md'
@@ -45,18 +42,16 @@ const AuthDropdown: FC = () => {
     }
 
     return (
-        <Dropdown
-            trigger={
-                <div className='flex items-center gap-4'>
-                    <Avatar size={'small'} src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
-                </div>
-            }
-            items={[
-                <DropdownLinkItem iconLeft={MdDashboard} href="/dashboard">Dashboard</DropdownLinkItem>,
-                <DropdownDivider />,
-                <DropdownItem iconLeft={BiLogOut} onClick={handleSignOut}>Sign out</DropdownItem>
-            ]}
-        />
+        <Dropdown>
+            <Dropdown.Trigger>
+                <Avatar size={'small'} src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
+            </Dropdown.Trigger>
+            <Dropdown.Content>
+                <Dropdown.LinkItem iconLeft={MdDashboard} href="/dashboard">Dashboard</Dropdown.LinkItem>
+                <Dropdown.Divider />
+                <Dropdown.Item iconLeft={BiLogOut} onClick={handleSignOut}>Sign out</Dropdown.Item>
+            </Dropdown.Content>
+        </Dropdown>
     )
 }
 
