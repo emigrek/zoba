@@ -12,9 +12,12 @@ import ShortenModal from '@/components/modals/ShortenModal'
 import QRModal from '@/components/modals/QRModal'
 import SearchModal from '@/components/modals/SearchModal'
 import EditModal from '@/components/modals/EditModal'
+import useSidebar from '@/hooks/useSidebar'
 
 import { dashboardSidebarConfig } from '@/config/dashboardSidebar'
 import { mainSidebarConfig } from '@/config/mainSidebar'
+import cn from '@/utils/cn'
+import SidebarCollapseButton from '@/components/SidebarCollapseButton'
 
 interface LayoutProps {
     children: React.ReactNode,
@@ -23,18 +26,16 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
     const router = useRouter();
+    const { collapsed } = useSidebar();
     const { pathname } = router;
 
     const active = (path: string) => pathname === path;
 
     const sidebarItems = type === 'main' ? mainSidebarConfig.items : dashboardSidebarConfig.items;
 
-    // TODO
-    // Add sidebar collapse
-
     return (
         <div className='flex min-h-screen'>
-            <Sidebar className='w-20 md:w-64 flex flex-col px-2 md:px-5 items-center justify-between' variant={'dark'}>
+            <Sidebar collapsed={collapsed} className={cn('w-20 md:w-64 flex flex-col px-2 md:px-5 items-center justify-between transition duration-300')} variant={'dark'}>
                 <div className='flex flex-col items-center w-full gap-1'>
                     <Link href="/">
                         <Brand />
@@ -70,10 +71,15 @@ const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
                     }
                 </div>
             </Sidebar>
-            <main className="flex flex-col flex-grow ml-20 md:ml-64">
+            <main className={
+                cn(collapsed ? "ml-0" : "ml-20 md:ml-64", "flex flex-col flex-grow")
+            }>
                 <Navbar variant={'dark'}>
-                    <div className="flex items-center justify-between h-full px-6">
-                        <Breadcrumb />
+                    <div className="flex items-center justify-between h-full px-3 md:px-6">
+                        <div className='flex gap-2 items-center'>
+                            <SidebarCollapseButton />
+                            <Breadcrumb />
+                        </div>
                         <AuthDropdown />
                     </div>
                 </Navbar>

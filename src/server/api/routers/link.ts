@@ -248,5 +248,18 @@ export const linkRouter = createTRPCRouter({
             });
 
             return link;
-        })
+        }),
+    getCount: protectedProcedure
+        .query(async ({ ctx }) => {
+            const { prisma, session } = ctx;
+
+            const count = await prisma.link.count({
+                where: {
+                    userId: session.user.id
+                }
+            });
+
+            return count;
+        }
+    )
 });

@@ -20,7 +20,7 @@ const buttonVariants = cva(
                 transparent: "bg-transparent hover:bg-neutral-500/20 focus:ring-2 focus:ring-neutral-500/50",
             },
             size: {
-                small: "px-4 h-8 text-sm gap-1",
+                small: "px-4 h-8 text-sm gap-2",
                 medium: "px-5 h-12 text-base gap-2",
                 large: "px-6 h-16 text-lg gap-2"
             }

@@ -14,7 +14,7 @@ export const visitRouter = createTRPCRouter({
                 }
             });
 
-            if(link) {
+            if (link) {
                 const visit = await prisma.visit.create({
                     data: {
                         link: {
@@ -29,5 +29,19 @@ export const visitRouter = createTRPCRouter({
             } else {
                 throw new Error("Link not found");
             }
+        }),
+    getCount: protectedProcedure
+        .query(async ({ ctx }) => {
+            const { prisma, session } = ctx;
+
+            const count = await prisma.visit.count({
+                where: {
+                    link: {
+                        userId: session.user.id
+                    }
+                }
+            });
+
+            return count;
         })
 });

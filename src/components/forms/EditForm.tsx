@@ -36,6 +36,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
             linkContext.link.getInfinite.invalidate();
             linkContext.link.getMostVisited.invalidate();
             toast.success("Link edited successfully", { icon: '🥳' });
+            setIsOpen(false);
         }
     });
 

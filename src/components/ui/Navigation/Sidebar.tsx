@@ -21,9 +21,12 @@ const sidebarVariants = cva(
 
 interface SidebarProps extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof sidebarVariants> {
+    collapsed?: boolean;
 }
 
-const Sidebar: FC<SidebarProps> = forwardRef<HTMLDivElement, SidebarProps>(({ className, variant, children, ...props }, ref) => {
+const Sidebar: FC<SidebarProps> = forwardRef<HTMLDivElement, SidebarProps>(({ className, collapsed, variant, children, ...props }, ref) => {
+    if(collapsed) return null;
+    
     return (
         <aside
             ref={ref}
