@@ -10,6 +10,7 @@ import useLinkDetails from '@/hooks/useLinkDetails'
 import { ExtendedLink } from 'types'
 import useQRModal from '@/hooks/useQRModal'
 import useEditModal from '@/hooks/useEditModal'
+import pluralize from 'pluralize';
 
 interface LinkItemProps {
     link: ExtendedLink
@@ -67,7 +68,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                         {domain}
                     </div>
                     <div className='text-sm md:text-md text-neutral-300 tracking-wide'>
-                        {link.visits.length} visits
+                        {pluralize('visit', link.visits.length, true)}
                     </div>
                     <div className='text-neutral-500 text-xs md:text-sm'>
                         {created}
