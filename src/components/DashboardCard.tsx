@@ -1,11 +1,9 @@
 import { FC, HTMLAttributes } from 'react'
 import { IconType } from 'react-icons/lib';
-import { Sheet } from './ui/Sheet/Sheet';
+import { Sheet } from '@/components/ui/Sheet/Sheet';
 import cn from '@/utils/cn';
-import Spinner from './ui/Spinner/Spinner';
-import { Button } from './ui/Button/Button';
-import { RxReload } from 'react-icons/rx';
-import { IoAlertCircle } from 'react-icons/io5';
+import Spinner from '@/components/ui/Spinner/Spinner';
+import ErrorFallback from '@/components/ErrorFallback';
 
 interface DashboardCardProps extends HTMLAttributes<HTMLDivElement> {
     label: string;
@@ -13,20 +11,6 @@ interface DashboardCardProps extends HTMLAttributes<HTMLDivElement> {
     loading?: boolean;
     isError?: boolean;
     reload?: () => void;
-}
-
-type ErrorFallbackProps = Pick<DashboardCardProps, 'reload'>;
-
-const ErrorFallback: FC<ErrorFallbackProps> = ({ reload }) => {
-    return (
-        <div className="flex gap-2 py-1 items-cente4">
-            <IoAlertCircle className="w-14 h-14 text-red-400" />
-            <div className='flex flex-col gap-1'>
-                <div className="text-red-400 text-sm">Something went wrong</div>
-                <Button onClick={reload} variant={'red'} size={'small'} iconLeft={RxReload}>Try again</Button>
-            </div>
-        </div>
-    )
 }
 
 const DashboardCard: FC<DashboardCardProps> = ({ className, label, icon: Icon, children, loading, isError, reload }) => {

@@ -3,9 +3,10 @@ import { FC } from 'react'
 import LinkGrid from './LinkGrid';
 import LinkItem from './LinkItem';
 import LinkItemSkeleton from '@/components/LinkItemSkeleton';
+import ErrorFallback from './ErrorFallback';
 
 const MostViewedLinks: FC = () => {
-    const { data: links, isLoading } = api.link.getMostVisited.useQuery();
+    const { data: links, isLoading, isError, refetch } = api.link.getMostVisited.useQuery();
 
     if (isLoading)
         return (
@@ -16,7 +17,10 @@ const MostViewedLinks: FC = () => {
                     })
                 }
             </LinkGrid>
-        )
+        );
+
+    if (isError)
+        return <ErrorFallback reload={refetch} />
 
     return (
         <LinkGrid>

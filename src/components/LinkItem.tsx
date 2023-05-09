@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { Sheet } from '@/components/ui/Sheet/Sheet'
-import { Button } from './ui/Button/Button'
+import { Button } from '@/components/ui/Button/Button'
 import { BiCopy, BiDotsVerticalRounded, BiEdit, BiQr, BiTrash } from 'react-icons/bi'
 import Image from 'next/image'
 import Dropdown from '@/components/ui/Dropdown/Dropdown'
@@ -24,11 +24,8 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink } = api.link.delete.useMutation({
         onSuccess: () => {
-            linkContext.link.getInfinite.invalidate();
+            linkContext.link.invalidate();
             toast.success("Link deleted successfully", { icon: '🥳' });
-        },
-        onError: () => {
-            toast.error("Something went wrong", { icon: '🤔' });
         }
     });
 
@@ -51,8 +48,12 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
         setQRModalText(shortened);
     };
 
-    const handleDelete = () => {
-        deleteLink({ id: link.id });
+    const handleDelete = async () => {
+        try {
+            await deleteLink({ id: link.id });
+        } catch (error) {
+            toast.error("Something went wrong", { icon: '🤔' });
+        }
     };
 
     return (

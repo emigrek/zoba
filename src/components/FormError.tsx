@@ -7,7 +7,7 @@ interface FormErrorProps {
 
 const FormError: FC<FormErrorProps> = ({ children }) => {
     return (
-        <div className="text-red-500 flex gap-2 items-center">
+        <div className="text-red-400 flex gap-2 items-center">
             <IoAlertCircle className='w-6 h-6'/>
             {children}
         </div>

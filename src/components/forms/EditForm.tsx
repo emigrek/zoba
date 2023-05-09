@@ -33,8 +33,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
     const linkContext = api.useContext();
     const { mutateAsync: editLink } = api.link.edit.useMutation({
         onSuccess: () => {
-            linkContext.link.getInfinite.invalidate();
-            linkContext.link.getMostVisited.invalidate();
+            linkContext.link.invalidate();
             toast.success("Link edited successfully", { icon: '🥳' });
             setIsOpen(false);
         }

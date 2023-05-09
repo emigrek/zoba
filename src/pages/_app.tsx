@@ -31,8 +31,8 @@ const MyApp = ({
 
   return (
     <SessionProvider session={session}>
-      <DefaultSeo {...nextSeoConfig}/>
-      <NextNProgress color="#6b5cff" height={2} options={{ showSpinner: false }} showOnShallow/>
+      <DefaultSeo {...nextSeoConfig} />
+      <NextNProgress color="#6b5cff" height={2} options={{ showSpinner: false }} showOnShallow />
       <AppContextProvider>
         {getLayout(<Component {...pageProps} />)}
       </AppContextProvider>

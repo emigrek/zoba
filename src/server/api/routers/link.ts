@@ -189,7 +189,7 @@ export const linkRouter = createTRPCRouter({
                     createdAt: "desc"
                 }
             });
-
+            
             let nextCursor: typeof cursor | undefined = undefined;
             if (links.length > limit) {
                 const nextItem = links.pop()

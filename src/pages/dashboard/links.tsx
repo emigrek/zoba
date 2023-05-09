@@ -1,12 +1,9 @@
-import { useSession } from "next-auth/react";
-import SignIn from "@/components/SignIn";
 import { api } from "@/utils/api";
 import LinkItem from "@/components/LinkItem";
 import LinkGrid from "@/components/LinkGrid";
 import { Button } from "@/components/ui/Button/Button";
 import { BiPlus, BiSearch } from "react-icons/bi";
 import { Container } from "@/components/ui/Container/Container";
-import QRModal from "@/components/modals/QRModal";
 import { ExtendedLink } from "types";
 import { Fragment, useEffect } from "react";
 import { useInView } from 'react-intersection-observer';
@@ -19,13 +16,14 @@ import LinkItemSkeleton from "@/components/LinkItemSkeleton";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "@/server/auth";
 import Layout from "@/components/layouts/Layout";
+import ErrorFallback from "@/components/ErrorFallback";
 
 const Links: NextPageWithLayout = () => {
     const { ref, inView } = useInView();
     const { setIsOpen: setShortenModalOpen } = useShortenModal();
     const { setIsOpen: setSearchModalOpen, query, setQuery } = useSearchModal();
 
-    const { data, fetchNextPage, isLoading } = api.link.getInfinite.useInfiniteQuery(
+    const { data, fetchNextPage, isLoading, isError, refetch } = api.link.getInfinite.useInfiniteQuery(
         { limit: 25, query },
         { getNextPageParam: (lastPage) => lastPage.nextCursor }
     );
@@ -62,6 +60,11 @@ const Links: NextPageWithLayout = () => {
                             ))
                         }
                     </LinkGrid>
+                ) : null
+            }
+            {
+                isError ? (
+                    <ErrorFallback reload={refetch} />
                 ) : null
             }
             {

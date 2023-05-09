@@ -12,8 +12,6 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { env } from "@/env.mjs";
 import { TRPCClientError } from '@trpc/client';
 import { BiCut } from 'react-icons/bi';
-
-// Form Validation
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateLinkSchema, createLinkSchema } from "@/validation/link";
@@ -32,7 +30,7 @@ const ShortenForm: FC = () => {
     const linkContext = api.useContext();
     const { mutateAsync: createLink, data } = api.link.create.useMutation({
         onSuccess: () => {
-            linkContext.link.getInfinite.invalidate();
+            linkContext.link.invalidate();
             toast.success("Link shortened successfully", { icon: '🥳' });
         }
     });
