@@ -7,10 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { BiRightArrowAlt, BiSave, BiShareAlt } from "react-icons/bi";
 import { MdManageSearch } from "react-icons/md";
+import MotionContainer from "@/components/MotionContainer";
+
+import { fadeInVariant } from "@/motions/fade";
 
 const Home: NextPage = () => {
   return (
-    <Container className="py-5" size={'small'}>
+    <MotionContainer variants={fadeInVariant} initial="initial" animate="animate" className="py-5" size={'small'}>
       <div className="flex flex-col gap-5 md:gap-10">
         <div className="flex flex-col md:flex-row items-center justify-between w-full">
           <div className="relative w-52 h-52 md:w-full md:h-64 mx-auto md:mx-0">
@@ -57,7 +60,7 @@ const Home: NextPage = () => {
           Source code on <Anchor target="_blank" href="https://github.com/zoba">Github</Anchor>.
         </div>
       </footer>
-    </Container>
+    </MotionContainer>
   );
 };
 

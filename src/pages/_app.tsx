@@ -34,7 +34,9 @@ const MyApp = ({
       <DefaultSeo {...nextSeoConfig} />
       <NextNProgress color="#6b5cff" height={2} options={{ showSpinner: false }} showOnShallow />
       <AppContextProvider>
-        {getLayout(<Component {...pageProps} />)}
+        {getLayout(
+          <Component {...pageProps} />
+        )}
       </AppContextProvider>
       <Toaster position={"bottom-right"} toastOptions={toastOptions} />
     </SessionProvider>

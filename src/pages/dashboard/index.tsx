@@ -12,12 +12,14 @@ import Layout from "@/components/layouts/Layout";
 
 import LinksCountCard from "@/components/LinksCountCard";
 import VisitsCountCard from "@/components/VisitsCountCard";
+import MotionContainer from "@/components/MotionContainer";
+import { fadeInVariant } from "@/motions/fade";
 
 const Dashboard: NextPageWithLayout = () => {
     const { data: session } = useSession();
 
     return (
-        <Container className="flex flex-col gap-8 my-0 p-8">
+        <MotionContainer variants={fadeInVariant} initial="initial" animate="animate" className="flex flex-col gap-8 my-0 p-8">
             <SiteHeader label={`Hello ${session ? `${session?.user.name}` : ``} 🤗`} />
             <SiteSubheader label="Overview" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-neutral-300">
@@ -33,7 +35,7 @@ const Dashboard: NextPageWithLayout = () => {
                 </Link>
             ]} />
             <MostViewedLinks />
-        </Container>
+        </MotionContainer>
     );
 };
 

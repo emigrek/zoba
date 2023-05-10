@@ -17,6 +17,8 @@ import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "@/server/auth";
 import Layout from "@/components/layouts/Layout";
 import ErrorFallback from "@/components/ErrorFallback";
+import MotionContainer from "@/components/MotionContainer";
+import { fadeInVariant } from "@/motions/fade";
 
 const Links: NextPageWithLayout = () => {
     const { ref, inView } = useInView();
@@ -38,7 +40,7 @@ const Links: NextPageWithLayout = () => {
     }, [inView]);
 
     return (
-        <Container className="flex flex-col gap-8 my-0 p-8">
+        <MotionContainer variants={fadeInVariant} initial="initial" animate="animate" className="flex flex-col gap-8 my-0 p-8">
             <SiteHeader label="Links" actions={[
                 <>
                     {
@@ -98,7 +100,7 @@ const Links: NextPageWithLayout = () => {
                     </LinkGrid>
                 )
             }
-        </Container>
+        </MotionContainer>
     );
 };
 
