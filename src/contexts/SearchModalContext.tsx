@@ -9,9 +9,13 @@ interface SearchModalContextProps {
 
 export const SearchModalContext = createContext<SearchModalContextProps>({
     isOpen: false,
-    setIsOpen: () => { },
+    setIsOpen: () => {
+        // do nothing
+    },
     query: '',
-    setQuery: () => { },
+    setQuery: () => {
+        // do nothing
+    },
 });
 
 interface SearchModalContextProviderProps {

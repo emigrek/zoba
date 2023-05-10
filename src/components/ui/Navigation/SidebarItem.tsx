@@ -77,4 +77,6 @@ const SidebarItem: FC<SidebarItemProps> = ({ className, size, variant, children,
     )
 }
 
+SidebarItem.displayName = "SidebarItem";
+
 export { SidebarItem, sidebarItemVariants, sidebarItemIconVariants }

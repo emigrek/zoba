@@ -25,7 +25,9 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink } = api.link.delete.useMutation({
         onSuccess: () => {
-            linkContext.link.invalidate();
+            linkContext.link.invalidate().catch(() => {
+                toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
+            });
             toast.success("Link deleted successfully", { icon: '🥳' });
         }
     });
@@ -36,12 +38,11 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     };
 
     const handleClipboard = () => {
-        try {
-            navigator.clipboard.writeText(shortened);
-            toast.success("Copied to clipboard", { icon: '📋' });
-        } catch (error) {
+        navigator.clipboard.writeText(shortened).catch(() => {
             toast.error("Something went wrong", { icon: '🤔' });
-        }
+        }).finally(() => {
+            toast.success("Copied to clipboard", { icon: '📋' });
+        });
     };
 
     const handleShowQR = () => {
@@ -49,12 +50,10 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
         setQRModalText(shortened);
     };
 
-    const handleDelete = async () => {
-        try {
-            await deleteLink({ id: link.id });
-        } catch (error) {
+    const handleDelete = () => {
+        deleteLink({ id: link.id }).catch(() => {
             toast.error("Something went wrong", { icon: '🤔' });
-        }
+        });
     };
 
     return (
@@ -93,5 +92,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
         </Sheet>
     )
 })
+
+LinkItem.displayName = 'LinkItem';
 
 export default LinkItem

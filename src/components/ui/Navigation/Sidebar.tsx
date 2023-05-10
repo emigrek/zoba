@@ -4,7 +4,7 @@ import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
 const sidebarVariants = cva(
-    "backdrop-filter backdrop-blur-sm z-20 fixed top-0 bottom-0",
+    "backdrop-filter backdrop-blur-sm z-20 absolute fixed top-0 bottom-0",
     {
         variants: {
             variant: {
@@ -37,5 +37,7 @@ const Sidebar: FC<SidebarProps> = forwardRef<HTMLDivElement, SidebarProps>(({ cl
         </aside>
     )
 })
+
+Sidebar.displayName = "Sidebar";
 
 export { Sidebar, sidebarVariants };

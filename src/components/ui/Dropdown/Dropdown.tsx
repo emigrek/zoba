@@ -6,7 +6,7 @@ import DropdownLinkItem from './DropdownLinkItem';
 import DropdownItem from './DropdownItem';
 import DropdownDivider from './DropdownDivider';
 
-interface DropdownProps extends HTMLAttributes<HTMLDivElement> {}
+type DropdownProps = HTMLAttributes<HTMLDivElement>
 
 function Dropdown ({
     children

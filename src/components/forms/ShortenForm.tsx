@@ -4,11 +4,7 @@ import { Button } from '@/components/ui/Button/Button';
 import FormError from '@/components/FormError';
 import { api } from '@/utils/api';
 import { toast } from 'react-hot-toast';
-
-// @ts-ignore
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-
 import { env } from "@/env.mjs";
 import { TRPCClientError } from '@trpc/client';
 import { BiCut } from 'react-icons/bi';
@@ -30,7 +26,9 @@ const ShortenForm: FC = () => {
     const linkContext = api.useContext();
     const { mutateAsync: createLink, data } = api.link.create.useMutation({
         onSuccess: () => {
-            linkContext.link.invalidate();
+            linkContext.link.invalidate().catch(() => {
+                toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
+            });
             toast.success("Link shortened successfully", { icon: '🥳' });
         }
     });
@@ -54,6 +52,14 @@ const ShortenForm: FC = () => {
         }
     }
 
+    const handleClipboard = () => {
+        navigator.clipboard.writeText(shortened).catch(() => {
+            toast.error("Something went wrong", { icon: '🤔' });
+        }).finally(() => {
+            toast.success("Copied to clipboard", { icon: '📋' });
+        });
+    }
+    
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
             <div className="flex flex-col gap-2">
@@ -72,15 +78,7 @@ const ShortenForm: FC = () => {
             />
             <div className="flex flex-col gap-2">
                 <p className="text-neutral-400">Output</p>
-                <CopyToClipboard
-                    text={shortened}
-                    onCopy={() => toast.success("Copied to clipboard")}
-                >
-                    <Input id="output" className="h-16 text-xl"
-                        value={shortened}
-                        readOnly
-                    />
-                </CopyToClipboard>
+                <Input onClick={handleClipboard} id="output" className="h-16 text-xl" value={shortened} readOnly />
             </div>
         </form>
     )

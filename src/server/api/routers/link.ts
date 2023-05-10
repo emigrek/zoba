@@ -14,7 +14,7 @@ const verifyCaptcha = async (token: string) => {
             method: "POST",
         }
     );
-    const data = await response.json();
+    const data = await response.json() as { success: boolean };
     return data.success;
 };
 

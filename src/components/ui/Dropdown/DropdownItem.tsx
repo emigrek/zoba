@@ -28,4 +28,6 @@ const DropdownItem: FC<DropdownItemProps> = ({ onClick, className, children, ico
     )
 }
 
+DropdownItem.displayName = "DropdownItem";
+
 export default DropdownItem

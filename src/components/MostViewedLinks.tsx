@@ -12,7 +12,7 @@ const MostViewedLinks: FC = () => {
         return (
             <LinkGrid>
                 {
-                    [...Array(3)].map((_, index) => {
+                    Array(3).fill(null).map((_, index) => {
                         return <LinkItemSkeleton key={index} />
                     })
                 }
@@ -20,7 +20,7 @@ const MostViewedLinks: FC = () => {
         );
 
     if (isError)
-        return <ErrorFallback reload={refetch} />
+        return <ErrorFallback reload={() => refetch} />
 
     return (
         <LinkGrid>

@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import { FC } from 'react'
-import { RxSlash } from 'react-icons/rx'
+import { FC, ReactNode } from 'react'
 
-interface BreadcrumbProps { }
+interface BreadcrumbProps {
+    separator?: ReactNode;
+}
 
-const Breadcrumb: FC<BreadcrumbProps> = ({ }) => {
+const Breadcrumb: FC<BreadcrumbProps> = ({ separator = '/' }) => {
     const router = useRouter();
     const { route } = router;
     const items = route.split('/').filter(item => item !== '');
@@ -21,14 +22,14 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ }) => {
                     return (
                         <div key={index} className='flex items-center'>
                             <div className='text-neutral-300'>{
-                                isLast ? 
-                                    <span className={`${isFirst ? 'font-semibold' : ''}`}>{capitalized}</span> 
-                                : 
+                                isLast ?
+                                    <span className={`${isFirst ? 'font-semibold' : ''}`}>{capitalized}</span>
+                                    :
                                     <Link className={`${isFirst ? 'font-semibold' : ''}`} href={`/${item}`}>{capitalized}</Link>
                             }</div>
                             {!isLast && (
-                                <div className='text-neutral-300 mx-1'>
-                                    <RxSlash />
+                                <div className='text-neutral-300 mx-2'>
+                                    {separator}
                                 </div>
                             )}
                         </div>

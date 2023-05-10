@@ -24,4 +24,6 @@ const SidebarLinkItem: FC<SidebarLinkItemProps> = ({ className, size, variant, h
     )
 }
 
+SidebarLinkItem.displayName = "SidebarLinkItem";
+
 export default SidebarLinkItem

@@ -1,6 +1,5 @@
 import { Sheet } from "@/components/ui/Sheet/Sheet";
 import { Button } from "@/components/ui/Button/Button";
-import { Container } from "@/components/ui/Container/Container";
 import Anchor from "@/components/ui/Anchor/Anchor";
 import { type NextPage } from "next";
 import Image from "next/image";

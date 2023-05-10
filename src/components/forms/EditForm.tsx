@@ -33,7 +33,9 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
     const linkContext = api.useContext();
     const { mutateAsync: editLink } = api.link.edit.useMutation({
         onSuccess: () => {
-            linkContext.link.invalidate();
+            linkContext.link.invalidate().catch(() => {
+                toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
+            });
             toast.success("Link edited successfully", { icon: '🥳' });
             setIsOpen(false);
         }
@@ -45,7 +47,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
         setValue("id", link.id);
         setValue("url", link.url);
         setValue("slug", link.slug);
-    }, [link, isLoading]);
+    }, [link, isLoading, setValue]);
 
     const onSubmit: SubmitHandler<EditLinkSchema> = async ({ id, url, slug }) => {
         try {

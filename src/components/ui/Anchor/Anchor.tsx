@@ -1,7 +1,7 @@
 import cn from '@/utils/cn'
-import { AnchorHTMLAttributes, FC, HTMLAttributes } from 'react'
+import { AnchorHTMLAttributes, FC } from 'react'
 
-interface AnchorProps extends AnchorHTMLAttributes<HTMLAnchorElement> {}
+type AnchorProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
 const Anchor: FC<AnchorProps> = ({ className, children, ...props }) => {
     return (
@@ -11,4 +11,6 @@ const Anchor: FC<AnchorProps> = ({ className, children, ...props }) => {
     )
 }
 
-export default Anchor
+Anchor.displayName = "Anchor";
+
+export default Anchor;

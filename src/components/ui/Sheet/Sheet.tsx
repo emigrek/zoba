@@ -39,4 +39,6 @@ const Sheet = forwardRef<HTMLDivElement, SheetProps>(({ className, size, variant
     )
 })
 
+Sheet.displayName = "Sheet";
+
 export { Sheet, sheetVariants };

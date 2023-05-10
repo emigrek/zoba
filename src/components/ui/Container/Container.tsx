@@ -33,4 +33,6 @@ const Container: FC<ContainerProps> = forwardRef<HTMLDivElement, ContainerProps>
     )
 })
 
+Container.displayName = "Container";
+
 export { Container, containerVariants };

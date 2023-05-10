@@ -87,4 +87,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, iconLeft:
     )
 })
 
+Button.displayName = "Button";
+
 export { Button, buttonVariants, buttonIconVariants };

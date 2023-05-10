@@ -7,7 +7,9 @@ interface DropdownContextProps {
 
 export const DropdownContext = createContext<DropdownContextProps>({
     isOpen: false,
-    setIsOpen: () => { },
+    setIsOpen: () => { 
+        //do nothing 
+    },
 });
 
 interface DropdownContextProviderProps {

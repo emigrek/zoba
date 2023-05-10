@@ -8,8 +8,12 @@ interface SidebarContextProps {
 
 export const SidebarContext = createContext<SidebarContextProps>({
     collapsed: false,
-    setCollapsed: () => { },
-    toggle: () => { },
+    setCollapsed: () => {
+        // do nothing
+    },
+    toggle: () => {
+        // do nothing
+    },
 });
 
 interface SidebarContextProviderProps {

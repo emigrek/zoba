@@ -1,7 +1,7 @@
 import { prisma } from "@/server/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function (req: NextApiRequest, res: NextApiResponse) {
     const { slug } = req.query;
 
     if(!slug || typeof slug !== "string") {
@@ -31,4 +31,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     return res.json(data);
-};
+}

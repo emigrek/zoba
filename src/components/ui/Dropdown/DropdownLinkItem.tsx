@@ -30,4 +30,6 @@ const DropdownLinkItem: FC<DropdownLinkItemProps> = ({ onClick, className, href,
     )
 }
 
+DropdownLinkItem.displayName = "DropdownLinkItem";
+
 export default DropdownLinkItem

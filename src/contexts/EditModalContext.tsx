@@ -9,9 +9,13 @@ interface EditModalContextProps {
 
 export const EditModalContext = createContext<EditModalContextProps>({
     isOpen: false,
-    setIsOpen: () => { },
+    setIsOpen: () => {
+        // do nothing
+    },
     id: '',
-    setId: () => { },
+    setId: () => {
+        // do nothing
+    },
 });
 
 interface EditModalContextProviderProps {

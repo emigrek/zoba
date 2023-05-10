@@ -7,7 +7,9 @@ interface ShortenModalContextProps {
 
 export const ShortenModalContext = createContext<ShortenModalContextProps>({
     isOpen: false,
-    setIsOpen: () => { },
+    setIsOpen: () => {
+        // do nothing
+    },
 });
 
 interface ShortenModalContextProviderProps {

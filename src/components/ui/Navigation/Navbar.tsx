@@ -40,7 +40,7 @@ interface NavbarProps extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof navbarVariants> {}
 
 const Navbar: FC<NavbarProps> = forwardRef<HTMLDivElement, NavbarProps>(({ className, variant, children, ...props }, ref) => {
-    const [{x,y}] = useWindowScroll();
+    const [{y}] = useWindowScroll();
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
     useEffect(() => { y>20 ? setIsScrolled(true) : setIsScrolled(false); }, [y]);
@@ -58,5 +58,7 @@ const Navbar: FC<NavbarProps> = forwardRef<HTMLDivElement, NavbarProps>(({ class
         </nav>
     )
 })
+
+Navbar.displayName = "Navbar";
 
 export { Navbar, navbarVariants };

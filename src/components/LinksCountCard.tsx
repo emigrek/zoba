@@ -8,7 +8,7 @@ const LinksCountCard: FC = () => {
     const { data, isLoading, isError, refetch } = api.link.getCount.useQuery();
 
     return (
-        <DashboardCard label="Links" icon={BiLink} loading={isLoading} isError={isError} reload={refetch}>
+        <DashboardCard label="Links" icon={BiLink} loading={isLoading} isError={isError} reload={() => refetch}>
             <div className="text-5xl font-bold">{data}</div>
         </DashboardCard>
     )

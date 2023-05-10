@@ -6,7 +6,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     right?: React.ReactNode
 }
 
-const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(({ right, className, size, ...props }, ref) => {
+const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(({ right, className, ...props }, ref) => {
     return (
         <div className={cn(
             "flex h-12 w-full rounded-full transition duration-200 ease-in-out bg-neutral-600/20 px-4 text-sm focus-within:ring-2 focus-within:ring-neutral-600",
@@ -21,5 +21,7 @@ const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(({ right,
         </div>
     )
 })
+
+Input.displayName = "Input";
 
 export { Input };

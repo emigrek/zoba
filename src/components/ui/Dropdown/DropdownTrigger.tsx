@@ -10,9 +10,11 @@ const DropdownTrigger: FC<DropdownTriggerProps> = ({ className, children, ...pro
     const { setIsOpen, isOpen } = useDropdown();
 
     return cloneElement(children, {
-        className: cn("relative cursor-pointer", children.props.className, className),
+        className: cn("relative cursor-pointer", className),
         onClick: () => {
-            children.props.onClick ? children.props.onClick() : null;
+            if(children.props.onClick && typeof children.props.onClick == 'function') {
+                children.props.onClick();
+            }
             setIsOpen(!isOpen);
         },
         ...props

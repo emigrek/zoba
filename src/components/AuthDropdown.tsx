@@ -7,28 +7,35 @@ import { MdDashboard } from 'react-icons/md'
 import { FcGoogle } from 'react-icons/fc'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { BiLogOut } from 'react-icons/bi'
+import { toast } from 'react-hot-toast'
 
 const AuthDropdown: FC = () => {
     const { data: session, status } = useSession();
     const [loading, setLoading] = useState(false);
 
-    const handleSignIn = async () => {
+    const handleSignIn = () => {
         setLoading(true);
-        await signIn("google", {
+
+        signIn("google", {
             callbackUrl: `${window.location.origin}/dashboard`
+        }).catch(() => {
+            setLoading(false);
+            toast.error("Something went wrong, please try again later.", { icon: '🤔' });
         });
     }
 
-    const handleSignOut = async () => {
-        await signOut({
+    const handleSignOut = () => {
+        signOut({
             callbackUrl: `${window.location.origin}/`
+        }).catch(() => {
+            toast.error("Something went wrong, please try again later.", { icon: '🤔' });
         });
     }
 
     if (status == 'loading') {
         return (
             <div className='flex items-center gap-4 p-2'>
-                <Spinner/>
+                <Spinner />
             </div>
         )
     }
@@ -44,7 +51,7 @@ const AuthDropdown: FC = () => {
     return (
         <Dropdown>
             <Dropdown.Trigger>
-                <Avatar size={'small'} src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name}`} />
+                <Avatar size={'small'} src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name || 'User'}`} />
             </Dropdown.Trigger>
             <Dropdown.Content>
                 <Dropdown.LinkItem iconLeft={MdDashboard} href="/dashboard">Dashboard</Dropdown.LinkItem>

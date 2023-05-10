@@ -20,4 +20,6 @@ const DropdownContent: FC<DropdownContentProps> = ({ children, className, ...pro
     )
 }
 
+DropdownContent.displayName = "DropdownContent";
+
 export default DropdownContent

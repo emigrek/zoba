@@ -1,4 +1,3 @@
-import { Container } from "@/components/ui/Container/Container";
 import { NextPageWithLayout } from "@/pages/_app";
 import { useSession } from "next-auth/react";
 import { BsArrowRightShort } from "react-icons/bs";
@@ -20,7 +19,7 @@ const Dashboard: NextPageWithLayout = () => {
 
     return (
         <MotionContainer variants={fadeInVariant} initial="initial" animate="animate" className="flex flex-col gap-8 my-0 p-8">
-            <SiteHeader label={`Hello ${session ? `${session?.user.name}` : ``} 🤗`} />
+            <SiteHeader label={`Hello ${session && session?.user.name ? `${session.user.name}` : ``} 🤗`} />
             <SiteSubheader label="Overview" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-neutral-300">
                 <LinksCountCard/>

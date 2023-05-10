@@ -8,7 +8,7 @@ const VisitsCountCard: FC = () => {
     const { data, isLoading, isError, refetch } = api.visit.getCount.useQuery();
 
     return (
-        <DashboardCard label="Visits" icon={IoEye} loading={isLoading} isError={isError} reload={refetch}>
+        <DashboardCard label="Visits" icon={IoEye} loading={isLoading} isError={isError} reload={() => refetch}>
             <div className="text-5xl font-bold">{data}</div>
         </DashboardCard>
     )

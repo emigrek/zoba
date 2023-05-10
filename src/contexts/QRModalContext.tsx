@@ -9,9 +9,13 @@ interface QRModalContextProps {
 
 export const QRModalContext = createContext<QRModalContextProps>({
     isOpen: false,
-    setIsOpen: () => { },
+    setIsOpen: () => {
+        // do nothing
+    },
     text: '',
-    setText: () => { },
+    setText: () => {
+        // do nothing
+    },
 });
 
 interface QRModalContextProviderProps {
