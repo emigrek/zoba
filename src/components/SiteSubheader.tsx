@@ -2,21 +2,17 @@ import { FC, ReactNode } from 'react'
 
 interface SiteSubheaderProps {
     label: string,
-    actions?: ReactNode[]
+    action?: ReactNode
 }
 
-const SiteSubheader: FC<SiteSubheaderProps> = ({ label, actions }) => {
+const SiteSubheader: FC<SiteSubheaderProps> = ({ label, action }) => {
     return (
         <div className="flex flex-col md:flex-row justify-between gap-3 text-neutral-300 md:items-center">
             <div className="font-semibold text-xl md:text-2xl">
                 {label}
             </div>
             <div className="flex gap-2">
-                {
-                    actions ? actions.map((item, index) => {
-                        return <div className='grow' key={index}>{item}</div>
-                    }) : null
-                }
+                {action}
             </div>
         </div>
     )

@@ -1,7 +1,5 @@
-import useSearchModal from '@/hooks/useSearchModal';
 import { api } from '@/utils/api';
 import { FC, Fragment, useEffect } from 'react'
-
 import LinkGrid from '@/components/LinkGrid';
 import LinkItemSkeleton from '@/components/LinkItemSkeleton';
 import ErrorFallback from '@/components/ErrorFallback';
@@ -10,10 +8,11 @@ import { ExtendedLink } from 'types';
 import LinkItem from '@/components/LinkItem';
 import { useInView } from 'react-intersection-observer';
 import { toast } from 'react-hot-toast';
+import useSearchModalStore from '@/stores/searchModal';
 
 const InfiniteLinks: FC = () => {
     const { ref, inView } = useInView();
-    const { query } = useSearchModal();
+    const { query } = useSearchModalStore();
 
     const { data, fetchNextPage, isLoading, isError, refetch } = api.link.getInfinite.useInfiniteQuery(
         { limit: 25, query },

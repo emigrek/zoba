@@ -3,14 +3,13 @@ import FormError from '@/components/FormError';
 import { Input } from '@/components/ui/Input/Input';
 import { Button } from '@/components/ui/Button/Button';
 import { SearchSchema, searchSchema } from '@/validation/search';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import useSearchModal from '@/hooks/useSearchModal';
 import { BiSearch } from 'react-icons/bi';
+import useSearchModalStore from '@/stores/searchModal';
 
 const SearchForm: FC = () => {
-    const { setIsOpen, setQuery } = useSearchModal();
+    const { toggle: toggleSearchModal, setQuery } = useSearchModalStore();
     const {
         register,
         handleSubmit,
@@ -24,13 +23,13 @@ const SearchForm: FC = () => {
     const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key !== 'Enter') return;
         e.preventDefault();
-        setIsOpen(false);
+        toggleSearchModal();
         setQuery(getValues('query'));
         setValue('query', '');
     }
 
     const onSubmit: SubmitHandler<SearchSchema> = ({query}) => {
-        setIsOpen(false);
+        toggleSearchModal();
         setQuery(query);
         setValue('query', '');
     };
@@ -43,7 +42,7 @@ const SearchForm: FC = () => {
                 {errors.query && <FormError>{errors.query.message}</FormError>}
             </div>
             <div className="flex justify-end items-center mt-3 gap-2">
-                <Button onClick={() => setIsOpen(false)} type="button" size={'large'} variant={'transparent'}>
+                <Button onClick={toggleSearchModal} type="button" size={'large'} variant={'transparent'}>
                     Cancel
                 </Button>
                 <Button

@@ -1,36 +1,36 @@
 import { Button } from "@/components/ui/Button/Button";
 import { BiPlus, BiSearch } from "react-icons/bi";
 import { NextPageWithLayout } from "@/pages/_app";
-import useShortenModal from "@/hooks/useShortenModal";
 import { MdClose } from "react-icons/md";
 import SiteHeader from "@/components/SiteHeader";
-import useSearchModal from "@/hooks/useSearchModal";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "@/server/auth";
 import Layout from "@/components/layouts/Layout";
 import MotionContainer from "@/components/MotionContainer";
 import { fadeInVariant } from "@/motions/fade";
 import InfiniteLinks from "@/components/InfiniteLinks";
+import useShortenModalStore from "@/stores/shortenModal";
+import useSearchModalStore from "@/stores/searchModal";
 
 const Links: NextPageWithLayout = () => {
-    const { setIsOpen: setShortenModalOpen } = useShortenModal();
-    const { setIsOpen: setSearchModalOpen, query, setQuery } = useSearchModal();
+    const { toggle: toggleShortenModal } = useShortenModalStore();
+    const { toggle: toggleSearchModal, query, setQuery } = useSearchModalStore();
 
     return (
         <MotionContainer variants={fadeInVariant} initial="initial" animate="animate" className="flex flex-col gap-8 my-0 p-8">
-            <SiteHeader label="Links" actions={[
+            <SiteHeader label="Links" action={
                 <>
                     {
                         query ? (
-                            <Button className="w-full" onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
+                            <Button className="w-full md:w-fit" onClick={() => setQuery('')} variant={'red'} iconRight={MdClose}>Clear search</Button>
                         ) : (
-                            <Button className="w-full" onClick={() => setSearchModalOpen(true)} iconRight={BiSearch}>Search</Button>
+                            <Button className="w-full md:w-fit" onClick={toggleSearchModal} iconRight={BiSearch}>Search</Button>
                         )
                     }
-                </>,
-                <Button className="w-full" onClick={() => setShortenModalOpen(true)} variant={'emerald'} iconRight={BiPlus}>Add</Button>
-            ]} />
-            <InfiniteLinks/>
+                    <Button className="w-full md:w-fit" onClick={toggleShortenModal} variant={'emerald'} iconRight={BiPlus}>Add</Button>
+                </>
+            } />
+            <InfiniteLinks />
         </MotionContainer>
     );
 };

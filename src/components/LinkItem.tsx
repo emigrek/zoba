@@ -8,9 +8,9 @@ import { api } from '@/utils/api'
 import { toast } from 'react-hot-toast'
 import useLinkDetails from '@/hooks/useLinkDetails'
 import { ExtendedLink } from 'types'
-import useQRModal from '@/hooks/useQRModal'
-import useEditModal from '@/hooks/useEditModal'
 import pluralize from 'pluralize';
+import useEditModalStore from '@/stores/editModal'
+import useQrModalStore from '@/stores/qrModal'
 
 interface LinkItemProps {
     link: ExtendedLink
@@ -19,8 +19,8 @@ interface LinkItemProps {
 const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     const { domain, shortened, created, favicon } = useLinkDetails({ link });
 
-    const { setIsOpen: setQRModalOpen, setText: setQRModalText } = useQRModal();
-    const { setIsOpen: setEditModalOpen, setId: setEditModalLinkId } = useEditModal();
+    const { toggle: toggleEditModal, setId: setEditModalLinkId } = useEditModalStore();
+    const { toggle: toggleQrModal, setText } = useQrModalStore();
     
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink } = api.link.delete.useMutation({
@@ -33,7 +33,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     });
 
     const handleEdit = () => {
-        setEditModalOpen(true);
+        toggleEditModal();
         setEditModalLinkId(link.id);
     };
 
@@ -46,8 +46,8 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     };
 
     const handleShowQR = () => {
-        setQRModalOpen(true);
-        setQRModalText(shortened);
+        toggleQrModal();
+        setText(shortened);
     };
 
     const handleDelete = () => {

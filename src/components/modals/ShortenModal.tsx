@@ -1,15 +1,15 @@
 import { FC } from 'react'
 import Modal from "react-modal";
-import useShortenModal from '@/hooks/useShortenModal';
 import ShortenForm from '@/components/forms/ShortenForm';
 import { customStyles } from '@/components/modals/shared';
 import ModalHeader from '@/components/ModalHeader';
+import useShortenModalStore from '@/stores/shortenModal';
 
 const ShortenModal: FC = () => {
-    const { isOpen, setIsOpen } = useShortenModal();
+    const { open, toggle } = useShortenModalStore();
 
     return (
-        <Modal isOpen={isOpen} style={customStyles} onRequestClose={() => setIsOpen(false)}>
+        <Modal isOpen={open} style={customStyles} onRequestClose={toggle}>
             <div className="w-80 md:w-96 p-2 flex flex-col gap-5">
                 <ModalHeader label="Shorten" />
                 <ShortenForm />

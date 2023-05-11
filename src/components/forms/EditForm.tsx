@@ -11,14 +11,14 @@ import FormError from "@/components/FormError";
 import { SubmitHandler } from "react-hook-form";
 import { TRPCClientError } from "@trpc/client";
 import { toast } from "react-hot-toast";
-import useEditModal from "@/hooks/useEditModal";
+import useEditModalStore from "@/stores/editModal";
 
 interface EditFormProps {
     id: string;
 }
 
 const EditForm: FC<EditFormProps> = ({ id }) => {
-    const { setIsOpen } = useEditModal();
+    const { toggle: toggleEditModal } = useEditModalStore();
     const {
         register,
         handleSubmit,
@@ -37,7 +37,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
                 toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
             });
             toast.success("Link edited successfully", { icon: '🥳' });
-            setIsOpen(false);
+            toggleEditModal();
         }
     });
 
@@ -49,15 +49,13 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
         setValue("slug", link.slug);
     }, [link, isLoading, setValue]);
 
-    const onSubmit: SubmitHandler<EditLinkSchema> = async ({ id, url, slug }) => {
-        try {
-            await editLink({ id, url, slug });
-        } catch (error) {
+    const onSubmit: SubmitHandler<EditLinkSchema> = ({ id, url, slug }) => {
+        editLink({ id, url, slug }).catch((error) => {
             if (error instanceof TRPCClientError) {
                 const { message } = error;
                 toast.error(message, { icon: '🤔' });
             }
-        }
+        });
     };
 
     if (isLoading) {
@@ -90,7 +88,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
                 {errors.slug && <FormError>{errors.slug.message}</FormError>}
             </div>
             <div className="flex justify-end items-center mt-3 gap-2">
-                <Button onClick={() => setIsOpen(false)} type="button" size={'large'} variant={'transparent'}>
+                <Button onClick={toggleEditModal} type="button" size={'large'} variant={'transparent'}>
                     Cancel
                 </Button>
                 <Button className="w-32" type="submit" size={'large'} variant={'accent'} iconRight={BiEdit}>

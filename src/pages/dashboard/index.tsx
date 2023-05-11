@@ -22,17 +22,17 @@ const Dashboard: NextPageWithLayout = () => {
             <SiteHeader label={`Hello ${session && session?.user.name ? `${session.user.name}` : ``} 🤗`} />
             <SiteSubheader label="Overview" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-neutral-300">
-                <LinksCountCard/>
-                <VisitsCountCard/>
+                <LinksCountCard />
+                <VisitsCountCard />
             </div>
-            <SiteSubheader label="Most viewed links" actions={[
+            <SiteSubheader label="Most viewed links" action={
                 <Link href="/dashboard/links">
-                    <div className="flex gap-2 text-accent-300 items-center justify-center">
+                    <div className="flex gap-2 text-accent-300 items-center justify-center grow">
                         <div>Show all</div>
                         <BsArrowRightShort className="w-8 h-8 opacity-40" />
                     </div>
                 </Link>
-            ]} />
+            } />
             <MostViewedLinks />
         </MotionContainer>
     );

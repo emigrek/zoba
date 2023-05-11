@@ -41,15 +41,15 @@ const ShortenForm: FC = () => {
         hcaptchaRef.current?.execute();
     };
 
-    const onHCaptchaChange = async (token: string) => {
-        try {
-            await createLink({ url: link, captcha: token });
-        } catch (error) {
+    const onHCaptchaChange = (token: string) => {
+        createLink({ url: link, captcha: token }).catch((error) => {
             if (error instanceof TRPCClientError) {
                 const { message } = error;
                 toast.error(message, { icon: '🤔' });
             }
-        }
+        }).finally(() => {
+            hcaptchaRef.current?.resetCaptcha();
+        });
     }
 
     const handleClipboard = () => {
