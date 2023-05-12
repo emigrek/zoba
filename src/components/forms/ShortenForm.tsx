@@ -24,7 +24,7 @@ const ShortenForm: FC = () => {
     });
 
     const linkContext = api.useContext();
-    const { mutateAsync: createLink, data } = api.link.create.useMutation({
+    const { mutateAsync: createLink, data, isLoading } = api.link.create.useMutation({
         onSuccess: () => {
             linkContext.link.invalidate().catch(() => {
                 toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
@@ -67,7 +67,7 @@ const ShortenForm: FC = () => {
                 <Input id="url" placeholder="Paste your link" {...register("url")} />
                 {errors.url && <FormError>{errors.url.message}</FormError>}
             </div>
-            <Button type="submit" className="w-full" size="large" variant={'accent'} iconRight={BiCut}>
+            <Button loading={isLoading} type="submit" className="w-full" size="large" variant={'accent'} iconRight={BiCut}>
                 Shorten
             </Button>
             <HCaptcha

@@ -3,19 +3,13 @@ import { siteConfig } from "@/config/site";
 export default {
     title: siteConfig.name,
     description: siteConfig.description,
-    additionalMetaTags: [
-        {
-            name: "theme-color",
-            content: "#000000"
-        }
-    ],
+    themeColor: "#5a37ff",
     additionalLinkTags: [
         {
             rel: "icon",
             href: "/favicon.ico"
         }
     ],
-    themeColor: "#5a37ff",
     openGraph: {
         type: "website",
         locale: "en_IE",

@@ -28,10 +28,10 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
         resolver: zodResolver(editLinkSchema)
     });
 
-    const { data: link, isLoading } = api.link.getById.useQuery({ id });
+    const { data: link, isLoading: isLinkLoading } = api.link.getById.useQuery({ id });
 
     const linkContext = api.useContext();
-    const { mutateAsync: editLink } = api.link.edit.useMutation({
+    const { mutateAsync: editLink, isLoading: isMutating } = api.link.edit.useMutation({
         onSuccess: () => {
             linkContext.link.invalidate().catch(() => {
                 toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
@@ -47,7 +47,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
         setValue("id", link.id);
         setValue("url", link.url);
         setValue("slug", link.slug);
-    }, [link, isLoading, setValue]);
+    }, [link, isLinkLoading, setValue]);
 
     const onSubmit: SubmitHandler<EditLinkSchema> = ({ id, url, slug }) => {
         editLink({ id, url, slug }).catch((error) => {
@@ -58,7 +58,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
         });
     };
 
-    if (isLoading) {
+    if (isLinkLoading) {
         return (
             <div className="flex flex-col md:flex-row gap-5 flex-grow justify-center py-10">
                 <Spinner className="w-8 h-8" />
@@ -91,7 +91,7 @@ const EditForm: FC<EditFormProps> = ({ id }) => {
                 <Button onClick={toggleEditModal} type="button" size={'large'} variant={'transparent'}>
                     Cancel
                 </Button>
-                <Button className="w-32" type="submit" size={'large'} variant={'accent'} iconRight={BiEdit}>
+                <Button className="w-32" loading={isMutating} type="submit" size={'large'} variant={'accent'} iconRight={BiEdit}>
                     Edit
                 </Button>
             </div>
