@@ -13,14 +13,14 @@ import { fadeInVariant } from "@/motions/fade";
 const Home: NextPage = () => {
   return (
     <MotionContainer variants={fadeInVariant} initial="initial" animate="animate" className="py-5" size={'small'}>
-      <div className="flex flex-col gap-5 md:gap-10">
+      <div className="flex flex-col gap-10">
         <div className="flex flex-col md:flex-row items-center justify-between w-full">
           <div className="relative w-52 h-52 md:w-full md:h-64 mx-auto md:mx-0">
-            <Image src="/man-riding-a-rocket.svg" fill alt="Man riding a rocket" />
+            <Image priority src="/business-success-chart.svg" fill alt="Business Success Chart" />
           </div>
           <div className="text-neutral-100 text-center flex flex-col gap-3 py-2 md:text-right">
             <h1 className="text-4xl md:text-5xl font-bold">
-              Shorten your links and watch them fly
+              Shorten your links and watch them grow
             </h1>
             <p className="text-neutral-400">
               Sign in to persist your links and manage them

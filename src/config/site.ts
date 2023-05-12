@@ -6,6 +6,6 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
     name: "Zoba",
-    description: "Shorten your links and watch them fly",
+    description: "Shorten your links and watch them grow",
     url: "https://zoba.netlify.app"
 }

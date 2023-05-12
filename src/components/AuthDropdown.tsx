@@ -21,6 +21,8 @@ const AuthDropdown: FC = () => {
         }).catch(() => {
             setLoading(false);
             toast.error("Something went wrong, please try again later.", { icon: '🤔' });
+        }).finally(() => {
+            setLoading(false);
         });
     }
 
@@ -51,7 +53,7 @@ const AuthDropdown: FC = () => {
     return (
         <Dropdown>
             <Dropdown.Trigger>
-                <Avatar size={'small'} src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name || 'User'}`} />
+                <Avatar size={'small'} sizes={'96px'} src={session.user.image || `https://ui-avatars.com/api/?name=${session.user.name || 'User'}`} />
             </Dropdown.Trigger>
             <Dropdown.Content>
                 <Dropdown.LinkItem iconLeft={MdDashboard} href="/dashboard">Dashboard</Dropdown.LinkItem>

@@ -23,9 +23,10 @@ const avatarVariants = cva(
 interface AvatarProps extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof avatarVariants> {
     src: string;
+    sizes?: string;
 }
 
-const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(({ src, className, size, ...props }, ref) => {
+const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(({ src, className, size, sizes, ...props }, ref) => {
     return (
         <div
             ref={ref}
@@ -35,6 +36,7 @@ const Avatar: FC<AvatarProps> = forwardRef<HTMLDivElement, AvatarProps>(({ src, 
             <Image
                 src={src}
                 alt={"Avatar"}
+                sizes={sizes}
                 fill
                 className="rounded-full"
             />

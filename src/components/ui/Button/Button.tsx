@@ -6,7 +6,7 @@ import { IconType } from 'react-icons/lib';
 import Spinner from '@/components/ui/Spinner/Spinner';
 
 const buttonVariants = cva(
-    "relative w-fit flex items-center justify-center rounded-full text-white font-semibold tracking-wide transition duration-200 ease-in-out focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+    "relative w-fit flex items-center justify-center rounded-full text-white font-semibold tracking-wide transition duration-200 ease-in-out focus:outline-none disabled:cursor-not-allowed disabled:opacity-90",
     {
         variants: {
             variant: {
@@ -77,7 +77,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, iconLeft:
         >
             {IconL ? <IconL className={cn(buttonIconVariants({ size, variant }))} /> : null}
             {loading ? (
-                <div className="absolute relative-0 bg-black/80 w-full h-full rounded-full inset-0 flex items-center justify-center">
+                <div className="absolute bg-accent-950/90 w-full h-full rounded-full inset-0 flex items-center justify-center text-white">
                     <Spinner/>
                 </div>
             ) : null}
