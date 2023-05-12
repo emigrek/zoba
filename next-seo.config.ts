@@ -23,7 +23,7 @@ export default {
         description: siteConfig.description,
         images: [
             {
-                url: `${siteConfig.url}/public/logo.png`,
+                url: `${siteConfig.url}/logo.png`,
                 width: 512,
                 height: 512,
                 alt: siteConfig.name
