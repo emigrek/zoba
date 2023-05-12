@@ -5,5 +5,5 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
     name: "Zoba",
-    description: "Shorten links and manage them in fashionable way"
+    description: "Shorten your links and watch them fly"
 }

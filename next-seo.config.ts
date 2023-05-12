@@ -1,12 +1,16 @@
 import { siteConfig } from "@/config/site";
 
 export default {
-    title: `${siteConfig.name}`,
+    title: siteConfig.name,
     description: siteConfig.description,
     additionalMetaTags: [
         {
             name: "theme-color",
             content: "#000000"
+        },
+        {
+            name: "og:image",
+            content: "/public/repo-header.png"
         }
     ],
     additionalLinkTags: [
