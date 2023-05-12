@@ -11,6 +11,7 @@ import Modal from "react-modal";
 import NextNProgress from "nextjs-progressbar";
 import { DefaultSeo } from "next-seo";
 import nextSeoConfig from "next-seo.config";
+import { Session } from "next-auth";
 
 export type NextPageWithLayout<P = any, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -29,7 +30,7 @@ const MyApp = ({
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
 
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={session as Session}>
       <DefaultSeo {...nextSeoConfig} />
       <NextNProgress color="#6b5cff" height={2} options={{ showSpinner: false }} showOnShallow />
       {getLayout(<Component {...pageProps} />)}

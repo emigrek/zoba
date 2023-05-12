@@ -1,7 +1,6 @@
 import { api } from '@/utils/api';
 import { FC, Fragment, useEffect } from 'react'
 import LinkGrid from '@/components/LinkGrid';
-import LinkItemSkeleton from '@/components/LinkItemSkeleton';
 import ErrorFallback from '@/components/ErrorFallback';
 import { MdOutlet } from 'react-icons/md';
 import { ExtendedLink } from 'types';
