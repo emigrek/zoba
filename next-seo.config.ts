@@ -23,7 +23,7 @@ export default {
         description: siteConfig.description,
         images: [
             {
-                url: `${siteConfig.url}/public/repo-header.png`,
+                url: `${siteConfig.url}/public/logo.svg`,
                 width: 1600,
                 height: 400,
                 alt: siteConfig.name
