@@ -7,10 +7,6 @@ export default {
         {
             name: "theme-color",
             content: "#000000"
-        },
-        {
-            name: "og:image",
-            content: "/public/repo-header.png"
         }
     ],
     additionalLinkTags: [
@@ -19,4 +15,19 @@ export default {
             href: "/favicon.ico"
         }
     ],
+    openGraph: {
+        type: "website",
+        locale: "en_IE",
+        url: siteConfig.url,
+        title: siteConfig.name,
+        description: siteConfig.description,
+        images: [
+            {
+                url: `${siteConfig.url}/public/repo-header.png`,
+                width: 1600,
+                height: 400,
+                alt: siteConfig.name
+            }
+        ]
+    }
 }
