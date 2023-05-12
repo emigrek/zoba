@@ -1,26 +1,22 @@
 import { api } from '@/utils/api'
 import { FC } from 'react'
-import LinkGrid from './LinkGrid';
-import LinkItem from './LinkItem';
-import LinkItemSkeleton from '@/components/LinkItemSkeleton';
-import ErrorFallback from './ErrorFallback';
+import LinkGrid from '@/components/LinkGrid';
+import LinkItem from '@/components/LinkItem';
+import ErrorFallback from '@/components/ErrorFallback';
+import LinksSkeleton from '@/components/LinksSkeleton';
+import NoLinks from '@/components/NoLinks';
 
 const MostViewedLinks: FC = () => {
     const { data: links, isLoading, isError, refetch } = api.link.getMostVisited.useQuery();
 
     if (isLoading)
-        return (
-            <LinkGrid>
-                {
-                    Array(3).fill(null).map((_, index) => {
-                        return <LinkItemSkeleton key={index} />
-                    })
-                }
-            </LinkGrid>
-        );
+        return <LinksSkeleton size={3} />
 
     if (isError)
         return <ErrorFallback reload={() => refetch} />
+
+    if (!links?.length)
+        return <NoLinks />
 
     return (
         <LinkGrid>
