@@ -15,6 +15,7 @@ export default {
             href: "/favicon.ico"
         }
     ],
+    themeColor: "#5a37ff",
     openGraph: {
         type: "website",
         locale: "en_IE",
