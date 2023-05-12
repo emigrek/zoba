@@ -77,8 +77,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, iconLeft:
         >
             {IconL ? <IconL className={cn(buttonIconVariants({ size, variant }))} /> : null}
             {loading ? (
-                <div className="absolute bg-accent-950/90 w-full h-full rounded-full inset-0 flex items-center justify-center text-white">
-                    <Spinner/>
+                <div className="absolute bg-neutral-900/90 w-full h-full rounded-full inset-0 flex items-center justify-center text-white">
+                    <Spinner className='w-8 h-8'/>
                 </div>
             ) : null}
             {children}
