@@ -45,7 +45,7 @@ const AuthDropdown: FC = () => {
     if (!session) {
         return (
             <Button onClick={handleSignIn} loading={loading} variant='blue' iconLeft={FcGoogle}>
-                <span className='hidden md:block'>Sign in</span>
+                Sign in
             </Button>
         )
     }
