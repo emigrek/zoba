@@ -9,7 +9,7 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { BiLogOut } from 'react-icons/bi'
 import { toast } from 'react-hot-toast'
 
-const AuthDropdown: FC = () => {
+const Auth: FC = () => {
     const { data: session, status } = useSession();
     const [loading, setLoading] = useState(false);
 
@@ -27,6 +27,8 @@ const AuthDropdown: FC = () => {
     }
 
     const handleSignOut = () => {
+        toast.loading("Signing out...", { icon: '👋' });
+
         signOut({
             callbackUrl: `${window.location.origin}/`
         }).catch(() => {
@@ -64,4 +66,4 @@ const AuthDropdown: FC = () => {
     )
 }
 
-export default AuthDropdown
+export default Auth

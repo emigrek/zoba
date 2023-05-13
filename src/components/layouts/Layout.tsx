@@ -7,7 +7,7 @@ import SidebarLinkItem from '@/components/ui/Navigation/SidebarLinkItem';
 import { SidebarItem } from '@/components/ui/Navigation/SidebarItem'
 import Breadcrumb from '@/components/Breadcrumb'
 import Brand from '@/components/Brand'
-import AuthDropdown from '@/components/AuthDropdown'
+import Auth from '@/components/Auth'
 import ShortenModal from '@/components/modals/ShortenModal'
 import QRModal from '@/components/modals/QRModal'
 import SearchModal from '@/components/modals/SearchModal'
@@ -80,7 +80,7 @@ const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
                             <SidebarCollapseButton />
                             <Breadcrumb />
                         </div>
-                        <AuthDropdown />
+                        <Auth />
                     </div>
                 </Navbar>
                 {children}
