@@ -25,7 +25,7 @@ const NotFoundPage: NextPageWithLayout = () => {
                             Page not found
                         </p>
                         <div className='flex mt-7 md:mt-4 mx-auto md:ml-auto md:mr-0 gap-2 items-center'>
-                            <Button size={'medium'} onClick={() => router.back()} iconRight={RiArrowGoBackFill}>
+                            <Button variant={'transparent'} size={'medium'} onClick={() => router.back()} iconRight={RiArrowGoBackFill}>
                                 Back
                             </Button>
                             <Button variant={'accent'} size={'medium'} onClick={() => router.push('/')} iconRight={BiHome}>

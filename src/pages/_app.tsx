@@ -13,7 +13,7 @@ import { DefaultSeo } from "next-seo";
 import nextSeoConfig from "next-seo.config";
 import { Session } from "next-auth";
 
-export type NextPageWithLayout<P = any, IP = P> = NextPage<P, IP> & {
+export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
 
