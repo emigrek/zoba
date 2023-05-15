@@ -1,4 +1,4 @@
-import { BiLink } from "react-icons/bi";
+import { BiCog, BiLink } from "react-icons/bi";
 import { MdDashboard } from "react-icons/md";
 import { SidebarConfig } from "./mainSidebar";
 
@@ -13,6 +13,11 @@ export const dashboardSidebarConfig: SidebarConfig = {
             name: "Links",
             icon: BiLink,
             href: "/dashboard/links"
+        },
+        {
+            name: "Settings",
+            icon: BiCog,
+            href: "/dashboard/settings"
         }
     ]
 }

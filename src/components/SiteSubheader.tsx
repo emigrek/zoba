@@ -1,13 +1,14 @@
-import { FC, ReactNode } from 'react'
+import cn from '@/utils/cn'
+import { FC, HTMLAttributes, ReactNode } from 'react'
 
-interface SiteSubheaderProps {
+interface SiteSubheaderProps extends HTMLAttributes<HTMLDivElement> {
     label: string,
     action?: ReactNode
 }
 
-const SiteSubheader: FC<SiteSubheaderProps> = ({ label, action }) => {
+const SiteSubheader: FC<SiteSubheaderProps> = ({ className, label, action, ...props }) => {
     return (
-        <div className="flex flex-col md:flex-row justify-between gap-3 text-neutral-300 md:items-center">
+        <div className={cn("flex flex-col md:flex-row justify-between gap-3 text-neutral-300 md:items-center", className)} {...props}>
             <div className="font-semibold text-xl md:text-2xl">
                 {label}
             </div>

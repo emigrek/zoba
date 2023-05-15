@@ -239,15 +239,35 @@ export const linkRouter = createTRPCRouter({
         .input(deleteLinkSchema)
         .mutation(async ({ input, ctx }) => {
             const { id } = input;
-            const { prisma } = ctx;
+            const { prisma, session } = ctx;
 
-            const link = await prisma.link.delete({
+            const link = await prisma.link.findUnique({
                 where: {
                     id
                 }
             });
 
-            return link;
+            if(!link) {
+                throw new TRPCError({
+                    code: "NOT_FOUND",
+                    message: "Link not found"
+                });
+            }
+
+            if(link.userId !== session.user.id) {
+                throw new TRPCError({
+                    code: "FORBIDDEN",
+                    message: "You don't have permission to delete this link"
+                });
+            }
+
+            const deleted = await prisma.link.delete({
+                where: {
+                    id
+                }
+            });
+
+            return deleted;
         }),
     getCount: protectedProcedure
         .query(async ({ ctx }) => {
