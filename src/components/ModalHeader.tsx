@@ -1,12 +1,13 @@
-import { FC } from 'react'
+import cn from '@/utils/cn'
+import { FC, HTMLAttributes } from 'react'
 
-interface ModalHeaderProps {
+interface ModalHeaderProps extends HTMLAttributes<HTMLDivElement> {
     label: string
 }
 
-const ModalHeader: FC<ModalHeaderProps> = ({ label }) => {
+const ModalHeader: FC<ModalHeaderProps> = ({ className, label, ...props }) => {
     return (
-        <div className='pb-3 border-b border-neutral-700'>
+        <div className={cn('pb-3 border-b border-neutral-700', className)} {...props}>
             <h1 className="text-2xl font-semibold">{label}</h1>
         </div>
     )

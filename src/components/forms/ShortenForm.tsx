@@ -11,8 +11,10 @@ import { BiCut } from 'react-icons/bi';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateLinkSchema, createLinkSchema } from "@/validation/link";
+import useShortenModalStore from '@/stores/shortenModal';
 
 const ShortenForm: FC = () => {
+    const { setOpen: setShortenModalOpen } = useShortenModalStore();
     const hcaptchaRef = useRef<HCaptcha>(null);
     const [link, setLink] = useState<string>("");
     const {
@@ -30,6 +32,7 @@ const ShortenForm: FC = () => {
                 toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
             });
             toast.success("Link shortened successfully", { icon: '🥳' });
+            setShortenModalOpen(false);
         }
     });
 

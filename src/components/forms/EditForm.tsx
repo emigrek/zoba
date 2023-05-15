@@ -13,12 +13,9 @@ import { TRPCClientError } from "@trpc/client";
 import { toast } from "react-hot-toast";
 import useEditModalStore from "@/stores/editModal";
 
-interface EditFormProps {
-    id: string;
-}
 
-const EditForm: FC<EditFormProps> = ({ id }) => {
-    const { toggle: toggleEditModal } = useEditModalStore();
+const EditForm: FC = () => {
+    const { toggle: toggleEditModal, id } = useEditModalStore();
     const {
         register,
         handleSubmit,

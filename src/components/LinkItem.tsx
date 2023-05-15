@@ -11,6 +11,7 @@ import { ExtendedLink } from 'types'
 import pluralize from 'pluralize';
 import useEditModalStore from '@/stores/editModal'
 import useQrModalStore from '@/stores/qrModal'
+import { IoEyeOff } from 'react-icons/io5'
 
 interface LinkItemProps {
     link: ExtendedLink
@@ -31,10 +32,18 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
             toast.success("Link deleted successfully", { icon: '🥳' });
         }
     });
+    const { mutateAsync: deleteVisits } = api.visit.deleteVisits.useMutation({
+        onSuccess: () => {
+            linkContext.link.invalidate().catch(() => {
+                toast.error("Something went wrong during reinvalidation", { icon: '🤔' });
+            });
+            toast.success("Visits deleted successfully", { icon: '🥳' });
+        }
+    });
 
     const handleEdit = () => {
-        toggleEditModal();
         setEditModalLinkId(link.id);
+        toggleEditModal();
     };
 
     const handleClipboard = () => {
@@ -46,9 +55,16 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
     };
 
     const handleShowQR = () => {
-        toggleQrModal();
         setText(shortened);
+        toggleQrModal();
     };
+
+    const handleDeleteVisits = () => {
+        deleteVisits({ id: link.id }).catch(() => {
+            toast.error("Something went wrong", { icon: '🤔' });
+        });
+    }
+
 
     const handleDelete = () => {
         deleteLink({ id: link.id }).catch(() => {
@@ -85,6 +101,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                         <Dropdown.Item iconLeft={BiCopy} onClick={handleClipboard}>Copy to clipboard</Dropdown.Item>
                         <Dropdown.Item iconLeft={BiQr} onClick={handleShowQR}>Show QR</Dropdown.Item>
                         <Dropdown.Divider/>
+                        <Dropdown.Item iconLeft={IoEyeOff} onClick={handleDeleteVisits}>Clear visits</Dropdown.Item>
                         <Dropdown.Item iconLeft={BiTrash} onClick={handleDelete}>Delete</Dropdown.Item>
                     </Dropdown.Content>
                 </Dropdown>

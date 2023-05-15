@@ -12,6 +12,7 @@ import ShortenModal from '@/components/modals/ShortenModal'
 import QRModal from '@/components/modals/QRModal'
 import SearchModal from '@/components/modals/SearchModal'
 import EditModal from '@/components/modals/EditModal'
+import AccountDeleteModal from '@/components/modals/AccountDeleteModal'
 
 import { dashboardSidebarConfig } from '@/config/dashboardSidebar'
 import { mainSidebarConfig } from '@/config/mainSidebar'
@@ -91,6 +92,7 @@ const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
             <QRModal />
             <SearchModal />
             <EditModal />
+            <AccountDeleteModal />
         </div>
     )
 }

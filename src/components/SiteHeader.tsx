@@ -8,7 +8,7 @@ interface SiteHeaderProps extends HTMLAttributes<HTMLDivElement> {
 
 const SiteHeader: FC<SiteHeaderProps> = ({ className, label, action, ...props }) => {
     return (
-        <div className={cn("flex flex-col md:flex-row justify-between gap-3 md:items-center", className)}>
+        <div className={cn("flex flex-col md:flex-row justify-between gap-3 md:items-center", className)} {...props}>
             <div className="font-bold text-2xl md:text-3xl">
                 {label}
             </div>

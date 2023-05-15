@@ -190,10 +190,10 @@ export const linkRouter = createTRPCRouter({
                 }
             });
             
-            let nextCursor: typeof cursor | undefined = undefined;
+            let nextCursor: typeof cursor = undefined;
             if (links.length > limit) {
-                const nextItem = links.pop()
-                nextCursor = nextItem!.id;
+                const nextItem = links.pop();
+                nextCursor = nextItem ? nextItem.id : undefined;
             }
             return {
                 links,

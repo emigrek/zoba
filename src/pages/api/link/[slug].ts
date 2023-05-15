@@ -1,7 +1,7 @@
 import { prisma } from "@/server/db";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { slug } = req.query;
 
     if(!slug || typeof slug !== "string") {

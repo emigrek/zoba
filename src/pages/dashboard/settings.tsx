@@ -8,33 +8,11 @@ import { fadeInVariant } from "@/motions/fade";
 import SiteSubheader from "@/components/SiteSubheader";
 import AccountDetails from "@/components/AccountDetails";
 import { Button } from "@/components/ui/Button/Button";
-import { api } from "@/utils/api";
-import { toast } from "react-hot-toast";
-import { TRPCClientError } from "@trpc/client";
-import { signOut } from "next-auth/react";
+import useAccountDeleteStore from "@/stores/accountDeleteModal";
 
 const Settings: NextPageWithLayout = () => {
-    const { mutateAsync: deleteAccount } = api.account.delete.useMutation({
-        onSuccess: () => {
-            toast.success("Account deleted", { icon: '👋' });
-        }
-    })
-
-    const handleAccountDelete = () => {
-        deleteAccount().catch((error) => {
-            if (error instanceof TRPCClientError) {
-                const { message } = error;
-                toast.error(message, { icon: '🤔' });
-            }
-        }).finally(() => {
-            signOut({
-                callbackUrl: `${window.location.origin}/`
-            }).catch(() => {
-                toast.error("Something went wrong, please try again later.", { icon: '🤔' });
-            });
-        });
-    }
-
+    const { toggle: toggleAccountDeleteModal } = useAccountDeleteStore();
+    
     return (
         <MotionContainer variants={fadeInVariant} initial="initial" animate="animate" className="flex flex-col gap-8 my-0 p-8">
             <SiteHeader label="Settings" />
@@ -44,7 +22,7 @@ const Settings: NextPageWithLayout = () => {
             <div className="text-neutral-500">
                 Deleting your account is permanent. All of your data will be deleted and you won&apos;t be able to recover it.
             </div>
-            <Button variant={'red'} onClick={handleAccountDelete}>Delete account</Button>
+            <Button variant={'red'} onClick={toggleAccountDeleteModal}>Delete account</Button>
         </MotionContainer>
     );
 };
