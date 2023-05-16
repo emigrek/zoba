@@ -30,6 +30,9 @@ const Links: NextPageWithLayout = () => {
                     <Button className="w-full md:w-fit" onClick={toggleShortenModal} variant={'emerald'} iconRight={BiPlus}>Add</Button>
                 </>
             } />
+            <div className="flex items-center justify-between">
+                <p className="text-neutral-400">{query ? `Search results for "${query}"` : 'All links'}</p>
+            </div>
             <InfiniteLinks />
         </MotionContainer>
     );

@@ -8,7 +8,7 @@ import DropdownDivider from './DropdownDivider';
 
 type DropdownProps = HTMLAttributes<HTMLDivElement>
 
-function Dropdown ({
+function Dropdown({
     children
 }: DropdownProps) {
     return (

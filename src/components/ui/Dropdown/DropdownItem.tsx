@@ -10,13 +10,11 @@ interface DropdownItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const DropdownItem: FC<DropdownItemProps> = ({ onClick, className, children, iconLeft: IconL, iconRight: IconR, ...props }) => {
-    const { setIsOpen } = useDropdown();
+    const { toggle } = useDropdown();
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        event.stopPropagation();
         onClick ? onClick(event) : null;
-
-        setIsOpen(false);
+        toggle();
     }
 
     return (

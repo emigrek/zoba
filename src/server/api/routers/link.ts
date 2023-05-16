@@ -184,10 +184,7 @@ export const linkRouter = createTRPCRouter({
                     visits: true
                 },
                 take: limit + 1,
-                cursor: cursor ? { id: cursor } : undefined,
-                orderBy: {
-                    createdAt: "desc"
-                }
+                cursor: cursor ? { id: cursor } : undefined
             });
             
             let nextCursor: typeof cursor = undefined;

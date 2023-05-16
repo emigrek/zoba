@@ -12,13 +12,11 @@ interface DropdownLinkItemProps extends HTMLAttributes<HTMLAnchorElement> {
 }
 
 const DropdownLinkItem: FC<DropdownLinkItemProps> = ({ onClick, className, href, children, iconLeft: IconL, iconRight: IconR, ...props }) => {
-    const { setIsOpen } = useDropdown();
+    const { toggle } = useDropdown();
 
     const handleClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        event.stopPropagation();
         onClick ? onClick(event) : null;
-
-        setIsOpen(false);
+        toggle();
     }
 
     return (
