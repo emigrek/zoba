@@ -6,6 +6,8 @@ import { BiDownload, BiQr } from 'react-icons/bi';
 import extractDomain from 'extract-domain';
 import saveSVG from '@/utils/saveSvg';
 import { toast } from 'react-hot-toast';
+import Dropdown from '../ui/Dropdown/Dropdown';
+import { HexColorPicker } from 'react-colorful';
 
 interface QRFormProps {
     initialText?: string;
@@ -13,6 +15,7 @@ interface QRFormProps {
 
 const QRForm: FC<QRFormProps> = ({ initialText }) => {
     const [text, setText] = useState<string>(initialText || '');
+    const [foregroundColor, setForegroundColor] = useState<string>('#ffffff');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -31,12 +34,12 @@ const QRForm: FC<QRFormProps> = ({ initialText }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-5 flex-grow">
+        <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-5">
             <div className='flex items-center justify-center'>
-                <div className='w-60 md:w-64 bg-neutral-500/10 rounded-lg'>
+                <div className='w-54 md:w-60 aspect-square bg-neutral-500/10 rounded-lg'>
                     {
                         text ?
-                            <QRCode id="qr-code" className="w-10/12 mx-auto" value={text} bgColor="#000" fgColor="#fff" />
+                            <QRCode id="qr-code" className="w-10/12 m-auto" value={text} bgColor="#000" fgColor={foregroundColor} />
                             :
                             <div className='aspect-square p-3 relative flex-col flex justify-center items-center text-neutral-500'>
                                 <BiQr className='w-40 h-40' />
@@ -45,10 +48,24 @@ const QRForm: FC<QRFormProps> = ({ initialText }) => {
                     }
                 </div>
             </div>
-            <div className='flex flex-col justify-center gap-5 grow'>
+            <div className='flex flex-col justify-center gap-5 flex-grow'>
                 <div className="flex flex-col gap-2">
                     <p className="text-neutral-400">Text</p>
                     <Input value={text} onChange={handleTextChange} placeholder="Enter your text" />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <p className="text-neutral-400">Foreground color</p>
+                    <div className="flex gap-2 items-center">
+                        <Dropdown>
+                            <Dropdown.Trigger>
+                                <div className='w-12 h-12 rounded-full' style={{ backgroundColor: foregroundColor }} />
+                            </Dropdown.Trigger>
+                            <Dropdown.Content className='top-0 left-0 items-center'>
+                                <HexColorPicker color={foregroundColor} onChange={setForegroundColor} />
+                            </Dropdown.Content>
+                        </Dropdown>
+                        <Input value={foregroundColor} onChange={(e) => setForegroundColor(e.target.value)} />
+                    </div>
                 </div>
                 <div className='flex flex-col gap-2'>
                     <Button variant="accent" className='w-full' size="large" iconRight={BiDownload}>Download</Button>
