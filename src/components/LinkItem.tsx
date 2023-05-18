@@ -18,11 +18,11 @@ interface LinkItemProps {
 }
 
 const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
-    const { domain, shortened, created, favicon } = useLinkDetails({ link });
+    const { domain, shortened, created, favicon, visits } = useLinkDetails({ link });
 
     const { toggle: toggleEditModal, setId: setEditModalLinkId } = useEditModalStore();
     const { toggle: toggleQrModal, setText } = useQrModalStore();
-    
+
     const linkContext = api.useContext();
     const { mutateAsync: deleteLink } = api.link.delete.useMutation({
         onSuccess: () => {
@@ -83,7 +83,7 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                         {domain}
                     </div>
                     <div className='text-sm md:text-md text-neutral-300 tracking-wide'>
-                        {pluralize('visit', link.visits.length, true)}
+                        {visits} {pluralize('visit', link.visits.length, false)}
                     </div>
                     <div className='text-neutral-500 text-xs md:text-sm'>
                         {created}
@@ -97,10 +97,10 @@ const LinkItem = forwardRef<HTMLDivElement, LinkItemProps>(({ link }, ref) => {
                     </Dropdown.Trigger>
                     <Dropdown.Content>
                         <Dropdown.Item iconLeft={BiEdit} onClick={handleEdit}>Edit</Dropdown.Item>
-                        <Dropdown.Divider/>
+                        <Dropdown.Divider />
                         <Dropdown.Item iconLeft={BiCopy} onClick={handleClipboard}>Copy to clipboard</Dropdown.Item>
                         <Dropdown.Item iconLeft={BiQr} onClick={handleShowQR}>Show QR</Dropdown.Item>
-                        <Dropdown.Divider/>
+                        <Dropdown.Divider />
                         <Dropdown.Item iconLeft={IoEyeOff} onClick={handleDeleteVisits}>Clear visits</Dropdown.Item>
                         <Dropdown.Item iconLeft={BiTrash} onClick={handleDelete}>Delete</Dropdown.Item>
                     </Dropdown.Content>

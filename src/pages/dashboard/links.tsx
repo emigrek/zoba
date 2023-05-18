@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button/Button";
-import { BiPlus, BiSearch } from "react-icons/bi";
+import { BiCut, BiSearch } from "react-icons/bi";
 import { NextPageWithLayout } from "@/pages/_app";
 import { MdClose } from "react-icons/md";
 import SiteHeader from "@/components/SiteHeader";
@@ -27,7 +27,7 @@ const Links: NextPageWithLayout = () => {
                             <Button className="w-full md:w-fit" onClick={toggleSearchModal} iconRight={BiSearch}>Search</Button>
                         )
                     }
-                    <Button className="w-full md:w-fit" onClick={toggleShortenModal} variant={'emerald'} iconRight={BiPlus}>Add</Button>
+                    <Button className="w-full md:w-fit" onClick={toggleShortenModal} variant={'accent'} iconRight={BiCut}>Shorten</Button>
                 </>
             } />
             <div className="flex items-center justify-between">

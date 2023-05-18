@@ -58,6 +58,11 @@ export const siteConfig: SiteConfig = {
 }
 ```
 
+Push to PlanetScale
+```
+npx prisma db push
+```
+
 Run development server
 ```
 npm run dev
