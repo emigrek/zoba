@@ -1,5 +1,7 @@
-import { BiCut, BiQr } from "react-icons/bi";
+import { BiCut } from "react-icons/bi";
+import { BsQrCode } from "react-icons/bs";
 import { IconType } from "react-icons/lib";
+
 
 export interface SidebarItem {
     name: string;
@@ -20,7 +22,7 @@ export const mainSidebarConfig: SidebarConfig = {
         },
         {
             name: "QR Code",
-            icon: BiQr,
+            icon: BsQrCode,
             href: "/qr"
         }
     ]
