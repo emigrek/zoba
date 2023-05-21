@@ -1,7 +1,6 @@
 import { FC } from 'react'
 import Modal from "react-modal";
 import { Button } from '@/components/ui/Button/Button';
-import { MdClose } from 'react-icons/md';
 import ModalHeader from '@/components/ModalHeader';
 import QRForm from '@/components/forms/QRForm';
 import { customStyles } from '@/components/modals/shared';
@@ -14,9 +13,9 @@ const QRModal: FC = () => {
         <Modal isOpen={open} style={customStyles} onRequestClose={toggle}>
             <div className="flex flex-col p-2 gap-5">
                 <ModalHeader label="QR Code" />
-                <QRForm initialText={text} />
+                <QRForm initialText={text}/>
                 <div className='flex-grow mx-auto'>
-                    <Button iconLeft={MdClose} onClick={toggle} variant={'red'}>Close</Button>
+                    <Button onClick={toggle} variant={'transparent'}>Cancel</Button>
                 </div>
             </div>
         </Modal>

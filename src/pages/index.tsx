@@ -56,7 +56,7 @@ const Home: NextPage = () => {
         <div className="text-center text-neutral-500 text-xs md:text-sm">
           Built by <Anchor target="_blank" href="https://github.com/emigrek">emigrek</Anchor>.
           Illustration by <Anchor target="_blank" href="https://popsy.co/">Popsy</Anchor>.
-          Source code on <Anchor target="_blank" href="https://github.com/zoba">Github</Anchor>.
+          Source code on <Anchor target="_blank" href="https://github.com/emigrek/zoba">Github</Anchor>.
         </div>
       </footer>
     </MotionContainer>

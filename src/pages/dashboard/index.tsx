@@ -4,7 +4,6 @@ import { BsArrowRightShort } from "react-icons/bs";
 import SiteHeader from "@/components/SiteHeader";
 import SiteSubheader from "@/components/SiteSubheader";
 import MostViewedLinks from "@/components/MostViewedLinks";
-import Link from "next/link";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { getServerAuthSession } from "@/server/auth";
 import Layout from "@/components/layouts/Layout";
@@ -13,6 +12,7 @@ import LinksCountCard from "@/components/LinksCountCard";
 import VisitsCountCard from "@/components/VisitsCountCard";
 import MotionContainer from "@/components/MotionContainer";
 import { fadeInVariant } from "@/motions/fade";
+import NextAnchor from "@/components/ui/Anchor/NextAnchor";
 
 const Dashboard: NextPageWithLayout = () => {
     const { data: session } = useSession();
@@ -26,12 +26,12 @@ const Dashboard: NextPageWithLayout = () => {
                 <VisitsCountCard />
             </div>
             <SiteSubheader label="Most viewed links" action={
-                <Link href="/dashboard/links">
-                    <div className="flex gap-2 text-accent-300 items-center justify-center grow">
+                <NextAnchor href="/dashboard/links">
+                    <div className="flex gap-2 items-center justify-center grow">
                         <div>Show all</div>
                         <BsArrowRightShort className="w-8 h-8 opacity-40" />
                     </div>
-                </Link>
+                </NextAnchor>
             } />
             <MostViewedLinks />
         </MotionContainer>
