@@ -4,7 +4,7 @@ import { VariantProps } from 'class-variance-authority'
 import cn from '@/utils/cn';
 
 const sidebarVariants = cva(
-    "backdrop-filter backdrop-blur-sm z-20 absolute fixed top-0 bottom-0",
+    "backdrop-filter backdrop-blur-sm z-20 absolute fixed top-0 bottom-0 transition-all duration-200",
     {
         variants: {
             variant: {
@@ -25,15 +25,19 @@ interface SidebarProps extends HTMLAttributes<HTMLDivElement>,
 }
 
 const Sidebar: FC<SidebarProps> = forwardRef<HTMLDivElement, SidebarProps>(({ className, collapsed, variant, children, ...props }, ref) => {
-    if(collapsed) return null;
-    
     return (
         <aside
             ref={ref}
-            className={cn(sidebarVariants({ className, variant }))}
+            className={cn(sidebarVariants({ className, variant }),
+                collapsed ? "w-0" : "w-20 md:w-64 px-2 md:px-5"
+            )}
             {...props}
         >
-            {children}
+            {
+                !collapsed && (
+                    children
+                )
+            }
         </aside>
     )
 })
