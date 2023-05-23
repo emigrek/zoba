@@ -11,10 +11,15 @@ const sidebarVariants = cva(
                 light: "bg-neutral-300/80 text-neutral-200",
                 dark: "bg-neutral-300/5 text-neutral-200",
                 transparent: "bg-transparent text-neutral-200"
+            },
+            state: {
+                open: "w-20 md:w-64 px-2 md:px-5",
+                closed: "w-0"
             }
         },
         defaultVariants: {
-            variant: "transparent"
+            variant: "transparent",
+            state: "open"
         }
     }
 );
@@ -28,9 +33,7 @@ const Sidebar: FC<SidebarProps> = forwardRef<HTMLDivElement, SidebarProps>(({ cl
     return (
         <aside
             ref={ref}
-            className={cn(sidebarVariants({ className, variant }),
-                collapsed ? "w-0" : "w-20 md:w-64 px-2 md:px-5"
-            )}
+            className={cn(sidebarVariants({ className, variant, state: collapsed ? "closed" : "open" }))}
             {...props}
         >
             {

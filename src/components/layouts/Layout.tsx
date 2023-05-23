@@ -27,7 +27,7 @@ interface LayoutProps {
 
 const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
     const router = useRouter();
-    const { open: sidebarOpen } = useSidebarStore();
+    const { open: sidebarCollapsed } = useSidebarStore();
     const { pathname } = router;
 
     const active = (path: string) => pathname === path;
@@ -36,7 +36,7 @@ const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
 
     return (
         <div className='flex min-h-screen'>
-            <Sidebar collapsed={sidebarOpen} className={cn('flex flex-col items-center justify-between')} variant={'dark'}>
+            <Sidebar collapsed={sidebarCollapsed} className="flex flex-col items-center justify-between" variant={'dark'}>
                 <div className='flex flex-col items-center w-full gap-1'>
                     <Link href="/">
                         <Brand />
@@ -73,7 +73,7 @@ const Layout: FC<LayoutProps> = ({ children, type = 'main' }) => {
                 </div>
             </Sidebar>
             <main className={
-                cn("flex flex-col flex-grow transition-all", sidebarOpen ? "ml-0" : "ml-20 md:ml-64")
+                cn("flex flex-col flex-grow transition-all", sidebarCollapsed ? "ml-0" : "ml-20 md:ml-64")
             }>
                 <Navbar variant={'dark'}>
                     <div className="flex items-center justify-between h-full px-3 md:px-6">

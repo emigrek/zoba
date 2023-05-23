@@ -11,7 +11,7 @@ const QRModal: FC = () => {
 
     return (
         <Modal isOpen={open} style={customStyles} onRequestClose={toggle}>
-            <div className="flex flex-col p-2 gap-5">
+            <div className="flex flex-col p-2 gap-5 max-w-2xl">
                 <ModalHeader label="QR Code" />
                 <QRForm initialText={text}/>
                 <div className='flex-grow mx-auto'>

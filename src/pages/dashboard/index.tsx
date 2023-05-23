@@ -29,7 +29,7 @@ const Dashboard: NextPageWithLayout = () => {
                 <NextAnchor href="/dashboard/links">
                     <div className="flex gap-2 items-center justify-center grow">
                         <div>Show all</div>
-                        <BsArrowRightShort className="w-8 h-8 opacity-40" />
+                        <BsArrowRightShort className="w-8 h-8" />
                     </div>
                 </NextAnchor>
             } />

@@ -25,7 +25,7 @@ const ColorInput: FC<ColorInputProps> = ({ className, color: initial, placeholde
             <Input className='rounded-r-none' value={color} onChange={(e) => setColor(e.target.value)} placeholder={placeholder} />
             <Dropdown>
                 <Dropdown.Trigger>
-                    <div className='w-12 h-12 rounded-r-full flex items-center justify-center transition duration-200 ease-in-out group-focus-within:ring-2 group-focus-within:ring-neutral-600' style={{ backgroundColor: color }}>
+                    <div className='w-10 h-12 rounded-r-full flex items-center justify-center transition duration-200 ease-in-out group-focus-within:ring-2 group-focus-within:ring-neutral-600' style={{ backgroundColor: color }}>
                         <CgColorPicker className='w-5 h-5 text-neutral-400 mix-blend-difference' />
                     </div>
                 </Dropdown.Trigger>
